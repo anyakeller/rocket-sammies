@@ -1,0 +1,4 @@
+e.g. firstL -- TIMESTAMP\n
+
+AnyaK -- 2017-5-9 9:26
+- created devlog
