@@ -1,6 +1,5 @@
 # Project Manager
 By Rocket Sammies
--------------------
 
 ### About
 Project Manager is a gradebook with an emphasis on easy assignment, oversight, and grading of group projects.  
