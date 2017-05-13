@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<html style="background-color:#FFA07A">
+
+<body style="background-color:#FFA07A">
+
+<h1><center>Login or Register</center></h1>
+        <h3><center> {{ messageLogin }} </center> <br><br></h3>
+
+<div style="background-color:#FFA07A" class="jumbotron">
+<form action="/authenticate" method="POST">
+  <center>
+  <h2>
+
+      Username: <input type="text" name="username">
+      <br><br>
+      Password:  <input type="password" name="password">
+      <br><br>
+  </h2>
+
+  <button input type="submit" name="action" value="Login">Login</button>
+  <button input type="submit" name="action" value="Register">Register</button>
+
+  </center>
+</form>
+</div>
+<p><center>If you click a button, something may happen.</center></p>
+
+</body>
+</html>
