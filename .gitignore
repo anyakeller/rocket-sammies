@@ -88,4 +88,5 @@ ENV/
 # Rope project settings
 .ropeproject
 
-.secret_key # flask secret key
+# flask secret key
+.secret_key
