@@ -1,4 +1,7 @@
 e.g. firstL -- TIMESTAMP\n
 
-AnyaK -- 2017-5-9 9:26
+AnyaK -- 2017-05-09 09:26
 - created devlog
+
+WangJ -- 2017-05-14 15:55
+- Created basic app.py
