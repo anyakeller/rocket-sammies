@@ -9,7 +9,7 @@ blueprint = Blueprint("class", __name__)
 @teachers_only
 @login_required
 def create_class():
-    """ Create a new class """
+    """ Route for creating a class """
     # TODO: Implement
     return { "success": 1, "message": "Class created" }
 
@@ -18,7 +18,7 @@ def create_class():
 @teachers_only
 @login_required
 def get_students(cid):
-    """ Get a list of all students in a class by its class id (cid) """
+    """ Route for retrieving a list of all students in a class by its class id (cid) """
     students = []
     # TODO: Implement
     return { "success": 1, "data": students }

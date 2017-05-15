@@ -7,6 +7,7 @@ blueprint = Blueprint("user", __name__)
 @blueprint.route("/register", methods=["POST"])
 @api_wrapper
 def register_user():
+    """ Route for registering a user """
     form = request.form
     email = form.get("email")
     password = form.get("password")
@@ -18,6 +19,7 @@ def register_user():
 @blueprint.route("/login", methods=["POST"])
 @api_wrapper
 def login_user():
+    """ Route for logging in a user """
     form = request.form
     email = form.get("email")
     password = form.get("password")

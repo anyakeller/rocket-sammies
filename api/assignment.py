@@ -9,6 +9,7 @@ blueprint = Blueprint("assignment", __name__)
 @teachers_only
 @login_required
 def create_assignment():
+    """ Route for creating an assignment """
     # TODO: Implement
     return { "success": 1, "message": "Assignment created" }
 
@@ -16,5 +17,6 @@ def create_assignment():
 @api_wrapper
 @login_required
 def submit_assignment():
+    """ Route for submitting an assignment """
     # TODO: Implement
     return { "success": 1, "message": "Assignment submitted" }
