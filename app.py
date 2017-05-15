@@ -11,6 +11,11 @@ def index():
 def login():
     return render_template("login.html")
 
+# For testing frontend:
+@app.route("/guitest")
+def guitest():
+    return render_template("gradebook.html")
+
 if __name__ == "__main__":
 
     # Create and store secret key if it doesn't already exist
