@@ -8,10 +8,13 @@ dhirajP -- 2017-05-13 20:00
 - started app.py
 - started writing the code for the login.html and the corresponding code in app.py
 
-WangJ -- 2017-05-14 15:55
+jamesW -- 2017-05-14 15:55
 - Created basic app.py
 - Added basic decorators
 
 wilsonB -- 2017-05-14 20:55
 - started base CSS stylesheet (replaced inline styles)
 - began parent template for pages in which the user is logged in
+
+jamesW -- 2017-05-15 14:03
+- Created basic api endpoints

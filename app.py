@@ -1,7 +1,14 @@
 from flask import Flask, render_template
 import os
 
+import api
+
 app = Flask(__name__)
+
+# Register all api blueprints
+app.register_blueprint(api.assignment.blueprint, url_prefix="/api/assignment")
+app.register_blueprint(api.classes.blueprint, url_prefix="/api/class")
+app.register_blueprint(api.user.blueprint, url_prefix="/api/user")
 
 @app.route("/")
 def index():
@@ -22,6 +29,7 @@ if __name__ == "__main__":
     with open(".secret_key", "a+b") as f:
         secret_key = f.read()
         if not secret_key:
+            # Secret key doesn't exist, so generate it
             secret_key = os.urandom(64)
             f.write(secret_key)
             f.flush()
