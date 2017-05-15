@@ -1,7 +1,13 @@
 from flask import Flask, render_template
 import os
 
+import api
+
 app = Flask(__name__)
+
+app.register_blueprint(api.assignment.blueprint, url_prefix="/api/assignment")
+app.register_blueprint(api.classes.blueprint, url_prefix="/api/class")
+app.register_blueprint(api.user.blueprint, url_prefix="/api/user")
 
 @app.route("/")
 def index():
