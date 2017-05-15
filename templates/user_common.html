@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{% block title %}Project Manager{% endblock %}</title>
+        <link rel="stylesheet" href="/static/base.css" />
+    </head>
+    <body>
+        <div class="banner">
+            <h3><a href="/">Project Manager</a></h1>
+        </div>
+        <div class="content" id="content">
+            {% block content %}
+            {% endblock %}
+        </div>
+        <div class="footer">
+            <!-- TODO: do we want a footer? -->
+        </div>
+    </body>
+</html>

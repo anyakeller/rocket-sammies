@@ -1,4 +1,17 @@
 e.g. firstL -- TIMESTAMP\n
 
-AnyaK -- 2017-5-9 9:26
+AnyaK -- 2017-05-09 09:26
 - created devlog
+
+dhirajP -- 2017-05-13 20:00
+- created the initial template html files
+- started app.py
+- started writing the code for the login.html and the corresponding code in app.py
+
+WangJ -- 2017-05-14 15:55
+- Created basic app.py
+- Added basic decorators
+
+wilsonB -- 2017-05-14 20:55
+- started base CSS stylesheet (replaced inline styles)
+- began parent template for pages in which the user is logged in
