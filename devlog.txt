@@ -19,3 +19,8 @@ wilsonB -- 2017-05-14 20:55
 jamesW -- 2017-05-15 14:03
 - Created basic api endpoints
 - Add documentation
+
+
+dhirajP -- 2017-05-15 14:00
+- added bootstrap cdn to the master template
+- started designing dashboard.html with bootstrap grid
