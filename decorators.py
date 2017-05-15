@@ -6,12 +6,18 @@ import traceback
 
 response_header = {"Content-Type": "application/json charset=utf-8"}
 
+class WebException(Exception):
+    """
+    Exception raised by the api to indicate a failed request
+
+    Example:
+    >>> raise WebException("invalid credentials")
+    """
+    pass
+
 def api_wrapper(f):
     """
     Decorator used to return a json response from an api endpoint
-    Suggested use:
-        Return {"success": 1, "message": <message>} for successful requests
-        Return {"success": 0, "message": <error>} for bad requests
     """
     @wraps(f)
     def wrapper(*args, **kwargs):
@@ -19,24 +25,28 @@ def api_wrapper(f):
         response = 200
         try:
             result = f(*args, **kwargs)
+        except WebException as e:
+            # An Exception was raised intentionally to indicate failure
+            result = { "success": 0, "message": str(e) }
         except Exception:
-            # Print traceback for debugging
-            traceback.print_exc()
-            # Ensure that something is returned, even if the server crashes
-            result = {"success": 0, "message": "Something went wrong!"}
+            # Unexpected Exception, so ensure that something is returned
+            traceback.print_exc() # Print traceback for debugging
+            result = { "success": 0, "message": "Something went wrong!" }
         result = (json.dumps(result), response, response_header)
         return make_response(result)
     return wrapper
 
 def login_required(f):
+    """ Decorator used to block requests from users that are not logged in """
     @wraps(f)
     def wrapper(*args, **kwargs):
         if "email" not in session:
-            return redirect("/login")
+            raise WebException("You must be logged in to do that.")
         return f(*args, **kwargs)
     return wrapper
 
 def teachers_only(f):
+    """ Decorator used to block requests from non-teacher users """
     @wraps(f)
     def wrapper(*args, **kwargs):
         return f(*args, **kwargs)
