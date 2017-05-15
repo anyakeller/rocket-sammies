@@ -12,21 +12,31 @@
 <div class="jumbotron">
 <form action="/authenticate" method="POST">
   <center>
-  <h2>
+  <h2>Login</h2>
+  Username: <input type="text" id="login-uname">
+  <br><br>
+  Password:  <input type="password" id="login-pass">
+  <br><br>
+  <button id="btn-login">Login</button>
 
-      Username: <input type="text" name="username">
-      <br><br>
-      Password:  <input type="password" name="password">
-      <br><br>
-  </h2>
-
-  <button input type="submit" name="action" value="Login">Login</button>
-  <button input type="submit" name="action" value="Register">Register</button>
+  <h2>Register</h2>
+  Username: <input type="text" id="register-uname">
+  <br><br>
+  Password:  <input type="password" id="register-pass1">
+  <br><br>
+  Confirm Password:  <input type="password" id="register-pass2">
+  <br><br>
+  <button id="btn-register">Register</button>
 
   </center>
 </form>
 </div>
 <p><center>If you click a button, something may happen.</center></p>
 
+<script
+     src="https://code.jquery.com/jquery-3.2.1.min.js"
+     integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+     crossorigin="anonymous"></script>
+<script src="/static/login.js"></script>
 </body>
 </html>
