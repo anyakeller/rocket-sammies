@@ -16,9 +16,7 @@ class WebException(Exception):
     pass
 
 def api_wrapper(f):
-    """
-    Decorator used to return a json response from an api endpoint
-    """
+    """ Decorator used to return a json response from an api endpoint """
     @wraps(f)
     def wrapper(*args, **kwargs):
         result = {}
@@ -49,5 +47,14 @@ def teachers_only(f):
     """ Decorator used to block requests from non-teacher users """
     @wraps(f)
     def wrapper(*args, **kwargs):
+        return f(*args, **kwargs)
+    return wrapper
+
+def redirect_if_not_logged_in(f):
+    """ Decorator to redirect users if they are not logged in """
+    @wraps(f)
+    def wrapper(*args, **kwargs):
+        if "email" not in session:
+            return redirect("/login")
         return f(*args, **kwargs)
     return wrapper
