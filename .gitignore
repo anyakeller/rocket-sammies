@@ -90,3 +90,7 @@ ENV/
 
 # flask secret key
 .secret_key
+
+# editor files
+*.sw[a-z]
+*~
