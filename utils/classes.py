@@ -12,7 +12,7 @@ def create_class(name, tid, students=[]):
         "name": name,
         "students": students,
         "teacher": tid,
-        "assignments": [],
+        "assignments": {"work": [], "projects": []},
         "weightmap": {},
     }
 
