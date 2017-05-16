@@ -24,3 +24,6 @@ jamesW -- 2017-05-15 14:03
 dhirajP -- 2017-05-15 14:00
 - added bootstrap cdn to the master template
 - started designing dashboard.html with bootstrap grid
+
+AnyaL -- 2017-05=16 8:30
+- added route for dashboard 
