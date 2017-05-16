@@ -10,21 +10,21 @@
         <h3><center> {{ messageLogin }} </center> <br><br></h3>
 
 <div class="jumbotron">
-<form action="/authenticate" method="POST">
+<div>
   <center>
   <h2>Login</h2>
-  Username: <input type="text" id="login-uname">
+  Username: <input type="text" name="email" id="login-uname">
   <br><br>
-  Password:  <input type="password" id="login-pass">
+  Password:  <input type="password" name="password" id="login-pass">
   <br><br>
-  <button id="btn-login">Login</button>
+  <button type="submit" id="btn-login">Login</button>
 
   <h2>Register</h2>
-  Username: <input type="text" id="register-uname">
+  Username: <input type="text" name="email" id="register-uname">
   <br><br>
-  Password:  <input type="password" id="register-pass1">
+  Password:  <input type="password" name="password1" id="register-pass1">
   <br><br>
-  Confirm Password:  <input type="password" id="register-pass2">
+  Confirm Password:  <input type="password" name="password2" id="register-pass2">
   <br><br>
   <button id="btn-register">Register</button>
 
