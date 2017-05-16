@@ -32,3 +32,6 @@ AnyaL -- 2017-05-16 8:30
 
 jamesW -- 2017-05-16 15:29
 - Added functions for interacting with the classes collection
+
+anyaK -- 2017-05-16 15:38
+- added temporary navbar

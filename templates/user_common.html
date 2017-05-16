@@ -7,13 +7,20 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="/static/base.css" />
 	{% block head  %}{% endblock%}
-	
-	
     </head>
     <body>
-        <div class="banner">
-            <h3><a href="/">Project Manager</a></h3>
-        </div>
+ <nav class="navbar navbar-toggleable-md navbar-light bg-faded" style="background-color: #DDD5D0;">
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" href="/">Project Manager</a>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link" href="#">Dashboard</a>
+      <a class="nav-item nav-link" href="#">Classes</a>
+    </div>
+  </div>
+</nav>
         <div class="content" id="content">
             {% block content %}
             {% endblock %}
