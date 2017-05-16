@@ -2,6 +2,7 @@ from flask import Flask, render_template
 import os
 
 import api
+from decorators import redirect_if_not_logged_in
 
 app = Flask(__name__)
 
@@ -11,8 +12,9 @@ app.register_blueprint(api.classes.blueprint, url_prefix="/api/class")
 app.register_blueprint(api.user.blueprint, url_prefix="/api/user")
 
 @app.route("/")
+@redirect_if_not_logged_in
 def index():
-    return "Hello"
+    return "Logged in"
 
 @app.route("/login")
 def login():
