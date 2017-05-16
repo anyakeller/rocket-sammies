@@ -2,5 +2,47 @@
 {% block title %}Class View{% endblock %}
 {% block content %}
 
+<div class="container-fluid">
+<div class="row">
+    <div class="col-lg-6 col-lg-offset-3">
+    <h1 class="head">Welcome to Netflix and Chill! </h1>
+    </div>
+</div>
+      <br><br>
+<div class="row">
+    <div class="col-lg-6 col-lg-offset-3 text-center">
+    <button class = "btn btn-info" id="registerbutton"> Sign Up </button>
+      <button class = "btn btn-info" id="loginbutton"> Login </button>
+    </div>
+</div>
+    
+    <!--Form changes depending on what version-->
+    <!--Form data is stored in hidden input fields when data is removed--><br>
+<div class="row">
+    <div class="col-lg-6 col-lg-offset-3 text-center">
+    <h3 id="description">
+      Enter your Username & Password
+    </h3>
+    <h4> {{message}} </h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-6 col-lg-offset-3 text-center">
+    <form class="form" id="f1" action = "/authenticate/" method="POST">  
+    <input type = "text" class="textfield" name="user" placeholder="Username" required><br>
+    <input type = "password" class="textfield" name="password" placeholder="Password"  required>
+    </form>
+    </div>
+</div>
+    <!--Button changes depending on what step in the login process--><br>
+    
+<div class="row">
+<div class="col-lg-6 col-lg-offset-3 text-center">
+    <center><button class="btn btn-info" id="b1">Next</button></center>
+</div>
+</div>  
+</div>
+
+
 
 {% endblock %}
