@@ -19,13 +19,15 @@ def login():
     return render_template("login.html")
 
 # For testing frontend:
-@app.route("/guitest")
-def guitest():
+@app.route("/gradebook")
+def gradebook():
     return render_template("gradebook.html")
 
 @app.route("/dashboard")
 def dashboard():
     return render_template("dashboard.html")
+
+
 
 if __name__ == "__main__":
 
@@ -41,3 +43,4 @@ if __name__ == "__main__":
 
     app.debug = True
     app.run()
+
