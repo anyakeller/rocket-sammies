@@ -3,7 +3,7 @@ import common
 def create_class(name, tid, students=[]):
     """
     Creates a class and inserts it into the database
-    Returns the cid of the new class
+    Returns the id of the new class
     """
     db = common.get_connection()
     cid = common.random_string()
