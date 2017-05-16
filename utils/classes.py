@@ -42,10 +42,14 @@ def get_classes():
     return list(classes)
 
 def remove_class(cid):
-    """Delete a class from its class id"""
+    """
+    Delete a class from its class id
+    Returns the number of deleted documents
+    """
 
     db = common.get_connection()
     match = {
         "cid": cid
     }
-    db.classes.delete_one(match)
+    result = db.classes.delete_one(match)
+    return result.deleted_count
