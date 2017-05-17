@@ -1,6 +1,7 @@
-from flask import Blueprint, request
+from flask import Blueprint, request, session
 
-from decorators import api_wrapper
+from decorators import api_wrapper, WebException
+from utils import users
 
 blueprint = Blueprint("user", __name__)
 
@@ -12,7 +13,11 @@ def register_user():
     email = form.get("email")
     password = form.get("password")
 
-    # TODO: Implement
+    exists = users.get_user(email=email)
+    if exists:
+        raise WebException("Email already in use")
+
+    users.create_user(email, password)
 
     return { "success": 1, "message": "Account created" }
 
@@ -24,6 +29,9 @@ def login_user():
     email = form.get("email")
     password = form.get("password")
 
-    # TODO: Implement
+    if not users.authenticate(email, password):
+        raise WebException("Invalid credentials")
+
+    session["email"] = email
 
     return { "success": 1, "message": "Success!" }
