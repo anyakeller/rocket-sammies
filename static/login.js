@@ -5,8 +5,9 @@
 	$.ajax({
 	    method: method,
 	    url: url,
-	    data: JSON.stringify(data),
+	    data: data,
 	    dataType: 'json'
+	    // jQuery stringifies as JSON automatically
 	}).then(function (data, status, jqxhr) {
 	    if (typeof success === "function") {
 		success(data, status, jqxhr);
