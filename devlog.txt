@@ -30,9 +30,17 @@ dhirajP -- 2017-05-15 14:00
 AnyaL -- 2017-05-16 8:30
 - added route for dashboard
 
+wilsonB -- 2017-05-16 14:00
+- implemented front-end side of login/register (API calls and basic alerts)
+
 jamesW -- 2017-05-16 15:29
 - Added functions for interacting with the classes collection
 - Added functions for interacting with the assignments collection
 
 anyaK -- 2017-05-16 15:38
 - added temporary navbar
+
+wilsonB -- 2017-05-17 14:00
+- converted user_common.html to base.html (parameterized by whether user is
+  signed in)
+- made login.html extend base.html
