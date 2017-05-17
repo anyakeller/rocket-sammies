@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, session, redirect
 import os
 
 import api
@@ -32,6 +32,10 @@ def dashboard():
 def classview():
     return render_template("class.html")
 
+@app.route("/logout")
+def logout():
+    session.clear()
+    return redirect("/")
 
 if __name__ == "__main__":
 
