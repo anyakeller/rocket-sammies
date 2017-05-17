@@ -18,6 +18,7 @@ def index():
 
 @app.route("/login")
 def login():
+    print session
     return render_template("login.html")
 
 # For testing frontend:
@@ -36,6 +37,12 @@ def classview():
 def logout():
     session.clear()
     return redirect("/")
+
+@app.context_processor
+def inject_session():
+    if session:
+        return dict(session)
+    return {}
 
 if __name__ == "__main__":
 
