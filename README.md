@@ -13,4 +13,6 @@ Project Manager is a gradebook with an emphasis on easy assignment, oversight, a
 - View old projects
 - Grade projects
 
+### Libraries in this repo
 
+`notify.js` is used, in `static/lib/notify.js`.
