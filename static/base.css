@@ -2,3 +2,7 @@ html, body {
     background-color: #C1BCBA;
     color: #353238;
 }
+
+.panel > .heading-red {
+    background: red;
+}
