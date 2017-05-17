@@ -28,7 +28,7 @@
             </div>
             <div id="navbar-content" class="collapse navbar-collapse">
                 <div class="nav navbar-nav">
-		    {% if not signed_out %}
+		    {% if "email" in session %}
                     <li><a href="#">Dashboard</a></li>
                     <li><a href="#">Classes</a></li>
 		    {% endif %}
