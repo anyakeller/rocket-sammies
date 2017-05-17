@@ -28,7 +28,9 @@ def gradebook():
 @app.route("/dashboard")
 def dashboard():
     return render_template("dashboard.html")
-
+@app.route("/class")
+def classview():
+    return render_template("class.html")
 
 
 if __name__ == "__main__":
