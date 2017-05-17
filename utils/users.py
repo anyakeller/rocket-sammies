@@ -41,6 +41,6 @@ def get_user(uid=None, email=None):
     if email:
         match["email"] = email
 
-    user = db.user.find_one(match)
+    user = db.users.find_one(match)
 
     return user
