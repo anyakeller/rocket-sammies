@@ -1,8 +1,9 @@
 html, body {
-    background-color: #C1BCBA;
-    color: #353238;
+    background-color: #F6E8EA;
+    color: #22181C; 
+    font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
 }
 
 .panel > .heading-red {
-    background: red;
+    background-color: #F45B69;
 }
