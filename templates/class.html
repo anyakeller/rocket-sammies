@@ -3,40 +3,24 @@
 {% block content %}
 
 <div class="container">
-  <h2>My Classes</h2>
+    <h2>My Classes</h2>
 
-  <div class="panel-group" id="classes">
-    <div class="panel panel-default ">
-      <div class="panel-heading heading-red">
-        <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#classes" href="#collapse1">Class #1</a>
-        </h4>
-      </div>
-      <div id="collapse1" class="panel-collapse collapse in">
-        <div class="panel-body">This is the collapse section for class1.</div>
-      </div>
+    <div class="panel-group" id="classes">
+        {% for class in classes %}
+        <div class="panel panel-default ">
+            <div class="panel-heading heading-red">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#classes" href="#{{ class["cid"] }}">{{ class["name"] }}</a>
+                </h4>
+            </div>
+            <div id="{{ class["cid"] }}" class="panel-collapse collapse in">
+                <div class="panel-body">
+                    Students: {{ class["students"] }}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
     </div>
-    <div class="panel panel-default">
-      <div class="panel-heading heading-red">
-        <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#classes" href="#collapse2">Class #2</a>
-        </h4>
-      </div>
-      <div id="collapse2" class="panel-collapse collapse">
-        <div class="panel-body">collapse section for class 2.</div>
-      </div>
-    </div>
-    <div class="panel panel-default">
-      <div class="panel-heading heading-red">
-        <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#classes" href="#collapse3">Class #3</a>
-        </h4>
-      </div>
-      <div id="collapse3" class="panel-collapse collapse">
-        <div class="panel-body">Collapse section for class3.</div>
-      </div>
-    </div>
-  </div>
 </div>
 
 {% endblock %}
