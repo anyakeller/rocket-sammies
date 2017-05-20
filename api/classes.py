@@ -23,11 +23,11 @@ def create_class():
 @login_required
 def get_students(cid):
     """ Route for retrieving a list of all students in a class by its class id (cid) """
-    _class = classes.get_class(cid)
-    if _class is None:
+    _classes = classes.get_class(cid=cid)
+    if len(_classes) != 1:
         students = []
     else:
-        students = _class["students"]
+        students = _classes["students"]
     return { "success": 1, "data": students }
 
 @blueprint.route("/delete", methods=["POST"])
