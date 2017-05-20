@@ -33,11 +33,11 @@ def get_class(cid):
 
     return class_
 
-def get_classes():
-    """Retrieve a list of all classes"""
+def get_classes(**match):
+    """Retrieve all classes that match the keyword arguments """
 
     db = common.get_connection()
-    classes = db.classes.find()
+    classes = db.classes.find(match)
 
     return list(classes)
 

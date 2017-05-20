@@ -19,7 +19,7 @@ def create_user(email, password):
     return uid
 
 def get_user(**match):
-    """Retrieve a user based on the keyword arguments provided"""
+    """Retrieve a single user based on the keyword arguments provided"""
 
     db = common.get_connection()
     user = db.users.find_one(match)

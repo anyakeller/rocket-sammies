@@ -46,18 +46,12 @@ def create_project(cid, title, description, max_score, max_group_size, rubric):
     db.assignments.insert(assignment)
     return aid
 
-def get_assignment(aid):
-    """
-    Retrieve an assignment from its assignment id (aid)
-    Returns None if the assignment does not exist
-    """
+def get_assignments(**match):
+    """ Retrieve all assignments that match the keyword arguments provided """
 
     db = common.get_connection()
-    match = {
-        "aid": aid
-    }
-    assignment = db.assignments.find_one(match)
-    return assignment
+    assignments = db.assignments.find(match)
+    return list(assignments)
 
 def remove_assignment(aid):
     """
