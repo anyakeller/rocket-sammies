@@ -3,6 +3,8 @@ from flask import Blueprint, request, session
 from decorators import api_wrapper, WebException
 from utils import users
 
+import hashlib
+
 blueprint = Blueprint("user", __name__)
 
 @blueprint.route("/register", methods=["POST"])
@@ -17,7 +19,8 @@ def register_user():
     if exists:
         raise WebException("Email already in use")
 
-    users.create_user(email, password)
+    uid = users.create_user(email, password)
+    session["uid"] = uid
 
     return { "success": 1, "message": "Account created" }
 
@@ -27,11 +30,12 @@ def login_user():
     """ Route for logging in a user """
     form = request.form
     email = form.get("email")
-    password = form.get("password")
+    password = hashlib.sha256(form.get("password")).hexdigest()
 
-    if not users.authenticate(email, password):
+    user = users.get_user(email=email, password=password)
+    if user is None:
         raise WebException("Invalid credentials")
 
-    session["email"] = email
+    session["uid"] = user["uid"]
 
     return { "success": 1, "message": "Success!" }

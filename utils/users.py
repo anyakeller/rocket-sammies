@@ -18,29 +18,10 @@ def create_user(email, password):
     db.users.insert(user)
     return uid
 
-def authenticate(email, password):
-    """ Authenticates a user """
+def get_user(**match):
+    """Retrieve a user based on the keyword arguments provided"""
 
     db = common.get_connection()
-    match = {
-        "email": email,
-        "password": common.hash(password),
-    }
-
-    user = db.users.find_one(match)
-    return user is not None
-
-def get_user(uid=None, email=None):
-    """Retrieve a user from their uid or email"""
-
-    db = common.get_connection()
-    match = {}
-
-    if uid:
-        match["uid"] = uid
-    if email:
-        match["email"] = email
-
     user = db.users.find_one(match)
 
     return user
