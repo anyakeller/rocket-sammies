@@ -9,7 +9,13 @@
 	    dataType: 'json'
 	    // jQuery stringifies as JSON automatically
 	}).then(function (data, status, jqxhr) {
-	    window.location = redirect;
+      if (data.success) {
+        console.log("Sucessful response:", data);
+        window.location = redirect;
+      } else {
+        console.error("Error in response:", data);
+        $.notify(data.message, "error");
+      }
 	}, function (response) {
 	    $.notify(response.message, "error");
 	});
