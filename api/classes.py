@@ -13,7 +13,7 @@ def create_class():
     """ Route for creating a class """
     form = request.form
     name = form.get("name")
-    teacher = 1 # users.get_user(session.get("email")).uid
+    teacher = session.get("uid")
     classes.create_class(name, teacher)
     return { "success": 1, "message": "Class created" }
 

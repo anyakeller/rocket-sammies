@@ -38,7 +38,7 @@ def login_required(f):
     """ Decorator used to block requests from users that are not logged in """
     @wraps(f)
     def wrapper(*args, **kwargs):
-        if "email" not in session:
+        if "uid" not in session:
             raise WebException("You must be logged in to do that.")
         return f(*args, **kwargs)
     return wrapper
@@ -54,7 +54,7 @@ def redirect_if_not_logged_in(f):
     """ Decorator to redirect users if they are not logged in """
     @wraps(f)
     def wrapper(*args, **kwargs):
-        if "email" not in session:
+        if "uid" not in session:
             return redirect("/login")
         return f(*args, **kwargs)
     return wrapper
