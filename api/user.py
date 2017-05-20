@@ -1,7 +1,7 @@
 from flask import Blueprint, request, session
 
-from decorators import api_wrapper, WebException
-from utils import users
+from decorators import api_wrapper, teachers_only, login_required, WebException
+from utils import classes, users
 
 import hashlib
 
@@ -39,3 +39,14 @@ def login_user():
     session["uid"] = user["uid"]
 
     return { "success": 1, "message": "Success!" }
+
+@blueprint.route("/classes", methods=["GET"])
+@api_wrapper
+@teachers_only
+@login_required
+def get_classes():
+    """ Route for retrieving all classes owned by a teacher """
+    tid = session.get("uid")
+    data = classes.get_classes(tid=tid)
+
+    return { "success": 1, data: data }
