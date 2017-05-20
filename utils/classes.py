@@ -19,20 +19,6 @@ def create_class(name, tid, students=[]):
     db.classes.insert(class_)
     return cid
 
-def get_class(cid):
-    """
-    Retrieve a class from its class id (cid)
-    Returns None if the class does not exist
-    """
-
-    db = common.get_connection()
-    match = {
-        "cid": cid
-    }
-    class_ = db.classes.find_one(match)
-
-    return class_
-
 def get_classes(**match):
     """Retrieve all classes that match the keyword arguments """
 
