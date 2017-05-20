@@ -27,12 +27,15 @@
                 <a class="navbar-brand" href="/">Project Manager</a>
             </div>
             <div id="navbar-content" class="collapse navbar-collapse">
-                <div class="nav navbar-nav">
-		    {% if "uid" in session %}
+                {% if "uid" in session %}
+                <ul class="nav navbar-nav">
                     <li><a href="/dashboard">Dashboard</a></li>
                     <li><a href="/class">Classes</a></li>
-		    {% endif %}
-                </div>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/logout">Logout</a></li>
+                </ul>
+                {% endif %}
             </div>
         </nav>
         <div class="content" id="content">
