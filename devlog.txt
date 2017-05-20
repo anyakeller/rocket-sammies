@@ -44,3 +44,8 @@ wilsonB -- 2017-05-17 14:00
 - converted user_common.html to base.html (parameterized by whether user is
   signed in)
 - made login.html extend base.html
+
+dhirajP -- 2017-05-17 01:49 
+- adding some more css (changing font)
+- working up new color scheme
+- trying to get gradebook chart to have a fixed left column when horizontally scrolling. 
