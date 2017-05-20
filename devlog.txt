@@ -48,4 +48,4 @@ wilsonB -- 2017-05-17 14:00
 dhirajP -- 2017-05-17 01:49 
 - adding some more css (changing font)
 - working up new color scheme
-- trying to get gradebook chart to have a fixed left column when horizontally scrolling. 
+- adding a feature to gradebook chart to have a fixed left column when horizontally scrolling. 

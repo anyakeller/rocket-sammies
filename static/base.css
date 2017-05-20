@@ -7,3 +7,29 @@ html, body {
 .panel > .heading-red {
     background-color: #F45B69;
 }
+table {
+  table-layout: fixed; 
+  border: 2px solid #5A0001; 
+
+}
+td, th {
+  vertical-align: top;
+  border-top: 1px solid #ccc;
+  padding: 10px;
+  width: 100px;
+}
+.fix {
+  position: absolute;
+  *position: relative; /*ie7*/
+  margin-left: -100px;
+  width: 100px;
+}
+.outer {
+  position: relative;
+}
+.inner {
+  overflow-x: scroll;
+  overflow-y: visible;
+  
+  margin-left: 100px;
+}
