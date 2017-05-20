@@ -45,7 +45,12 @@ wilsonB -- 2017-05-17 14:00
   signed in)
 - made login.html extend base.html
 
-dhirajP -- 2017-05-17 01:49 
+dhirajP -- 2017-05-17 01:49
 - adding some more css (changing font)
 - working up new color scheme
-- adding a feature to gradebook chart to have a fixed left column when horizontally scrolling. 
+- adding a feature to gradebook chart to have a fixed left column when horizontally scrolling.
+
+jonathanB -- 2017-05-20 12:39
+- Added students.py
+- Functions for parsing CSV file of students and adding them to database
+_ Functions for searching for and removing students
