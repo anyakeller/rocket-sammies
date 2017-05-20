@@ -1,7 +1,7 @@
 (function () {
     "use strict";
 
-    var apiCall = function (method, url, data, success, failure) {
+    var apiCall = function (method, url, data, redirect) {
 	$.ajax({
 	    method: method,
 	    url: url,
@@ -9,43 +9,24 @@
 	    dataType: 'json'
 	    // jQuery stringifies as JSON automatically
 	}).then(function (data, status, jqxhr) {
-	    if (typeof success === "function") {
-		success(data, status, jqxhr);
-	    }
-	    if (typeof data.redirect === "string") {
-		window.location = data.redirect;
-	    }
-	}, failure);
+	    window.location = redirect;
+	}, function (response) {
+	    $.notify(response.message, "error");
+	});
     };
 
     var apiLogin = function (email, pass) {
 	apiCall("POST", "/api/user/login", {
 	    email: email,
 	    password: pass
-	}, function (response) {
-	    if (response.success === 1) {
-		window.location = "/dashboard";
-	    } else {
-		// TODO: better popup
-		// TODO: better message (once backend is more detailed)
-		alert("Authentication failed");
-	    }
-	});
+	}, "/dashboard");
     };
 
     var apiRegister = function (email, pass) {
 	apiCall("POST", "/api/user/register", {
 	    email: email,
 	    password: pass
-	}, function (response) {
-	    if (response.success === 1) {
-		window.location = "/dashboard";
-	    } else {
-		// TODO: better popup
-		// TODO: better message (once backend is more detailed)
-		alert("Authentication failed");
-	    }
-	});
+	}, "/dashboard");
     };
 
     var loginBtn = document.getElementById("btn-login");
@@ -65,7 +46,7 @@
 	e.preventDefault();
 	if (registerPass1.value !== registerPass2.value) {
 	    // TODO: better alerts
-	    alert("Passwords do not match!");
+	    $.notify("Passwords do not match!", "error");
 	} else {
 	    apiRegister(registerUName.value, registerPass1.value);
 	}

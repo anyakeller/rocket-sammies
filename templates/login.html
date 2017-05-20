@@ -27,10 +27,9 @@
 </form>
 </div>
 <p><center>If you click a button, something may happen.</center></p>
+{% endblock %}
 
-<script
-   src="https://code.jquery.com/jquery-3.2.1.min.js"
-   integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-   crossorigin="anonymous"></script>
+{% block scripts %}
+{{ super() }}
 <script src="/static/login.js"></script>
 {% endblock %}
