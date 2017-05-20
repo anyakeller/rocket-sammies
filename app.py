@@ -3,6 +3,7 @@ import os
 
 import api
 from decorators import redirect_if_not_logged_in
+import utils
 
 app = Flask(__name__)
 
@@ -29,9 +30,11 @@ def gradebook():
 @app.route("/dashboard")
 def dashboard():
     return render_template("dashboard.html")
+
 @app.route("/class")
 def classview():
-    return render_template("class.html")
+    classes = utils.classes.get_classes(teacher=session.get("uid"))
+    return render_template("class.html", classes=classes)
 
 @app.route("/logout")
 def logout():
