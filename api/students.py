@@ -1,4 +1,4 @@
-from flask import Blueprint
+from flask import Blueprint, request
 
 from utils import students
 from decorators import api_wrapper, login_required, teachers_only
@@ -14,3 +14,15 @@ def get_students():
 
     data = students.getStudent()
     return { "success": 1, "data": data }
+
+@blueprint.route("/add-csv", methods=["POST"])
+@api_wrapper
+@teachers_only
+@login_required
+def add_students():
+    """Add students to the database"""
+    # FIXME: check for duplicates (e.g. for when the user accidentally
+    # re-uploads same file)
+    # FIXME: handle invalid CSV
+    s = students.addStudentsStr(request.form["csv"])
+    return { "success": 1, "added_students": s }

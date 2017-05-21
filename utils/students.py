@@ -23,6 +23,15 @@ def addStudents(studentFile):
             students.append(student)
     db.students.insert_many(students)
 
+# Adds mulitple students from CSV string
+def addStudentsStr(studentsCSV):
+    students = []
+    reader = csv.DictReader(studentsCSV.split('\n'), delimiter=',')
+    for student in reader:
+        students.append(student)
+    db.students.insert_many(students)
+    return students
+
 # Returns students based on keyword
 def getStudent(**keyword):
     foundStudents = db.students.find(keyword)

@@ -20,20 +20,18 @@
                             <input type="text" class="form-control" id="input-new-class-name" placeholder="Computer Graphics" />
                         </div>
                         <h3>Students</h3>
-                        <div>Add students manually or import from CSV spreadsheet</div>
-                        <div class="row">
-                            <div class="col-md-6" style="border-right: 1px solid gray;">
-                                <h5>Create from scratch</h5>
-                                <div class="input-group">
-                                    <span class="input-group-addon">Students</span>
-                                    <input type="text" class="form-control" id="input-create-class-students" placeholder="John Smith, Jane Doe, ..." />
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <h5>Import from spreadsheet</h5>
-                                <button class="btn btn-defualt" id="btn-import-class">Import from CSV</button>
-                            </div>
-                        </div>
+                        <ol>
+                            <li>
+                                <p style="margin-bottom: 0;">If you haven't already, import student data
+                                from a CSV spreadsheet.</p>
+                                <input type="file" id="btn-import-students" />
+                            </li>
+                            <li>
+                                <p style="margin-top: 0.5em;">Add students in this class by name.</p>
+                                <input type="text" class="form-control" id="input-create-class-students" placeholder="John Smith, Jane Doe, ..." />
+                            </li>
+                        </ol>
+                        <ol id="student-list"><!-- populated with AJAX --></ol>
                     </div>
                     <div class="modal-footer">
                         <button id="btn-create-class" class="btn btn-default btn-primary">Create</button>
