@@ -1,6 +1,7 @@
 from flask import Flask, render_template, session, redirect
 import os
 
+
 import api
 from decorators import redirect_if_not_logged_in
 import utils
@@ -24,14 +25,17 @@ def login():
 
 # For testing frontend:
 @app.route("/gradebook")
+@redirect_if_not_logged_in
 def gradebook():
     return render_template("gradebook.html")
 
 @app.route("/dashboard")
+@redirect_if_not_logged_in
 def dashboard():
     return render_template("dashboard.html")
 
 @app.route("/class")
+@redirect_if_not_logged_in
 def classview():
     classes = utils.classes.get_classes(teacher=session.get("uid"))
     return render_template("class.html", classes=classes)
