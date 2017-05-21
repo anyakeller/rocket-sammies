@@ -5,6 +5,42 @@
 <div class="container">
     <h2>My Classes</h2>
 
+    <div>
+        <button class="btn btn-default" id="btn-new-class">New class</button>
+        <div id="modal-new-class" class="modal modal-fade" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2>Create Class</h2>
+                    </div>
+                    <div class="modal-body">
+                        <h3>Information</h3>
+                        <div class="input-group">
+                            <span class="input-group-addon">Class Name</span>
+                            <input type="text" class="form-control" id="input-new-class-name" placeholder="Computer Graphics" />
+                        </div>
+                        <h3>Students</h3>
+                        <div>Add students manually or import from CSV spreadsheet</div>
+                        <div class="row">
+                            <div class="col-md-6" style="border-right: 1px solid gray;">
+                                <h5>Create from scratch</h5>
+                                <div class="input-group">
+                                    <span class="input-group-addon">Students</span>
+                                    <input type="text" class="form-control" id="input-create-class-students" placeholder="John Smith, Jane Doe, ..." />
+                                </div>
+                                <button class="btn btn-defualt" id="btn-create-class">Create this class</button>
+                            </div>
+                            <div class="col-md-6">
+                                <h5>Import from spreadsheet</h5>
+                                <button class="btn btn-defualt" id="btn-import-class">Import from CSV</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="panel-group" id="classes">
         {% for class in classes %}
         <div class="panel panel-default ">
@@ -22,5 +58,10 @@
         {% endfor %}
     </div>
 </div>
+
+{% block scripts %}
+{{ super() }}
+<script src="/static/class.js"></script>
+{% endblock %}
 
 {% endblock %}
