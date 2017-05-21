@@ -10,6 +10,8 @@ def create_class(name, tid, students=[]):
     class_ = {
         "cid": cid,
         "name": name,
+        # students contains OSISes (values of "Student ID" in the student
+        # collection)
         "students": students,
         "teacher": tid,
         "assignments": {"work": [], "projects": []},

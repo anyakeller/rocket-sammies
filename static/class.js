@@ -6,8 +6,8 @@
     var btnImportStudents = document.getElementById("btn-import-students");
     var inputImportStudents = document.getElementById("input-import-students");
     var inputCreateClassStudents = document.getElementById("input-create-class-students");
-    var btnCreateClass = document.getElementById("btn-create-class");
     var elemStudentList = document.getElementById("student-list");
+    var btnCreateClass = document.getElementById("btn-create-class");
 
     btnNewClass.addEventListener("click", function () {
         $(modalNewClass).modal();
@@ -19,10 +19,23 @@
             $.notify("Please enter a class name");
         } else {
             PM.apiCall("POST", "/api/class/create", {
-                "name": name
+                "name": name,
+                "students": getSelectedStudentIDs()
             }, "/class");
         }
     });
+
+    var getSelectedStudentIDs = function () {
+        var students = elemStudentList.querySelectorAll("input");
+        var i;
+        var student_ids = [];
+        for (i = 0; i < students.length; i += 1) {
+            if (students[i].checked) {
+                student_ids.push(+students[i].getAttribute("data-id"));
+            }
+        }
+        return student_ids;
+    };
 
     var addStudent = function (student) {
         var checkbox = document.createElement("INPUT");
@@ -65,6 +78,7 @@
         for (i = 0; i < name_parts.length; i += 1) {
             for (j = 0; j < input_parts.length; j += 1) {
                 console.log(name_parts[i], "startsWith", input_parts[j]);
+                // TODO: clean up
                 if (name_parts[i].trim().toLowerCase().startsWith(input_parts[j].trim().toLowerCase())) {
                     return true;
                 }

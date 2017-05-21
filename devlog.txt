@@ -64,7 +64,12 @@ wilsonB -- 2017-05-20 20:40
 - Implemented some redirects (e.g. from pages requiring login to /login, if the
   user is not logged in)
 
-jamesW -- 2017-05-21 19:22
+jamesW -- 2017-05-20 19:22
 - Added backend routing for individual routes
 - Added sample student data for importing
 - Fix bug where bson could not get serialized
+
+wilsonB -- 2017-05-21 10:40
+- Implemented uploading of CSV file of student data
+- Made a convenient interface for adding students to a new class (similar to
+  type-ahead)
