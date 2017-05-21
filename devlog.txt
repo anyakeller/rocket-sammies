@@ -56,8 +56,11 @@ jonathanB -- 2017-05-20 12:39
 _ Functions for searching for and removing students
 
 wilsonB -- 2017-05-20 01:30
-- Create nicer error message boxes (replacing alert boxes)
+- Created nicer error message boxes (replacing alert boxes)
 
 wilsonB -- 2017-05-20 20:40
-- Create base.js with common utility functions
-- Start create-class UI in class.html, class.js
+- Created base.js with common utility functions
+- Started create-class UI in class.html, class.js (create classes, but importing/adding
+  students not yet implemented).
+- Implemented some redirects (e.g. from pages requiring login to /login, if the
+  user is not logged in)
