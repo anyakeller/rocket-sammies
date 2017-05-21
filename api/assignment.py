@@ -28,7 +28,7 @@ def create_assignment():
 
     if _type == assignments.PROJECT:
         # Create a project assignment
-        rubric = {} # TODO: Implement
+        rubric = form.get("rubric", [])
 
         try:
             # Validate max_group_size
