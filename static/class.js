@@ -31,7 +31,7 @@
         checkbox.setAttribute("data-name", student["Student Name"]);
         var label = document.createElement("LABEL");
         label.appendChild(checkbox);
-        label.innerHTML += student["Student Name"];
+        label.innerHTML += " " + student["Student Name"];
         var li = document.createElement("LI");
         li.appendChild(label);
         elemStudentList.appendChild(li);
@@ -55,5 +55,37 @@
 
     PM.apiCall("GET", "/api/students", null, function (response) {
         response.data.forEach(addStudent);
+    });
+
+    var matches = function (input, name) {
+        var i, j;
+        var input_parts = input.split(" ");
+        var name_parts = name.split(",");
+        // If any word in input is the beginning of any word in name, it's a match
+        for (i = 0; i < name_parts.length; i += 1) {
+            for (j = 0; j < input_parts.length; j += 1) {
+                console.log(name_parts[i], "startsWith", input_parts[j]);
+                if (name_parts[i].trim().toLowerCase().startsWith(input_parts[j].trim().toLowerCase())) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    };
+
+    inputCreateClassStudents.addEventListener("keyup", function () {
+        var val = inputCreateClassStudents.value.trim();
+        // Filter visibility of items in elemStudentList by the entered text
+        var list = elemStudentList.querySelectorAll("input");
+        var i, elem;
+        for (i = 0; i < list.length; i += 1) {
+            elem = list[i];
+          console.log(elem);
+            if (matches(val, elem.getAttribute("data-name"))) {
+                elem.parentNode.parentNode.setAttribute("style", "display: block;");
+            } else {
+                elem.parentNode.parentNode.setAttribute("style", "display: none;");
+            }
+        }
     });
 }());
