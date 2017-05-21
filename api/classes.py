@@ -1,4 +1,4 @@
-from flask import Blueprint, request
+from flask import Blueprint, request, session
 
 from utils import classes
 from decorators import WebException, api_wrapper, login_required, teachers_only
