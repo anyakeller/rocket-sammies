@@ -2,7 +2,7 @@ Rocket Sammies
 
 e.g. firstL -- TIMESTAMP\n
 
-AnyaK -- 2017-05-09 09:26
+anyaK -- 2017-05-09 09:26
 - created devlog
 
 dhirajP -- 2017-05-13 20:00
@@ -22,12 +22,11 @@ jamesW -- 2017-05-15 14:03
 - Created basic api endpoints
 - Added documentation for endpoints
 
-
 dhirajP -- 2017-05-15 14:00
 - added bootstrap cdn to the master template
 - started designing dashboard.html with bootstrap grid
 
-AnyaL -- 2017-05-16 8:30
+anyaK -- 2017-05-16 8:30
 - added route for dashboard
 
 wilsonB -- 2017-05-16 14:00
@@ -53,7 +52,7 @@ dhirajP -- 2017-05-17 01:49
 jonathanB -- 2017-05-20 12:39
 - Added students.py
 - Functions for parsing CSV file of students and adding them to database
-_ Functions for searching for and removing students
+- Functions for searching for and removing students
 
 wilsonB -- 2017-05-20 01:30
 - Created nicer error message boxes (replacing alert boxes)
@@ -64,3 +63,8 @@ wilsonB -- 2017-05-20 20:40
   students not yet implemented).
 - Implemented some redirects (e.g. from pages requiring login to /login, if the
   user is not logged in)
+
+jamesW -- 2017-05-21 19:22
+- Added backend routing for individual routes
+- Added sample student data for importing
+- Fix bug where bson could not get serialized
