@@ -10,7 +10,7 @@ blueprint = Blueprint("user", __name__)
 @blueprint.route("/register", methods=["POST"])
 @api_wrapper
 def register_user():
-    """ Route for registering a user """
+    """Route for registering a user"""
     form = request.form
     email = form.get("email")
     password = form.get("password")
@@ -27,7 +27,7 @@ def register_user():
 @blueprint.route("/login", methods=["POST"])
 @api_wrapper
 def login_user():
-    """ Route for logging in a user """
+    """Route for logging in a user"""
     form = request.form
     email = form.get("email")
     password = hashlib.sha256(form.get("password")).hexdigest()
@@ -45,7 +45,7 @@ def login_user():
 @teachers_only
 @login_required
 def get_classes():
-    """ Route for retrieving all classes owned by a teacher """
+    """Route for retrieving all classes owned by a teacher"""
     tid = session.get("uid")
     data = classes.get_classes(teacher=tid)
 

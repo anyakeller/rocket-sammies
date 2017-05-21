@@ -47,7 +47,7 @@ def create_project(cid, title, description, max_score, max_group_size, rubric):
     return aid
 
 def get_assignments(**match):
-    """ Retrieve all assignments that match the keyword arguments provided """
+    """Retrieve all assignments that match the keyword arguments provided"""
 
     db = common.get_connection()
     assignments = db.assignments.find(match)

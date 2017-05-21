@@ -10,7 +10,7 @@ blueprint = Blueprint("class", __name__)
 @teachers_only
 @login_required
 def create_class():
-    """ Route for creating a class """
+    """Route for creating a class"""
     form = request.form
     name = form.get("name")
     teacher = session.get("uid")
@@ -23,7 +23,7 @@ def create_class():
 @teachers_only
 @login_required
 def get_students(cid):
-    """ Route for retrieving a list of all students in a class by its class id (cid) """
+    """Route for retrieving a list of all students in a class by its class id (cid)"""
     _classes = classes.get_class(cid=cid)
     if len(_classes) != 1:
         students = []
@@ -36,7 +36,7 @@ def get_students(cid):
 @teachers_only
 @login_required
 def delete_class():
-    """ Route for deleting a class """
+    """Route for deleting a class"""
     form = request.form
     cid = form.get("cid")
     count = classes.remove_class(cid)
