@@ -4,7 +4,7 @@
 // making the PM object.
 var PM = (function () {
     "use strict";
-    var apiCall = function (method, url, data, redirect) {
+    var apiCall = function (method, url, data, after) {
 	$.ajax({
 	    method: method,
 	    url: url,
@@ -14,7 +14,11 @@ var PM = (function () {
 	}).then(function (data, status, jqxhr) {
       if (data.success) {
         console.log("Sucessful response:", data);
-        window.location = redirect;
+        if (typeof after === "string") {
+            window.location = after;
+        } else if (typeof after === "function" ) {
+            after(data);
+        }
       } else {
         console.error("Error in response:", data);
         $.notify(data.message, "error");
