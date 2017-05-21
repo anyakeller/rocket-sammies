@@ -16,7 +16,7 @@ app.register_blueprint(api.user.blueprint, url_prefix="/api/user")
 @app.route("/")
 @redirect_if_not_logged_in
 def index():
-    return "Logged in"
+    return redirect("/dashboard")
 
 @app.route("/login")
 def login():
