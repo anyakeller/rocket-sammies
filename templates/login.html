@@ -1,32 +1,44 @@
 {% extends "base.html" %}
-{% set signed_out = True %}
 {% block content %}
 <h1><center>Login or Register</center></h1>
-<h3><center> {{ messageLogin }} </center> <br><br></h3>
 
-<div class="jumbotron">
-  <div>
-    <center>
-      <h2>Login</h2>
-      Username: <input type="text" name="email" id="login-uname">
-      <br><br>
-      Password:  <input type="password" name="password" id="login-pass">
-      <br><br>
-      <button type="submit" id="btn-login">Login</button>
+<div class="container">
+    <div class="col-md-6 col-md-offset-3">
+        <h2>Login</h2>
 
-      <h2>Register</h2>
-      Username: <input type="text" name="email" id="register-uname">
-      <br><br>
-      Password:  <input type="password" name="password1" id="register-pass1">
-      <br><br>
-      Confirm Password:  <input type="password" name="password2" id="register-pass2">
-      <br><br>
-      <button id="btn-register">Register</button>
+        <form class="form-horizontal" id="login-form">
+            <div class="form-group">
+                <label for="login-uname">Email</label>
+                <input class="form-control" type="email" id="login-uname" required>
+            </div>
 
-    </center>
-</form>
+            <div class="form-group">
+                <label for="login-pass">Password</label>
+                <input class="form-control" type="password" id="login-pass" required>
+            </div>
+            <button class="btn btn-primary" type="submit" id="btn-login">Login</button>
+        </form>
+
+        <h2>Register</h2>
+
+        <form class="form-horizontal" id="register-form">
+            <div class="form-group">
+                <label for="register-uname">Email</label>
+                <input class="form-control" type="email" id="register-uname" required>
+            </div>
+            <div class="form-group">
+                <label for="register-pass1">Password</label>
+                <input class="form-control" type="password" name="password1" id="register-pass1" required>
+            </div>
+            <div class="form-group">
+                <label for="register-pass2">Confirm Password</label>
+                <input class="form-control" type="password" name="password2" id="register-pass2" required>
+            </div>
+            <button class="btn btn-primary" id="btn-register">Register</button>
+        </form>
+
+    </div>
 </div>
-<p><center>If you click a button, something may happen.</center></p>
 {% endblock %}
 
 {% block scripts %}
