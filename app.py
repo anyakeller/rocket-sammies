@@ -12,6 +12,7 @@ app = Flask(__name__)
 app.register_blueprint(api.assignment.blueprint, url_prefix="/api/assignment")
 app.register_blueprint(api.classes.blueprint, url_prefix="/api/class")
 app.register_blueprint(api.user.blueprint, url_prefix="/api/user")
+app.register_blueprint(api.students.blueprint, url_prefix="/api/students")
 
 @app.route("/")
 @redirect_if_not_logged_in
