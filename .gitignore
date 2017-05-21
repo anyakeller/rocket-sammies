@@ -94,3 +94,5 @@ ENV/
 # editor files
 *.sw[a-z]
 *~
+
+.DS_Store
