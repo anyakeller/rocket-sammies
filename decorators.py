@@ -1,3 +1,4 @@
+from bson import json_util
 from flask import make_response, redirect, session
 from functools import wraps
 
@@ -30,7 +31,7 @@ def api_wrapper(f):
             # Unexpected Exception, so ensure that something is returned
             traceback.print_exc() # Print traceback for debugging
             result = { "success": 0, "message": "Something went wrong!" }
-        result = (json.dumps(result), response, response_header)
+        result = (json.dumps(result, default=json_util.default), response, response_header)
         return make_response(result)
     return wrapper
 

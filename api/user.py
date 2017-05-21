@@ -47,6 +47,6 @@ def login_user():
 def get_classes():
     """ Route for retrieving all classes owned by a teacher """
     tid = session.get("uid")
-    data = classes.get_classes(tid=tid)
+    data = classes.get_classes(teacher=tid)
 
-    return { "success": 1, data: data }
+    return { "success": 1, "data": data }
