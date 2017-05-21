@@ -1,4 +1,4 @@
-from flask import Flask, render_template, session, redirect
+from flask import Flask, abort, render_template, session, redirect
 import os
 
 
@@ -36,10 +36,16 @@ def dashboard():
     return render_template("dashboard.html")
 
 @app.route("/class")
+@app.route("/class/<cid>")
 @redirect_if_not_logged_in
-def classview():
-    classes = utils.classes.get_classes(teacher=session.get("uid"))
-    return render_template("class.html", classes=classes)
+def classview(cid=None):
+    if cid is None:
+        classes = utils.classes.get_class(teacher=session.get("uid"))
+        return render_template("class.html", classes=classes)
+    _class = utils.classes.get_class(cid=cid)
+    if len(_class) != 1:
+        abort(404)
+    return "Individual class view"
 
 @app.route("/logout")
 def logout():

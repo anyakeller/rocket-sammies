@@ -19,7 +19,7 @@ def create_class(name, tid, students=[]):
     db.classes.insert(class_)
     return cid
 
-def get_classes(**match):
+def get_class(**match):
     """Retrieve all classes that match the keyword arguments """
 
     db = common.get_connection()
