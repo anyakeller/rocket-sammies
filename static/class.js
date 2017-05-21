@@ -43,6 +43,7 @@
         checkbox.setAttribute("data-id", student["Student ID"]);
         checkbox.setAttribute("data-name", student["Student Name"]);
         var label = document.createElement("LABEL");
+        label.setAttribute("style", "display: block;");
         label.appendChild(checkbox);
         label.innerHTML += " " + student["Student Name"];
         var li = document.createElement("LI");

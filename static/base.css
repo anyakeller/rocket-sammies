@@ -33,3 +33,17 @@ td, th {
   
   margin-left: 100px;
 }
+
+.student-selection-list {
+    list-style-type: none;
+}
+.student-selection-list li {
+    padding-left: 6px;
+    border-radius: 3px;
+    background-color: #cccccc;
+}
+
+
+.student-selection-list li:nth-child(even) {
+    background-color: #777777;
+}
