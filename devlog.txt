@@ -76,3 +76,6 @@ wilsonB -- 2017-05-21 10:40
 
 wilsonB -- 2017-05-21 07:45
 - Improved styling of student-selection list and add a select-all/deselect-all button
+
+wilsonB -- 2017-05-21 8:0
+- Pass students and assignments in the given class to oneclass.html
