@@ -50,10 +50,10 @@
                     <a data-toggle="collapse" data-parent="#classes" href="#{{ class["cid"] }}">{{ class["name"] }}</a>
                 </h4>
             </div>
-            <div id="{{ class["cid"] }}" class="panel-collapse collapse in">
+            <div id="{{ class["cid"] }}" class="panel-collapse collapse">
                 <div class="panel-body">
-                    <a href="/class/{{ class["cid"] }}" class="btn btn-primary">View class</a><br>
-                    Students: {{ class["students"] }}
+                    <a href="/class/{{ class["cid"] }}" class="btn btn-primary">View class</a><br><br>
+                       Students: {{ class["students"] }}
                 </div>
             </div>
         </div>
