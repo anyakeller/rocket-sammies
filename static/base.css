@@ -8,6 +8,13 @@ html, body {
     background-color: #734B5E;
     color: white;
 }
+#navlink{ 
+    background-color: #3A1B32;
+    color: #D7D4D3;
+}
+#totalnavbar{
+    background-color: #C9044C;
+}
 table {
   table-layout: fixed; 
   border: 2px solid #5A0001; 
