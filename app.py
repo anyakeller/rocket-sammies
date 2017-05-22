@@ -46,7 +46,7 @@ def classview(cid=None):
     if len(classes) != 1:
         abort(404)
     klass = classes[0]
-    students = [utils.students.getStudent(**{"Student ID": id}) for id in klass["students"]]
+    students = [utils.students.getStudent(**{"Student ID": id})[0] for id in klass["students"]]
     assigs = utils.assignments.get_assignments(cid=cid)
     return render_template("oneclass.html",
         klass=klass,
