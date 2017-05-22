@@ -68,6 +68,14 @@ def inject_session():
 def oneclass():
     return render_template("oneclass.html")
 
+@app.route("/assignment")
+def assignment():
+    return render_template("assignment.html")
+
+@app.route("/createAssignment", methods = ['POST'])
+def newAssignment():
+    return redirect('assignment')
+
 
 if __name__ == "__main__":
 

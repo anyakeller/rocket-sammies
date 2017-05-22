@@ -3,6 +3,13 @@
 {% block content %}
 <center>
     <h1>Students</h1>
+    <br>
+
+    <form class="form" id = "newWorkForm" action = "/createAssignment" method="POST">
+    <button class="btn btn-default btn-primary" id = "btn-new-work">Create Assignment</button>
+    </form>
+
+    <br>
     <br><br>
     <table style="width:92%;" class="table table-inverse">
         <thead>
@@ -23,3 +30,4 @@
 </center>
 
 {% endblock %}
+
