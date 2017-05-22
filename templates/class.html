@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 {% block title %}Class View{% endblock %}
 {% block content %}
-
 <div class="container">
     <h2>My Classes</h2>
 
@@ -32,7 +31,7 @@
                                 <input type="text" class="form-control" id="input-create-class-students" placeholder="John Smith, Jane Doe, ..." />
                             </li>
                         </ol>
-                        <ul id="student-list"><!-- populated with AJAX --></ul>
+                        <ul class="student-selection-list" id="student-list"><!-- populated with AJAX --></ul>
                     </div>
                     <div class="modal-footer">
                         <button id="btn-create-class" class="btn btn-default btn-primary">Create</button>

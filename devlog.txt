@@ -73,3 +73,6 @@ wilsonB -- 2017-05-21 10:40
 - Implemented uploading of CSV file of student data
 - Made a convenient interface for adding students to a new class (similar to
   type-ahead)
+
+wilsonB -- 2017-05-21 07:45
+- Improved styling of student-selection list
