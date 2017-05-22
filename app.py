@@ -58,6 +58,11 @@ def inject_session():
         return dict(session)
     return {}
 
+@app.route("/oneclass")
+def oneclass():
+    return render_template("oneclass.html")
+
+
 if __name__ == "__main__":
 
     # Create and store secret key if it doesn't already exist
