@@ -42,16 +42,14 @@ def classview(cid=None):
     if cid is None:
         classes = utils.classes.get_class(teacher=session.get("uid"))
         return render_template("class.html", classes=classes)
-    _class = utils.classes.get_class(cid=cid)
-    if len(_class) != 1:
-        abort(404)
     classes = utils.classes.get_class(cid=cid)
-    if len(classes) == 0:
-        raise WebException("That class doesn't exist!")
+    if len(classes) != 1:
+        abort(404)
     klass = classes[0]
     students = [utils.students.getStudent(**{"Student ID": id}) for id in klass["students"]]
     assigs = utils.assignments.get_assignments(cid=cid)
     return render_template("oneclass.html",
+        klass=klass,
         students=students,
         assignments=assigs)
 
