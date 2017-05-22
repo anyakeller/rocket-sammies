@@ -75,4 +75,4 @@ wilsonB -- 2017-05-21 10:40
   type-ahead)
 
 wilsonB -- 2017-05-21 07:45
-- Improved styling of student-selection list
+- Improved styling of student-selection list and add a select-all/deselect-all button

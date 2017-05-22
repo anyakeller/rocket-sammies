@@ -36,6 +36,10 @@ td, th {
 
 .student-selection-list {
     list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow-y: scroll;
+    max-height: 300px;
 }
 .student-selection-list li {
     padding-left: 6px;

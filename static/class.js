@@ -7,6 +7,7 @@
     var inputImportStudents = document.getElementById("input-import-students");
     var inputCreateClassStudents = document.getElementById("input-create-class-students");
     var elemStudentList = document.getElementById("student-list");
+    var btnToggleAllStudents = document.getElementById("btn-toggle-all-students");
     var btnCreateClass = document.getElementById("btn-create-class");
 
     btnNewClass.addEventListener("click", function () {
@@ -66,6 +67,39 @@
         reader.readAsText(btnImportStudents.files[0]);
         // When the file is loaded, it is read into a string and onload is called
     });
+
+    btnToggleAllStudents.addEventListener("click", function () {
+        var i, checkboxes = elemStudentList.querySelectorAll("input");
+        var some_deselected = false;
+        for (i = 0; i < checkboxes.length; i += 1) {
+            if (!checkboxes[i].checked) {
+                some_deselected = true;
+                break;
+            }
+        }
+        for (i = 0; i < checkboxes.length; i += 1) {
+            checkboxes[i].checked = some_deselected;
+        }
+        this.innerHTML = (some_deselected
+            ? "Deselect all"
+            : "Select all");
+    });
+
+    document.getElementById("student-list").addEventListener("click", function () {
+        var checkboxes = elemStudentList.querySelectorAll("input");
+        var some_deselected = false;
+        var i;
+        for (i = 0; i < checkboxes.length; i += 1) {
+            if (!checkboxes[i].checked) {
+                some_deselected = true;
+                break;
+            }
+        }
+        btnToggleAllStudents.innerHTML = (some_deselected
+            ? "Select all"
+            : "Deselect all");
+    });
+
 
     PM.apiCall("GET", "/api/students", null, function (response) {
         response.data.forEach(addStudent);

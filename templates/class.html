@@ -29,8 +29,9 @@
                                 <p style="margin-top: 0.5em;">Add students in this class by name.</p>
                                 <input type="text" class="form-control" id="input-create-class-students" placeholder="John Smith, Jane Doe, ..." />
                             </li>
+                            <ul class="student-selection-list" id="student-list"><!-- populated with AJAX --></ul>
+                            <button class="btn btn-default" id="btn-toggle-all-students">Select all</button>
                         </ol>
-                        <ul class="student-selection-list" id="student-list"><!-- populated with AJAX --></ul>
                     </div>
                     <div class="modal-footer">
                         <button id="btn-create-class" class="btn btn-default btn-primary">Create</button>
