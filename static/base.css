@@ -5,7 +5,8 @@ html, body {
 }
 
 .panel > .heading-red {
-    background-color: #F45B69;
+    background-color: #734B5E;
+    color: white;
 }
 table {
   table-layout: fixed; 
