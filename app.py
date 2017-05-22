@@ -45,7 +45,15 @@ def classview(cid=None):
     _class = utils.classes.get_class(cid=cid)
     if len(_class) != 1:
         abort(404)
-    return "Individual class view"
+    classes = utils.classes.get_class(cid=cid)
+    if len(classes) == 0:
+        raise WebException("That class doesn't exist!")
+    klass = classes[0]
+    students = [utils.students.getStudent(**{"Student ID": id}) for id in klass["students"]]
+    assigs = utils.assignments.get_assignments(cid=cid)
+    return render_template("oneclass.html",
+        students=students,
+        assignments=assigs)
 
 @app.route("/logout")
 def logout():
