@@ -16,6 +16,7 @@ var resetForm = function(e){
     while(inputs.length>0){
 	inputs[0].remove();
     }
+    console.log(inputs);
 }
 var makeInput = function(type, name, text){
     var ret = document.createElement("input");
@@ -29,28 +30,37 @@ var makeInput = function(type, name, text){
 
 var loadformA = function(e){
     resetForm();
-    //var button = document.getElementById("b1");
     form.appendChild(makeInput("text","singleprojectTitle","Title"));
+    form.appendChild(document.createElement("br"));
+    form.appendChild(document.createElement("br"));
     form.appendChild(makeInput("text","singleprojectDescription","Description"));
+    form.appendChild(document.createElement("br"));
+    form.appendChild(document.createElement("br"));
     form.appendChild(makeInput("text","singleprojectMaxScore","Max Score"));
+    form.appendChild(document.createElement("br"));
+    form.appendChild(document.createElement("br"));
     var submitFormAButton = makeInput("submit","submitFormA","Create");
     submitFormAButton.setAttribute("onclick","window.location = '/dashboard'");
-
     form.appendChild(submitFormAButton);
-    //form.setAttribute("action","/authenticate/");
-    state="login";
-  }
+}
 
 var loadformB = function(e){
     resetForm();
     form.appendChild(makeInput("text","groupprojectTitle","Title"));
+    form.appendChild(document.createElement("br"));
+    form.appendChild(document.createElement("br"));
     form.appendChild(makeInput("text","groupprojectDescription","Description"));
+    form.appendChild(document.createElement("br"));
+    form.appendChild(document.createElement("br"));
     form.appendChild(makeInput("text","groupprojectMaxScore","Max Score"));
+    form.appendChild(document.createElement("br"));
+    form.appendChild(document.createElement("br"));
     form.appendChild(makeInput("text","groupprojectMaxSize","Max Group Size"));
+    form.appendChild(document.createElement("br"));
+    form.appendChild(document.createElement("br"));
     form.appendChild(makeInput("submit","submitFormB","Create"));
-    //button.setAttribute("type","button");
-    //form.setAttribute("action","/intro/");
-    state="reg1"
 };
+
+
 singlebutton.addEventListener("click",loadformA);
 groupbutton.addEventListener("click",loadformB);
