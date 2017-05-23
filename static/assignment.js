@@ -33,6 +33,10 @@ var loadformA = function(e){
     form.appendChild(makeInput("text","singleprojectTitle","Title"));
     form.appendChild(makeInput("text","singleprojectDescription","Description"));
     form.appendChild(makeInput("text","singleprojectMaxScore","Max Score"));
+    var submitFormAButton = makeInput("submit","submitFormA","Create");
+    submitFormAButton.setAttribute("onclick","window.location = '/dashboard'");
+
+    form.appendChild(submitFormAButton);
     //form.setAttribute("action","/authenticate/");
     state="login";
   }
@@ -43,6 +47,7 @@ var loadformB = function(e){
     form.appendChild(makeInput("text","groupprojectDescription","Description"));
     form.appendChild(makeInput("text","groupprojectMaxScore","Max Score"));
     form.appendChild(makeInput("text","groupprojectMaxSize","Max Group Size"));
+    form.appendChild(makeInput("submit","submitFormB","Create"));
     //button.setAttribute("type","button");
     //form.setAttribute("action","/intro/");
     state="reg1"
