@@ -31,31 +31,20 @@ var loadformA = function(e){
     resetForm();
     //var button = document.getElementById("b1");
     form.appendChild(makeInput("text","singleprojectTitle","Title"));
-    document.write("\n");
     form.appendChild(makeInput("text","singleprojectDescription","Description"));
-    document.write("\n");
     form.appendChild(makeInput("text","singleprojectMaxScore","Max Score"));
-    document.write("\n");
-    form.createElement("b")
-    form.setAttribute("action","/authenticate/");
-    var btn = document.createElement("BUTTON");
-    var t = document.createTextNode("CLICK ME");
-    btn.appendChild(t);
-    document.body.appendChild(btn);
-};
+    //form.setAttribute("action","/authenticate/");
+    state="login";
+  }
 
 var loadformB = function(e){
     resetForm();
     form.appendChild(makeInput("text","groupprojectTitle","Title"));
-    document.write("\n");
     form.appendChild(makeInput("text","groupprojectDescription","Description"));
-    document.write("\n");
     form.appendChild(makeInput("text","groupprojectMaxScore","Max Score"));
-    document.write("\n");
     form.appendChild(makeInput("text","groupprojectMaxSize","Max Group Size"));
-    document.write("\n");
     //button.setAttribute("type","button");
-    form.setAttribute("action","/intro/");
+    //form.setAttribute("action","/intro/");
     state="reg1"
 };
 singlebutton.addEventListener("click",loadformA);
