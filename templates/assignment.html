@@ -6,14 +6,30 @@
 {% block content %}
 
 <br><br><br>
-<div class="container-fluid">
-<div class="row">
-    <div class="col-md-6 col-md-offset-3">
-    <center><h1 class="head">Create an Assignment</h1></center>
-    <div class="jumbotron">
-    </div>
-    </div>
-</div>
-    </div>
+<center><h1 class="head">Create New Work</h1>
 
+
+<button class = "btn btn-info" id="singlebutton"> New Single Assignment </button>
+<button class = "btn btn-info" id="groupbutton"> New Group Project </button>
+
+
+<form class="form" id="f1" action = "/new/" method="POST">
+<input type = "text" class="textfield" name="title" placeholder="Title" required><br>
+<input type = "password" class="textfield" name="description" placeholder="Description" required><br>
+<input type = "password" class="textfield" name="maxscore" placeholder="Max Score" required><br>
+</form>
+<!--
+ def create_assignment(cid, title, description, max_score, _type):
+
+def create_project(cid, title, description, max_score, max_group_size, rubric):
+-->
+
+
+</center>
+
+
+{% endblock %}
+{% block scripts %}
+{{ super() }}
+<script src="/static/assignment.js"></script>
 {% endblock %}
