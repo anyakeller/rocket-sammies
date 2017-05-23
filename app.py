@@ -32,7 +32,10 @@ def gradebook():
 
 @app.route("/dashboard")
 @redirect_if_not_logged_in
-def dashboard():
+def dashboard(aid=None):
+    if aid is None:
+        assignments = utils.assignments.get_assignments(teacher=session.get("uid"))
+        return render_template("dashboard.html", assignments=assignments)
     return render_template("dashboard.html")
 
 @app.route("/class")
