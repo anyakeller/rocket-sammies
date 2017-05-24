@@ -79,3 +79,6 @@ wilsonB -- 2017-05-21 07:45
 
 wilsonB -- 2017-05-21 8:0
 - Pass students and assignments in the given class to oneclass.html
+
+jonathanB --2017-05-21 9:32
+- Fixed form problem where form was expanding each time button was clicked
