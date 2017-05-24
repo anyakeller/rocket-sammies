@@ -77,8 +77,15 @@ wilsonB -- 2017-05-21 10:40
 wilsonB -- 2017-05-21 07:45
 - Improved styling of student-selection list and add a select-all/deselect-all button
 
-wilsonB -- 2017-05-21 8:0
+wilsonB -- 2017-05-21 08:00
 - Pass students and assignments in the given class to oneclass.html
 
 jonathanB --2017-05-21 9:32
 - Fixed form problem where form was expanding each time button was clicked
+
+wilsonB -- 2017-05-24 01:56
+- Move assignment creation from assignment.html to a modal in oneclass.html, and make
+  its API calls functional
+- Include Bootstrap and jQuery JS and CSS in /static/vendor, so that instead of using
+  a CDN we have them locally. They are minified so it only slightly increases
+  git clone time, and it significantly decreases page load time
