@@ -2,14 +2,46 @@
 {% block title %}My Gradebook{% endblock %}
 {% block content %}
 <center>
-    <h1>Students</h1>
-    <br>
+    <h1>Class: {{ klass["name"] }}</h1>
 
-    <form class="form" id = "newWorkForm" action = "/createAssignment" method="POST">
-    <button class="btn btn-default btn-primary" id = "btn-new-work">Create Assignment</button>
-    </form>
+  <button class = "btn btn-info" id="singlebutton">New Single Assignment</button>
+  <button class = "btn btn-info" id="groupbutton"> New Group Project </button>
 
-    <br>
+  <br><br>
+    <div id="singleForm" class="modal fade" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Create Single Assignment</h2>
+                </div>
+                <div class="modal-body">
+                    <input type = 'text' id = 'singleprojectTitle'  class = 'field' placeholder = 'Title' required><br><br>
+                    <input type = 'text' id = 'singleprojectDescription'  class = 'field' placeholder = 'Description' required><br><br>
+                    <input type = 'text' id = 'singleprojectMaxScore'  class = 'field' placeholder = 'Max Score' required><br><br>
+                    <input type="hidden" id="singleprojectCid" value="{{ klass["cid"] }}">
+                    <button id="singleCreateButton" class='field'>Create</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="groupForm" class="modal fade" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Create Group Assignment</h2>
+                </div>
+                <div class="modal-body">
+                    <input type = 'text' id = 'groupprojectTitle'  class = 'field' placeholder = 'Title' required><br><br>
+                    <input type = 'text' id = 'groupprojectDescription'  class = 'field' placeholder = 'Description' required><br><br>
+                    <input type = 'text' id = 'groupprojectMaxScore'  class = 'field' placeholder = 'Max Score' required><br><br>
+                    <input type = 'text' id = 'groupprojectMaxSize'  class = 'field' placeholder = 'Max Group Size' required><br><br>
+                    <input type="hidden" id="groupprojectCid" value="{{ klass["cid"] }}">
+                    <button id="groupCreateButton" class = 'field'>Create</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <br><br>
     <table style="width:92%;" class="table table-inverse">
         <thead>
@@ -27,7 +59,9 @@
             {% endfor %}
         </tbody>
     </table>
-</center>
-
 {% endblock %}
 
+{% block scripts %}
+{{ super() }}
+<script src="/static/oneclass.js"></script>
+{% endblock %}

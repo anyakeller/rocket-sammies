@@ -4,6 +4,10 @@
 // making the PM object.
 var PM = (function () {
     "use strict";
+    // apiCall is a utility for sending or requesting data from the server
+    // and responding to it (pass a URL for `after` to redirect to that URL
+    // on success, or a function to be called on success). On failure, it
+    // shows an error notification using the error message from the server.
     var apiCall = function (method, url, data, after) {
 	$.ajax({
 	    method: method,
@@ -14,7 +18,7 @@ var PM = (function () {
 	}).then(function (data, status, jqxhr) {
       if (data.success) {
         console.log("Sucessful response:", data);
-        if (typeof after === "string") {
+        if (typeof after === "string" || after instanceof Location) {
             window.location = after;
         } else if (typeof after === "function" ) {
             after(data);
