@@ -21,7 +21,6 @@ def index():
 
 @app.route("/login")
 def login():
-    print session
     return render_template("login.html")
 
 # For testing frontend:
@@ -32,25 +31,31 @@ def gradebook():
 
 @app.route("/dashboard")
 @redirect_if_not_logged_in
-def dashboard(aid=None):
-    if aid is None:
-        assignments = utils.assignments.get_assignments(teacher=session.get("uid"))
-        print assignments
-        return render_template("dashboard.html", assignments=assignments)
-    return render_template("dashboard.html")
+def dashboard():
+    # Get all assignments associated with the current user
+    assignments = utils.assignments.get_assignments(teacher=session.get("uid"))
+    return render_template("dashboard.html", assignments=assignments)
 
 @app.route("/class")
 @app.route("/class/<cid>")
 @redirect_if_not_logged_in
 def classview(cid=None):
     if cid is None:
+        # View all classes if no class id was passed into the url
         classes = utils.classes.get_class(teacher=session.get("uid"))
         return render_template("class.html", classes=classes)
+
+    # Get the class associated with the class id in the url
     classes = utils.classes.get_class(cid=cid)
     if len(classes) != 1:
+        # Class does not exist, so return a 404 error
         abort(404)
     klass = classes[0]
+
+    # Get all students in the class
     students = [utils.students.getStudent(**{"Student ID": id})[0] for id in klass["students"]]
+
+    # Get all assignments for the class
     assigs = utils.assignments.get_assignments(cid=cid)
     return render_template("oneclass.html",
         klass=klass,
@@ -64,6 +69,7 @@ def logout():
 
 @app.context_processor
 def inject_session():
+    """Inject the session into the template. Used to determine login status"""
     if session:
         return dict(session)
     return {}
