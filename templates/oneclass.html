@@ -59,6 +59,23 @@
             {% endfor %}
         </tbody>
     </table>
+
+    <table style="width:92%;" class="table table-inverse">
+        <thead>
+            <tr>
+                <th>Assignment Name</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for assignment in assignments %}
+            <tr>
+                <th scope="row">{{ assignment["title"] }}</th>
+                <td>{{ assignment["description"] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}
 
 {% block scripts %}
