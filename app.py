@@ -35,6 +35,7 @@ def gradebook():
 def dashboard(aid=None):
     if aid is None:
         assignments = utils.assignments.get_assignments(teacher=session.get("uid"))
+        print assignments
         return render_template("dashboard.html", assignments=assignments)
     return render_template("dashboard.html")
 
@@ -96,4 +97,3 @@ if __name__ == "__main__":
 
     app.debug = True
     app.run()
-

@@ -15,8 +15,10 @@
   <form class="form" id="singleForm" action = "/assigntodash" method="POST">
     <input type = 'text' name = 'singleprojectTitle'  class = 'field' value = 'Title' required><br><br>
     <input type = 'text' name = 'singleprojectDescription'  class = 'field' value = 'Description' required><br><br>
-    <input type = 'text' name = 'groupprojectMaxScore'  class = 'field' value = 'Max Score' required><br><br>
+    <input type = 'text' name = 'singleprojectMaxScore'  class = 'field' value = 'Max Score' required><br><br>
     <input type = 'submit' name = 'submit' class = 'field' value = 'Create' onClick = 'window.location = "/dashboard"'required>
+    <input type="hidden" name="singleprojectCid" value=" {{ class["cid"] }}  ">
+    <input type="hidden" name="singleType" value=1>
   </form>
 
   <form class="form" id="groupForm" action = "/assigntodash" method="POST">
