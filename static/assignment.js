@@ -2,6 +2,8 @@ var form = document.getElementById("f1");
 var singlebutton = document.getElementById("singlebutton");
 var groupbutton = document.getElementById("groupbutton");
 
+/*
+
 //makeHidden hides all of the forms. This is used when reloading the "page"
 var makeHidden = function(e){
     var inputs = document.getElementsByTagName("input");
@@ -28,39 +30,18 @@ var makeInput = function(type, name, text){
     return ret;
 };
 
+*/
+
 var loadformA = function(e){
-    resetForm();
-    form.appendChild(makeInput("text","singleprojectTitle","Title"));
-    form.appendChild(document.createElement("br"));
-    form.appendChild(document.createElement("br"));
-    form.appendChild(makeInput("text","singleprojectDescription","Description"));
-    form.appendChild(document.createElement("br"));
-    form.appendChild(document.createElement("br"));
-    form.appendChild(makeInput("text","singleprojectMaxScore","Max Score"));
-    form.appendChild(document.createElement("br"));
-    form.appendChild(document.createElement("br"));
-    var submitFormAButton = makeInput("submit","submitFormA","Create");
-    submitFormAButton.setAttribute("onclick","window.location = '/dashboard'");
-    form.appendChild(submitFormAButton);
+    document.getElementById('singleForm').style.display='block';
+    document.getElementById('groupForm').style.display='none';
 }
 
 var loadformB = function(e){
-    resetForm();
-    form.appendChild(makeInput("text","groupprojectTitle","Title"));
-    form.appendChild(document.createElement("br"));
-    form.appendChild(document.createElement("br"));
-    form.appendChild(makeInput("text","groupprojectDescription","Description"));
-    form.appendChild(document.createElement("br"));
-    form.appendChild(document.createElement("br"));
-    form.appendChild(makeInput("text","groupprojectMaxScore","Max Score"));
-    form.appendChild(document.createElement("br"));
-    form.appendChild(document.createElement("br"));
-    form.appendChild(makeInput("text","groupprojectMaxSize","Max Group Size"));
-    form.appendChild(document.createElement("br"));
-    form.appendChild(document.createElement("br"));
-    form.appendChild(makeInput("submit","submitFormB","Create"));
+    document.getElementById('singleForm').style.display='none';
+    document.getElementById('groupForm').style.display='block';
 };
 
-
+document.getElementById('groupForm').style.display='none';
 singlebutton.addEventListener("click",loadformA);
 groupbutton.addEventListener("click",loadformB);

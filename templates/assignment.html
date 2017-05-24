@@ -7,17 +7,26 @@
 
 <br><br><br>
 <center><h1 class="head">Create New Work</h1>
+  <br><br>
+  <button class = "btn btn-info" id="singlebutton"> New Single Assignment </button>
+  <button class = "btn btn-info" id="groupbutton"> New Group Project </button>
 
+  <br><br>
+  <form class="form" id="singleForm" action = "/assigntodash" method="POST">
+    <input type = 'text' name = 'singleprojectTitle'  class = 'field' value = 'Title' required><br><br>
+    <input type = 'text' name = 'singleprojectDescription'  class = 'field' value = 'Description' required><br><br>
+    <input type = 'text' name = 'groupprojectMaxScore'  class = 'field' value = 'Max Score' required><br><br>
+    <input type = 'submit' name = 'submit' class = 'field' value = 'Create' onClick = 'window.location = "/dashboard"'required>
+  </form>
 
-<button class = "btn btn-info" id="singlebutton"> New Single Assignment </button>
-<button class = "btn btn-info" id="groupbutton"> New Group Project </button>
-
-<br><br>
-<form class="form" id="f1" action = "/assigntodash" method="POST">
-</form>
-
+  <form class="form" id="groupForm" action = "/assigntodash" method="POST">
+    <input type = 'text' name = 'groupprojectTitle'  class = 'field' value = 'Title' required><br><br>
+    <input type = 'text' name = 'groupprojectDescription'  class = 'field' value = 'Description' required><br><br>
+    <input type = 'text' name = 'groupprojectMaxScore'  class = 'field' value = 'Max Score' required><br><br>
+    <input type = 'text' name = 'groupprojectMaxSize'  class = 'field' value = 'Max Group Size' required><br><br>
+    <input type = 'submit' name = 'submit' class = 'field' value = 'Create' onClick = 'window.location = "/dashboard"'required>
+  </form>
 </center>
-
 
 {% endblock %}
 {% block scripts %}
