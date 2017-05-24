@@ -2,35 +2,15 @@ var form = document.getElementById("f1");
 var singlebutton = document.getElementById("singlebutton");
 var groupbutton = document.getElementById("groupbutton");
 
-/*
+var singleCreateButton = document.getElementById('singleCreateButton');
 
-//makeHidden hides all of the forms. This is used when reloading the "page"
-var makeHidden = function(e){
-    var inputs = document.getElementsByTagName("input");
-    for(var i =0; i<inputs.length;i++){
-	inputs[i].setAttribute("type","hidden");
-    }
-    return 0;
-};
-//reset form resets the entire form
-var resetForm = function(e){
-    var inputs = document.getElementsByTagName("input");
-    while(inputs.length>0){
-	inputs[0].remove();
-    }
-    console.log(inputs);
+
+    PM.apiCall("POST", "/api/class/create", {
+        "name": name,
+        "students": getSelectedStudentIDs()
+    }, "/class");
 }
-var makeInput = function(type, name, text){
-    var ret = document.createElement("input");
-    ret.setAttribute("type", type);
-    ret.setAttribute("name", name);
-    ret.setAttribute("required","required");
-    ret.setAttribute("class","field");
-    ret.setAttribute("value",text);
-    return ret;
-};
 
-*/
 
 var loadformA = function(e){
     document.getElementById('singleForm').style.display='block';
