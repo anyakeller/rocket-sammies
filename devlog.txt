@@ -89,3 +89,7 @@ wilsonB -- 2017-05-24 01:56
 - Include Bootstrap and jQuery JS and CSS in /static/vendor, so that instead of using
   a CDN we have them locally. They are minified so it only slightly increases
   git clone time, and it significantly decreases page load time
+
+jamesW -- 2017-05-24 08:21
+- Added assignments to individual class view
+- Added assignments to overall dashboard
