@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block title %}Class View{% endblock %}
+{% block head %} <link rel="stylesheet" href="/static/class.css">{% endblock %}
 {% block content %}
 <div class="container">
     <h2>My Classes</h2>
@@ -49,6 +50,9 @@
             <div class="panel-heading heading-red">
                 <h4 class="panel-title">
                     <a data-toggle="collapse" data-parent="#classes" href="#{{ class["cid"] }}">{{ class["name"] }}</a>
+                    <button type="button" class="btn btn-link">
+                              <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                    </button>
                 </h4>
             </div>
             <div id="{{ class["cid"] }}" class="panel-collapse collapse">
