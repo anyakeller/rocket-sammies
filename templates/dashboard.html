@@ -7,29 +7,32 @@
 
 <br><br><br>
 <div class="container-fluid">
-<div class="row">
-    <div class="col-md-6 col-md-offset-3">
-    <center><h1 class="head">Course Overview </h1></center>
-    <div class="panel-group" id="assignments">
-        {% for assignment in data["assignments"] %}
-        <div class="panel panel-default ">
-            <div class="panel-heading heading-red">
-                <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#assignments" href="#{{ assignment["aid"] }}">{{ assignment["title"] }}</a>
-                </h4>
-            </div>
-            <div id="{{ assignment["aid"] }}" class="panel-collapse collapse">
-                <div class="panel-body">
-                    Description: {{ assignment["description"] }}<br>
-                    Max score: {{ assignment["max_score"] }}
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <center><h1 class="head">Course Overview </h1></center>
+            <div class="panel-group" id="assignments">
+                {% for item in data %}
+                <h2>{{ item["class"]["name"] }}</h2>
+                {% for assignment in item["assignments"] %}
+                <div class="panel panel-default ">
+                    <div class="panel-heading heading-red">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#assignments" href="#{{ assignment["aid"] }}">{{ assignment["title"] }}</a>
+                        </h4>
+                    </div>
+                    <div id="{{ assignment["aid"] }}" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            Description: {{ assignment["description"] }}<br>
+                            Max score: {{ assignment["max_score"] }}
+                        </div>
+                    </div>
                 </div>
+                <br>
+                {% endfor %}
+                {% endfor %}
             </div>
         </div>
-	<br>
-        {% endfor %}
-    </div>
     </div>
 </div>
-    </div>
 
 {% endblock %}
