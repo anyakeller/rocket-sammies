@@ -15,12 +15,13 @@
         <div class="panel panel-default ">
             <div class="panel-heading heading-red">
                 <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#assignments" href="#{{ assignment["aid"] }}">{{ assignment["name"] }}</a>
+                    <a data-toggle="collapse" data-parent="#assignments" href="#{{ assignment["aid"] }}">{{ assignment["title"] }}</a>
                 </h4>
             </div>
             <div id="{{ assignment["aid"] }}" class="panel-collapse collapse">
                 <div class="panel-body">
-                    asdf
+                    Description: {{ assignment["description"] }}<br>
+                    Max score: {{ assignment["max_score"] }}
                 </div>
             </div>
         </div>

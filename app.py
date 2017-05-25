@@ -33,8 +33,9 @@ def gradebook():
 @redirect_if_not_logged_in
 def dashboard():
     # Get all assignments associated with the current user
-    assignments = utils.assignments.get_assignments(teacher=session.get("uid"))
-    return render_template("dashboard.html", assignments=assignments)
+    classes = utils.classes.get_class(teacher=session.get("uid"))
+    assignments = [utils.assignments.get_assignments(**{"cid": klass["cid"]})[0] for klass in classes]
+    return render_template("dashboard.html", classes=classes, assignments=assignments)
 
 @app.route("/class")
 @app.route("/class/<cid>")
