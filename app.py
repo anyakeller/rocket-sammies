@@ -89,7 +89,7 @@ def assignment():
 @app.route("/createAssignment", methods = ['POST'])
 def newAssignment():
     return redirect('assignment')
-@app.route("/assigntodash",methods=['POST'])
+@app.route("/assigntodash",methods=['GET','POST'])
 def backtodash():
     return redirect('dashboard')
 
