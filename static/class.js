@@ -1,4 +1,4 @@
-(function () {
+  (function () {
     "use strict";
     var btnNewClass = document.getElementById("btn-new-class");
     var modalNewClass = document.getElementById("modal-new-class");
