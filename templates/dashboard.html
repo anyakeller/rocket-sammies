@@ -23,8 +23,47 @@
                     </div>
                     <div id="{{ assignment["aid"] }}" class="panel-collapse collapse">
                         <div class="panel-body">
-                            Description: {{ assignment["description"] }}<br>
+                            Description: {{ assignment["description"] }}<br><br>
                             Max score: {{ assignment["max_score"] }}
+
+
+
+
+                                <div>
+                                    <br>
+                                    <button class="btn btn-primary" id="btn-new-class">Assign To Student(s)</button>
+                                    <br><br>
+                                    <div id="modal-new-class" class="modal fade" role="dialog">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h2>Assign Project to Students</h2>
+                                                </div>
+                                                <div class="modal-body">
+
+                                                    <h3>Students</h3>
+                            			
+                                                    <ol>
+                                                            <p style="margin-bottom: 0;">Select which students you would like to assign this project to.</p>
+
+
+                                                        <ul class="student-selection-list" id="student-list"><!-- populated with AJAX --></ul>
+                                                        <button class="btn btn-default" id="btn-toggle-all-students">Select all</button>
+                                                    </ol>
+
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button id="btn-create-class" class="btn btn-default btn-primary">Assign</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+
                         </div>
                     </div>
                 </div>
@@ -36,4 +75,9 @@
     </div>
 </div>
 
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script src="/static/dashboard.js"></script>
 {% endblock %}
