@@ -77,11 +77,30 @@ wilsonB -- 2017-05-21 10:40
 wilsonB -- 2017-05-21 07:45
 - Improved styling of student-selection list and add a select-all/deselect-all button
 
+patelD -- 2017-05-21 07:40
+- created oneclass.html template for backend to pass students and assignments into; uses HTML tables to organize
+- created routes directed for oneclass.html in app.py
+
 wilsonB -- 2017-05-21 08:00
 - Pass students and assignments in the given class to oneclass.html
 
+patelD -- 2017-05-21 08:45
+- made some quick little css front-end changes, color schemes, organizing html elements to make templates more user-friendly
+- changed navbar background and text colors to fit Mr. Brown's approved color scheme
+
 jonathanB -- 2017-05-21 9:32
 - Fixed form problem where form was expanding each time button was clicked
+
+patelD -- 2017-05-22 12:00
+- changed a background color
+- made collapsable panels, collapse out, instead of collapse in.
+- change dimensions of HTML table in class.html
+- added sample assignments.html file to work with until a final one can be created by me.
+- added a route in app.py that redirects to assignments.html
+- created two different html forms for creating assignments (one for single / one for group)
+- added javascript connected to those two html forms
+- Struggled with connected the backend to frontend for these two... eventually connected backend to the javascript file with jonathan (pair programming)
+- still have to get assignments to display in dashboard, and oneclass
 
 wilsonB -- 2017-05-24 01:56
 - Move assignment creation from assignment.html to a modal in oneclass.html, and make
@@ -93,6 +112,15 @@ wilsonB -- 2017-05-24 01:56
 jamesW -- 2017-05-24 08:21
 - Added assignments to individual class view
 - Added assignments to overall dashboard
+
+dhirajP -- 2017-05-24 21:30
+- routed assignment modals that were created by james to the dashboard
+- added css to the modals, and to the dashboard itself.
+- added a quick little favicon that i found
+- quick organization css fixes
+- added a color-scheme-approved colored bar behind every class name in the dashboard, to make it easier for users to see which assignments were in which classes.
+- created a separate modal that triggers from dashboard assignment panels, so that the user can input things in the modal to assign the project to either a certain group of students or to all students individually
+- jonathan has basic group creation working in the backend, so I have to connect it with frontend ASAP.
 
 jonathanB -- 2017-05-24 23:18
 - Added basic group creation methods
