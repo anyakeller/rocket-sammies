@@ -104,7 +104,7 @@ patelD -- 2017-05-22 12:00
 
 wilsonB -- 2017-05-24 01:56
 - Move assignment creation from assignment.html to a modal in oneclass.html, and make
-  its API calls functional
+  its API calls work
 - Include Bootstrap and jQuery JS and CSS in /static/vendor, so that instead of using
   a CDN we have them locally. They are minified so it only slightly increases
   git clone time, and it significantly decreases page load time
