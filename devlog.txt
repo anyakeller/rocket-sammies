@@ -125,3 +125,7 @@ dhirajP -- 2017-05-24 21:30
 jonathanB -- 2017-05-24 23:18
 - Added basic group creation methods
 - Will add further functionality as needed
+
+jonathanB -- 2017-05-24 14:06
+- Started work on further group functionality
+- Rewriting assignment storage in dictionary form

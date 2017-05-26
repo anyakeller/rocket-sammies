@@ -38,9 +38,9 @@ def getStudent(**keyword):
     return list(foundStudents)
 
 # Removes student based on email
-def removeStudent(email):
+def removeStudent(studentEmail):
     doomedStudent = {
-        'Student Email': email
+        'Student Email': studentEmail
     }
 
     db.students.delete_one(doomedStudent)

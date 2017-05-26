@@ -40,7 +40,7 @@ def create_project(cid, title, description, max_score, max_group_size, rubric):
         "type": PROJECT,
         "rubric": rubric,
         "max_group_size": max_group_size,
-        "groups": [],
+        "groups": {},
     }
 
     db.assignments.insert(assignment)
