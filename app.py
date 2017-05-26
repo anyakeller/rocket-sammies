@@ -33,13 +33,15 @@ def gradebook():
 @redirect_if_not_logged_in
 def dashboard():
     data = []
-    for klass in utils.classes.get_class(teacher=session.get("uid")):
+    classes = utils.classes.get_class(teacher=session.get("uid"))
+    for klass in classes:
+        students = [utils.students.getStudent(**{"Student ID": id})[0] for id in klass["students"]]
+        klass["students"] = students
         data.append({
             "class": klass,
             "assignments": utils.assignments.get_assignments(**{"cid": klass["cid"]})
         })
-    students = [utils.students.getStudent(**{"Student ID": id})[0] for id in klass["students"]]
-    return render_template("dashboard.html", data=data, students = students)
+    return render_template("dashboard.html", data=data)
 
 @app.route("/class")
 @app.route("/class/<cid>")

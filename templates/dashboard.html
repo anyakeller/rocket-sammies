@@ -48,7 +48,7 @@
 
 
                                                             <ul class="student-selection-list" id="student-list">
-                                                              {% for student in students %}
+                                                              {% for student in item["class"]["students"] %}
                                                               <li>
                                                                 <label style="display:block;">
                                                                   <input type="checkbox" data-id:"STUDENTID" data-name: {{ student["Student Name"] }}></input>{{ student["Student Name"] }}
