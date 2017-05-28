@@ -129,3 +129,9 @@ jonathanB -- 2017-05-24 23:18
 jonathanB -- 2017-05-24 14:06
 - Started work on further group functionality
 - Rewriting assignment storage in dictionary form
+
+wilsonB -- 2017-05-28 07:37
+- Moved code for the student-selection dialog from class.js to library function in base.js,
+  for reusability.
+- Set up the student selection dialog on /dashboard and fix the modal display (but NOT the
+  API call for creating students)
