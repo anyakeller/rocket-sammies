@@ -152,6 +152,14 @@ var PM = (function () {
                 },
                 addStudent: function (studentData) {
                     addStudent(studentList, studentData);
+                },
+                loadFromServer: function () {
+                    var self = this;
+                    PM.apiCall("GET", "/api/students", null, function (response) {
+                        response.data.forEach(function (studentData) {
+                            self.addStudent(studentData);
+                        });
+                    });
                 }
             };
         };

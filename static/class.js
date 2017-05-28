@@ -13,6 +13,7 @@
     });
 
     var studentSelector = PM.studentSelector(document.getElementById("student-selection"));
+    student.loadFromServer();
 
     btnCreateClass.addEventListener("click", function () {
         var name = inputNewClassName.value.trim();
@@ -41,11 +42,5 @@
         };
         reader.readAsText(btnImportStudents.files[0]);
         // When the file is loaded, it is read into a string and onload is called
-    });
-
-    PM.apiCall("GET", "/api/students", null, function (response) {
-        response.data.forEach(function (studentData) {
-            studentSelector.addStudent(studentData);
-        });
     });
 }());
