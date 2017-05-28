@@ -54,9 +54,11 @@ td, th {
     padding-left: 6px;
     border-radius: 3px;
     background-color: #cccccc;
+    border-bottom: 1px solid gray;
 }
 
 
-.student-selection-list li:nth-child(even) {
-    background-color: #777777;
+.modal-dialog {
+    top: 0;
+    left: 0;
 }
