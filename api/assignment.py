@@ -11,8 +11,7 @@ blueprint = Blueprint("assignment", __name__)
 @login_required
 def create_assignment():
     """Route for creating an assignment"""
-
-    form = request.form
+    form = request.get_json()
     cid = form.get("cid")
     title = form.get("title")
     description = form.get("description")
