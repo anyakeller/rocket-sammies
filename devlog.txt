@@ -135,3 +135,6 @@ wilsonB -- 2017-05-28 07:37
   for reusability.
 - Set up the student selection dialog on /dashboard and fix the modal display (but NOT the
   API call for creating students)
+
+jonathanB -- 2017-05-29 20:29
+- Finished up groups.py

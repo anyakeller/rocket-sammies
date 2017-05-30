@@ -20,22 +20,27 @@ def addGroups(aid, groupList):
         groups[gid] = group
     return db.assignments.update_many({'aid': aid}, {'groups': groups})
 
+# Takes in assignment ID and group ID and remvoes group from the assignment
 def removeGroup(aid, gid):
     assignment = db.assignments.find({'aid': aid})
     groups = assignment['groups']
     groups.pop(gid)
     return db.assignments.update_one({'aid': aid}, {'groups': groups})
 
-def addMember(aid, studentEmail):
+# Takes in assignment ID, group ID, and a new student email and adds it to group
+def addMember(aid, gid, studentEmail):
     assignment = db.assignments.find({'aid': aid})
     groups = assignment['groups']
+    group = groups[gid]
+    group.append(studentEmail)
+    groups[gid] = group
+    return db.assignments.update_one({'aid': aid}, {'groups': groups})
 
-def removeMember(aid, studentEmail):
+# Takes in assignment ID, group ID, and a student email and removes it from group
+def removeMember(aid, gid, studentEmail):
     assignment = db.assignments.find({'aid': aid})
     groups = assignment['groups']
-    for group in groups:
-        try:
-            group.remove(studentEmail)
-        except ValueError:
-            pass
+    group = groups[gid]
+    group.remove(studentEmail)
+    groups[gid] = group
     return db.assignments.update_one({'aid': aid}, {'groups': groups})
