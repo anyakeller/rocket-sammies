@@ -20,7 +20,7 @@ singleCreateButton.addEventListener("click", function(e){
         "description": document.getElementById("singleprojectDescription").value,
         "cid":document.getElementById("singleprojectCid").value,
         "max_score":+document.getElementById("singleprojectMaxScore").value,
-        "_type": 1
+        "type": "Regular Assignment"
     }, window.location);
 });
 groupCreateButton.addEventListener("click", function(e){
@@ -30,6 +30,6 @@ groupCreateButton.addEventListener("click", function(e){
         "description": document.getElementById("groupprojectDescription").value,
         "cid":document.getElementById("groupprojectCid").value,
         "max_score":+document.getElementById("groupprojectMaxScore").value,
-        "_type": 0
+        "type": "Group Project"
     }, window.location);
 });

@@ -26,7 +26,7 @@ def create_assignment():
     except:
         raise WebException("Max score must be greater than 0")
 
-    if _type == assignments.PROJECT:
+    if _type == "Group Project":
 
         try:
             # Validate max_group_size
