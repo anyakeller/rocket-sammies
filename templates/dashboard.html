@@ -23,6 +23,7 @@
                      <h4><u>Assignments</u></h4>
                        {% for assignment in item["assignments"] %}
                        <br>
+
                       <p>
 
                             <h5>{{ assignment["title"] }}</h5>
@@ -52,21 +53,18 @@
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button id="btn-create-assignment" class="btn btn-default btn-primary">Assign</button>
+
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                              {% endfor %}
 
-
-
-
-
-                        </div>
+                              </div>
                     </div>
                 </div>
                 <br>
-                {% endfor %}
                 {% endfor %}
             </div>
         </div>
