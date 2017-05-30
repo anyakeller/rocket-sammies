@@ -1,8 +1,5 @@
 import common
 
-PROJECT = 0
-HOMEWORK = 1
-
 def create_assignment(cid, title, description, max_score, _type, rubric):
     """
     Creates a regular assignment and inserts it into the database
@@ -26,7 +23,7 @@ def create_assignment(cid, title, description, max_score, _type, rubric):
 
 def create_project(cid, title, description, max_score, rubric, max_group_size):
     """
-    Creates a project assignment and inserts it into the database
+    Creates a group project assignment and inserts it into the database
     Returns the id of the new assignment
     """
 
@@ -39,7 +36,7 @@ def create_project(cid, title, description, max_score, rubric, max_group_size):
         "description": description,
         "max_score": max_score,
         "rubric": rubric,
-        "type": PROJECT,
+        "type": "Group Project",
         "max_group_size": max_group_size,
         "groups": [],
     }

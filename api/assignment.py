@@ -16,7 +16,7 @@ def create_assignment():
     title = form.get("title")
     description = form.get("description")
     max_score = form.get("max_score")
-    _type = form.get("type")
+    _type = form.get("type", "Regular Assignment")
     rubric = form.get("rubric", [])
 
     try:
