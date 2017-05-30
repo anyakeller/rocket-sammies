@@ -18,6 +18,7 @@ def create_assignment():
     description = form.get("description")
     max_score = form.get("max_score")
     _type = form.get("type")
+    rubric = form.get("rubric", [])
 
     try:
         # Validate max_score
@@ -27,8 +28,6 @@ def create_assignment():
         raise WebException("Max score must be greater than 0")
 
     if _type == assignments.PROJECT:
-        # Create a project assignment
-        rubric = form.get("rubric", [])
 
         try:
             # Validate max_group_size
@@ -37,9 +36,9 @@ def create_assignment():
         except:
             raise WebException("Maximum group size must be at least 2")
 
-        assignments.create_project(cid, title, description, max_score, max_group_size, rubric)
+        assignments.create_project(cid, title, description, max_score, rubric, max_group_size)
     else:
-        assignments.create_assignment(cid, title, description, max_score, _type)
+        assignments.create_assignment(cid, title, description, max_score, _type, rubric)
 
     return { "success": 1, "message": "Assignment created" }
 
