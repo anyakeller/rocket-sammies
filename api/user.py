@@ -11,7 +11,7 @@ blueprint = Blueprint("user", __name__)
 @api_wrapper
 def register_user():
     """Route for registering a user"""
-    form = request.form
+    form = request.get_json()
     email = form.get("email")
     password = form.get("password")
 
@@ -28,7 +28,7 @@ def register_user():
 @api_wrapper
 def login_user():
     """Route for logging in a user"""
-    form = request.form
+    form = request.get_json()
     email = form.get("email")
     password = hashlib.sha256(form.get("password")).hexdigest()
 

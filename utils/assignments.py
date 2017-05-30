@@ -3,7 +3,7 @@ import common
 PROJECT = 0
 HOMEWORK = 1
 
-def create_assignment(cid, title, description, max_score, _type):
+def create_assignment(cid, title, description, max_score, _type, rubric):
     """
     Creates a regular assignment and inserts it into the database
     Returns the id of the new assignment
@@ -17,13 +17,14 @@ def create_assignment(cid, title, description, max_score, _type):
         "title": title,
         "description": description,
         "max_score": max_score,
+        "rubric": rubric,
         "type": _type
     }
 
     db.assignments.insert(assignment)
     return aid
 
-def create_project(cid, title, description, max_score, max_group_size, rubric):
+def create_project(cid, title, description, max_score, rubric, max_group_size):
     """
     Creates a project assignment and inserts it into the database
     Returns the id of the new assignment
@@ -37,10 +38,10 @@ def create_project(cid, title, description, max_score, max_group_size, rubric):
         "title": title,
         "description": description,
         "max_score": max_score,
-        "type": PROJECT,
         "rubric": rubric,
+        "type": PROJECT,
         "max_group_size": max_group_size,
-        "groups": {},
+        "groups": [],
     }
 
     db.assignments.insert(assignment)

@@ -24,5 +24,6 @@ def add_students():
     # FIXME: check for duplicates (e.g. for when the user accidentally
     # re-uploads same file)
     # FIXME: handle invalid CSV
-    s = students.addStudentsStr(request.form["csv"])
+    form = request.get_json()
+    s = students.addStudentsStr(form["csv"])
     return { "success": 1, "added_students": s }

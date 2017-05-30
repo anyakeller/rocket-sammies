@@ -12,9 +12,9 @@ var PM = (function () {
 	$.ajax({
 	    method: method,
 	    url: url,
-	    data: data,
+	    data: JSON.stringify(data),
+        contentType: "application/json",
 	    dataType: 'json'
-	    // jQuery stringifies as JSON automatically
 	}).then(function (data, status, jqxhr) {
       if (data.success) {
         console.log("Sucessful response:", data);

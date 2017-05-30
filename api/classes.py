@@ -11,10 +11,10 @@ blueprint = Blueprint("class", __name__)
 @login_required
 def create_class():
     """Route for creating a class"""
-    form = request.form
+    form = request.get_json()
     name = form.get("name")
     teacher = session.get("uid")
-    student_ids = form.getlist("students[]")
+    student_ids = form["students"]
     classes.create_class(name, teacher, student_ids)
     return { "success": 1, "message": "Class created" }
 
@@ -37,7 +37,7 @@ def get_students(cid):
 @login_required
 def delete_class():
     """Route for deleting a class"""
-    form = request.form
+    form = request.get_json()
     cid = form.get("cid")
     count = classes.remove_class(cid)
     if count == 0:
