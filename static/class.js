@@ -13,7 +13,7 @@
     });
 
     var studentSelector = PM.studentSelector(document.getElementById("student-selection"));
-    student.loadFromServer();
+    studentSelector.loadFromServer();
 
     btnCreateClass.addEventListener("click", function () {
         var name = inputNewClassName.value.trim();
