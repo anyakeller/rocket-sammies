@@ -43,4 +43,32 @@
         reader.readAsText(btnImportStudents.files[0]);
         // When the file is loaded, it is read into a string and onload is called
     });
+
+    var deleteClassBtns = document.getElementsByClassName("delete-class"), i;
+    var getCID = function (elem) {
+	while (!elem.hasAttribute("data-cid")) {
+	    elem = elem.parentNode;
+	}
+	return elem.getAttribute("data-cid");
+    };
+    var rmClass = function (elem) {
+	var cid = getCID(e.target);
+	PM.apiCall("POST", "/api/class/delete", {
+	    cid: cid
+	}, function () {
+	    while (!elem.hasAttribute("data-cid")) {
+		elem = elem.parentNode;
+	    }
+	    elem.remove();
+	});
+    };
+    var deleteClassHandler = function (deleteBtn) {
+	return function (e) {
+	    // TODO: make modal appear, with a confirmation button
+	    // which calls rmClass
+	};
+    };
+    for (i = 0; i < deleteClassBtns.length; i++) {
+	deleteClassBtns[i].addEventListener(deleteClassHandler(deleteClassBtns[i]));
+    }
 }());
