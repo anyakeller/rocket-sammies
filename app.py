@@ -35,7 +35,7 @@ def dashboard():
     data = []
     classes = utils.classes.get_class(teacher=session.get("uid"))
     for klass in classes:
-        students = [utils.students.getStudent(**{"Student ID": id})[0] for id in klass["students"]]
+        students = [utils.students.getStudent(**{"Student ID": str(id)})[0] for id in klass["students"]]
         klass["students"] = students
         data.append({
             "class": klass,
@@ -60,7 +60,7 @@ def classview(cid=None):
     klass = classes[0]
 
     # Get all students in the class
-    students = [utils.students.getStudent(**{"Student ID": id})[0] for id in klass["students"]]
+    students = [utils.students.getStudent(**{"Student ID": str(id)})[0] for id in klass["students"]]
 
     # Get all assignments for the class
     assigs = utils.assignments.get_assignments(cid=cid)
