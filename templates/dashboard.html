@@ -12,23 +12,18 @@
             <center><h1 class="head">Course Overview </h1></center>
             <div class="panel-group" id="assignments">
                 {% for item in data %}
-                <center><h2 style="background-color:#E1769D;">{{ item["class"]["name"] }}</h2></center>
-                <h3><u>Assignments</u></h5>
-                {% for assignment in item["assignments"] %}
-                <div class="panel panel-default ">
-                    <div class="panel-heading heading-red">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#assignments" href="#{{ assignment["aid"] }}">{{ assignment["title"] }}</a>
-                        </h4>
-                    </div>
-                    <div id="{{ assignment["aid"] }}" class="panel-collapse collapse">
-                        <div class="panel-body">
+		<div class="panel panel-default">
+		  <div class = "panel-heading"><center>
+		    <h4 class = "panel-title">
+		      <a data-toggle="collapse" data-parent="#assignment" href="#{{ item["class"]["name"] }}">{{ item["class"]["name"] }}</a>
+		    </h4></center>
+		  </div>
+		  <div id=  "{{ item['class']['name'] }}" class="panel-collapse collapse">
+		  <div class = "panel-body">
+                     <h2><u>Assignments</u></h2><br>
+                       {% for assignment in item["assignments"] %}         
                             Description: {{ assignment["description"] }}<br><br>
                             Max score: {{ assignment["max_score"] }}
-
-
-
-
                                 <div>
                                     <br>
                                     <button class="btn btn-primary" id="btn-assign">Assign</button>
@@ -73,7 +68,6 @@
         </div>
     </div>
 </div>
-
 {% endblock %}
 
 {% block scripts %}
