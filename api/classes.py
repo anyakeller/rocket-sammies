@@ -14,7 +14,7 @@ def create_class():
     form = request.get_json()
     name = form.get("name")
     teacher = session.get("uid")
-    student_ids = form.getlist("students[]")
+    student_ids = form["students"]
     classes.create_class(name, teacher, student_ids)
     return { "success": 1, "message": "Class created" }
 
