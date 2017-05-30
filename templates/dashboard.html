@@ -9,25 +9,27 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
-            <center><h1 class="head">Course Overview </h1></center>
+            <center><h1 class="head">Course Overview </h1></center><br>
             <div class="panel-group" id="assignments">
                 {% for item in data %}
 		<div class="panel panel-default">
-		  <div class = "panel-heading"><center>
+		  <div class = "panel-heading heading-red"><center>
 		    <h4 class = "panel-title">
 		      <a data-toggle="collapse" data-parent="#assignment" href="#{{ item["class"]["name"] }}">{{ item["class"]["name"] }}</a>
 		    </h4></center>
 		  </div>
 		  <div id=  "{{ item['class']['name'] }}" class="panel-collapse collapse">
 		  <div class = "panel-body">
-                     <h4><u>Assignments</u></h4><br>
+                     <h4><u>Assignments</u></h4>
                        {% for assignment in item["assignments"] %}
+                       <br>
                       <p>
+
+                            <h5>{{ assignment["title"] }}</h5>
                             Type: {{ assignment["type"] }}<br>
-                            Description: {{ assignment["description"] }}<br><
+                            Description: {{ assignment["description"] }}<br>
                             Max score: {{ assignment["max_score"] }}<br>
                                 <div>
-                                    <br>
                                     <button class="btn btn-primary" id="btn-assign">Assign</button>
                                     <br><br>
                                     <div id="modal-assign" class="modal fade" role="dialog">
