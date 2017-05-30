@@ -20,10 +20,12 @@
 		  </div>
 		  <div id=  "{{ item['class']['name'] }}" class="panel-collapse collapse">
 		  <div class = "panel-body">
-                     <h2><u>Assignments</u></h2><br>
-                       {% for assignment in item["assignments"] %}         
-                            Description: {{ assignment["description"] }}<br><br>
-                            Max score: {{ assignment["max_score"] }}
+                     <h4><u>Assignments</u></h4><br>
+                       {% for assignment in item["assignments"] %}
+                      <p>
+                            Type: {{ assignment["type"] }}<br>
+                            Description: {{ assignment["description"] }}<br><
+                            Max score: {{ assignment["max_score"] }}<br>
                                 <div>
                                     <br>
                                     <button class="btn btn-primary" id="btn-assign">Assign</button>
