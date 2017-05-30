@@ -138,3 +138,7 @@ wilsonB -- 2017-05-28 07:37
 
 jonathanB -- 2017-05-29 20:29
 - Finished up groups.py
+
+jamesW -- 2017-05-30 17:48
+- Changed ajax requests to properly send json to the api
+- Changed assignment types to strings instead of numbers
