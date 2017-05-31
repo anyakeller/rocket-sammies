@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}My Gradebook{% endblock %}
+{% block title %}{{ klass["name"] }}{% endblock %}
 {% block content %}
 <center>
     <h1>Class: {{ klass["name"] }}</h1>
@@ -65,13 +65,17 @@
             <tr>
                 <th>Assignment Name</th>
                 <th>Description</th>
+                <td></td>
             </tr>
         </thead>
         <tbody>
             {% for assignment in assignments %}
             <tr>
-                <th scope="row">{{ assignment["title"] }}</th>
-                <td>{{ assignment["description"] }}</td>
+                <th width = "500" scope="row">{{ assignment["title"] }}</th>
+                <td width = "200">{{ assignment["description"] }}</td>
+                <td>
+                  <button class = "btn btn-info" id="create-rubric-btn">Create Rubric</button>
+                </td>
             </tr>
             {% endfor %}
         </tbody>
