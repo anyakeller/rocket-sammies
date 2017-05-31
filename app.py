@@ -99,29 +99,29 @@ def backtodash():
 @app.route("/rubric",methods=['GET'])
 def rubricCreation():
     return render_template("rubric.html")
-    
 
-
+@app.route("/exportStudents")
+def exportStudents():
+    return render_template("downloadStudentData.html",cid="2e49cecbe85552ed768e80b2223b7b21")
 #export to CSV
 @app.route("/export",methods=['GET','POST'])
 def export():
+    cid = request.args.get("cid")
     client = MongoClient()
     db = client.project_manager
     classes = db.classes
-    kids = classes.find_one({"cid":"2e49cecbe85552ed768e80b2223b7b21"})["students"]
+    kids = classes.find_one({"cid":cid})["students"]
     students = db.students
     results = []
     for kid in kids:
         results.append(students.find_one({"Student ID":kid}))
-    print results
-
+    print json.dumps(results)
     #keys = results[0].keys()
     #with open('people.csv', 'wb') as output_file:
     #    dict_writer = csv.DictWriter(output_file, keys)
     #    dict_writer.writeheader()
     #    dict_writer.writerows(results)
-    return
-export()
+    return results
 
 if __name__ == "__main__":
 

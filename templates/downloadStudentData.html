@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Downlaod Students{% endblock %}
+{% block head %} <link rel="stylesheet" href="/static/class.css">{% endblock %}
+{% block content %}
+<div class="container">
+    <h2>Download Studentss</h2>
+
+    <button class="btn btn-default" id="download">download</button>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script src="/static/downloadStudentData.js">
+var cid = {{ cid }}
+var input = { 'cid': cid};
+
+$.ajax({
+    url: '/export',
+    //'/saveSong'
+    type: 'GET',
+    //'POST'
+    data: input,
+    //title,artist
+    success: function( d ) {
+        d = JSON.parse(d);
+        console.log(d);
+    }
+});
+</script>
+{% endblock %}
