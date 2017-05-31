@@ -1,2 +1,3 @@
-#!/usr/bin/python
+#!/bin/bash
+
 python utils/students.py
