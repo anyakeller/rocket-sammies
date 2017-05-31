@@ -37,11 +37,9 @@ def dashboard():
     for klass in classes:
         students = [utils.students.getStudent(**{"Student ID": str(id)})[0] for id in klass["students"]]
         klass["students"] = students
-        data.append({
-            "class": klass,
-            "assignments": utils.assignments.get_assignments(**{"cid": klass["cid"]})
-        })
-    return render_template("dashboard.html", data=data)
+        klass["assignments"] = utils.assignments.get_assignments(**{"cid": klass["cid"]})
+        data.append(klass)
+    return render_template("dashboard.html", classes=data)
 
 @app.route("/class")
 @app.route("/class/<cid>")
