@@ -1,4 +1,7 @@
 from flask import Flask, abort, render_template, session, redirect
+from pymongo import MongoClient
+import pprint
+import csv
 import os
 
 
@@ -95,6 +98,24 @@ def newAssignment():
 @app.route("/assigntodash",methods=['GET','POST'])
 def backtodash():
     return redirect('dashboard')
+
+#export to CSV
+@app.route("/export",methods=['GET','POST'])
+def export():
+    client = MongoClient()
+    db = client.project_manager
+    students = db.students
+    results = []
+    for s in students.find():
+        results.append(s)
+    print results
+    #keys = results[0].keys()
+    #with open('people.csv', 'wb') as output_file:
+    #    dict_writer = csv.DictWriter(output_file, keys)
+    #    dict_writer.writeheader()
+    #    dict_writer.writerows(results)
+    return
+export()
 
 if __name__ == "__main__":
 
