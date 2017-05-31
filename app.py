@@ -107,11 +107,14 @@ def rubricCreation():
 def export():
     client = MongoClient()
     db = client.project_manager
+    classes = db.classes
+    kids = classes.find_one({"cid":"2e49cecbe85552ed768e80b2223b7b21"})["students"]
     students = db.students
     results = []
-    for s in students.find():
-        results.append(s)
+    for kid in kids:
+        results.append(students.find_one({"Student ID":kid}))
     print results
+
     #keys = results[0].keys()
     #with open('people.csv', 'wb') as output_file:
     #    dict_writer = csv.DictWriter(output_file, keys)
