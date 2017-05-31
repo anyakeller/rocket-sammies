@@ -1,15 +1,18 @@
 @import url("//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css");
 html, body {
     background-color: #EAEAEB;
-    color: #22181C; 
+    color: #22181C;
     font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
 }
-
+h1{
+  color: #22181C;
+  font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+}
 .panel > .heading-red {
     background-color: #734B5E;
     color: white;
 }
-#navlink{ 
+#navlink{
     background-color: #3A1B32;
     color: #D7D4D3;
 }
@@ -17,8 +20,8 @@ html, body {
     background-color: #C9044C;
 }
 table {
-  table-layout: fixed; 
-  border: 2px solid #5A0001; 
+  table-layout: fixed;
+  border: 2px solid #5A0001;
 
 }
 td, th {
@@ -39,7 +42,7 @@ td, th {
 .inner {
   overflow-x: scroll;
   overflow-y: visible;
-  
+
   margin-left: 100px;
 }
 
@@ -56,8 +59,6 @@ td, th {
     background-color: #cccccc;
     border-bottom: 1px solid gray;
 }
-
-
 .modal-dialog {
     top: 0;
     left: 0;
