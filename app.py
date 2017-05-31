@@ -96,6 +96,11 @@ def newAssignment():
 @app.route("/assigntodash",methods=['GET','POST'])
 def backtodash():
     return redirect('dashboard')
+@app.route("/rubric",methods=['GET'])
+def rubricCreation():
+    return render_template("rubric.html")
+    
+
 
 #export to CSV
 @app.route("/export",methods=['GET','POST'])

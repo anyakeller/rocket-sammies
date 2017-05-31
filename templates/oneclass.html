@@ -74,7 +74,9 @@
                 <th width = "500" scope="row">{{ assignment["title"] }}</th>
                 <td width = "200">{{ assignment["description"] }}</td>
                 <td>
-                  <button class = "btn btn-info" id="create-rubric-btn">Create Rubric</button>
+                  <form action="/rubric" method ="GET">
+                    <button class = "btn btn-info" id="create-rubric-btn">Create Rubric</button>
+                  </form>
                 </td>
             </tr>
             {% endfor %}
