@@ -5,26 +5,27 @@
 <div class="container">
     <h2>Download Studentss</h2>
 
-    <button class="btn btn-default" id="download">download</button>
-{% endblock %}
+    <a href="/downloadStudents/{{cid}}">Download</a>
+    {% endblock %}
 
-{% block scripts %}
-{{ super() }}
-<script src="/static/downloadStudentData.js">
-var cid = {{ cid }}
-var input = { 'cid': cid};
+    {% block scripts %}
+    {{ super() }}
+    <script src="/static/downloadStudentData.js"> </script>
+    <script>
+var download = function(){
+    var cid = "{{ cid }}";
+    var input = { 'cid': cid};
 
-$.ajax({
-    url: '/export',
-    //'/saveSong'
-    type: 'GET',
-    //'POST'
-    data: input,
-    //title,artist
-    success: function( d ) {
-        d = JSON.parse(d);
-        console.log(d);
-    }
-});
-</script>
-{% endblock %}
+    $.ajax({
+        url: '/export',
+        type: 'GET',
+        data: input,
+        success: function( d ) {
+            d = JSON.parse(d);
+            console.log(d);
+        }
+    });
+};
+$("#download").click(download);
+    </script>
+    {% endblock %}

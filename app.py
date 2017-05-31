@@ -1,5 +1,7 @@
-from flask import Flask, abort, render_template, session, redirect
+from bson import json_util
+from flask import Flask, abort, render_template, session, redirect,request,Response
 from pymongo import MongoClient
+import json
 import pprint
 import csv
 import os
@@ -115,13 +117,43 @@ def export():
     results = []
     for kid in kids:
         results.append(students.find_one({"Student ID":kid}))
-    print json.dumps(results)
-    #keys = results[0].keys()
-    #with open('people.csv', 'wb') as output_file:
-    #    dict_writer = csv.DictWriter(output_file, keys)
-    #    dict_writer.writeheader()
-    #    dict_writer.writerows(results)
-    return results
+    results = json.dumps(results, default=json_util.default)
+    return str(results)
+
+@app.route("/downloadStudents")
+@app.route("/downloadStudents/<cid>")
+def downloadStudents(cid=None):
+    if cid is None:
+        # View all classes if no class id was passed into the url
+        classes = utils.classes.get_class(teacher=session.get("uid"))
+        return render_template("class.html", classes=classes)
+
+    client = MongoClient()
+    db = client.project_manager
+    classes = db.classes
+    kids = classes.find_one({"cid":cid})["students"]
+    students = db.students
+    results = []
+    for kid in kids:
+        results.append(students.find_one({"Student ID":kid}))
+    print results
+    keys = results[0].keys()
+    csv = ",".join(keys)
+    csv = csv + "\n"
+    for row in results:
+        values = []
+        for key in keys:
+            if key in row:
+                values.append(str(row[key]))
+            else:
+                values.append("")
+        csv = csv + ",".join(values)+"\n"
+
+    return Response(
+            csv,
+            mimetype="text/csv",
+            headers={"Content-disposition":"attachment; filename=studentData.csv"})
+
 
 if __name__ == "__main__":
 
