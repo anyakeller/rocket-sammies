@@ -31,35 +31,8 @@
                             Description: {{ assignment["description"] }}<br>
                             Max score: {{ assignment["max_score"] }}<br>
                                 <div>
-                                    <button class="btn btn-primary" id="btn-assign">Assign</button>
+                                    <button class="btn btn-primary btn-assign">Assign</button>
                                     <br><br>
-                                    <div id="modal-assign" class="modal fade" role="dialog">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h2>Assign Project to Students</h2>
-                                                </div>
-                                                <div class="modal-body">
-
-                                                    <h3>Students</h3>
-
-                                                    <ol>
-                                                            <p style="margin-bottom: 0;">Select which students you would like to assign this project to.</p>
-
-
-                                                            <div id="student-selection"></div>
-                                                    </ol>
-
-                                                </div>
-                                                <div class="modal-footer">
-                                                  <form action="/dashboard" method = "GET">
-                                                    <button id="btn-create-assignment" class="btn btn-default btn-primary">Assign</button>
-                                                  </form>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                               {% endfor %}
 
@@ -68,6 +41,33 @@
                 </div>
                 <br>
                 {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div id="modal-assign" class="modal fade" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Assign Project to Students</h2>
+                </div>
+                <div class="modal-body">
+
+                    <h3>Students</h3>
+
+                    <ol>
+                            <p style="margin-bottom: 0;">Select which students you would like to assign this project to.</p>
+
+
+                            <div id="student-selection"></div>
+                    </ol>
+
+                </div>
+                <div class="modal-footer">
+                  <form action="/dashboard" method = "GET">
+                    <button id="btn-create-assignment" class="btn btn-default btn-primary">Assign</button>
+                  </form>
+
+                </div>
             </div>
         </div>
     </div>
