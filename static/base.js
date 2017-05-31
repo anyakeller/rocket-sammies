@@ -9,27 +9,28 @@ var PM = (function () {
     // on success, or a function to be called on success). On failure, it
     // shows an error notification using the error message from the server.
     var apiCall = function (method, url, data, after) {
-	$.ajax({
-	    method: method,
-	    url: url,
-	    data: JSON.stringify(data),
-        contentType: "application/json",
-	    dataType: 'json'
-	}).then(function (data, status, jqxhr) {
-      if (data.success) {
-        console.log("Sucessful response:", data);
-        if (typeof after === "string" || after instanceof Location) {
-            window.location = after;
-        } else if (typeof after === "function" ) {
-            after(data);
-        }
-      } else {
-        console.error("Error in response:", data);
-        $.notify(data.message, "error");
-      }
-	}, function (response) {
-	    $.notify(response.message, "error");
-	});
+        method = method.toUpperCase();
+        $.ajax({
+            method: method,
+            url: url,
+            data: method === "POST" ? JSON.stringify(data) : data,
+            contentType: method === "POST" ? "application/json" : "",
+            dataType: 'json'
+        }).then(function (data, status, jqxhr) {
+            if (data.success) {
+                console.log("Sucessful response:", data);
+                if (typeof after === "string" || after instanceof Location) {
+                    window.location = after;
+                } else if (typeof after === "function" ) {
+                    after(data);
+                }
+            } else {
+                console.error("Error in response:", data);
+                $.notify(data.message, "error");
+            }
+        }, function (response) {
+            $.notify(response.message, "error");
+        });
     };
 
     var studentSelector = (function () {
@@ -133,7 +134,7 @@ var PM = (function () {
                 var i, elem;
                 for (i = 0; i < list.length; i += 1) {
                     elem = list[i];
-                  console.log(elem);
+                    console.log(elem);
                     if (matches(val, elem.getAttribute("data-name"))) {
                         elem.parentNode.parentNode.setAttribute("style", "display: block;");
                     } else {

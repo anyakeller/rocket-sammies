@@ -48,3 +48,15 @@ def submit_assignment():
     """Route for submitting an assignment"""
     # TODO: Implement
     return { "success": 1, "message": "Assignment submitted" }
+
+@blueprint.route("/update", methods=["POST"])
+@api_wrapper
+@teachers_only
+@login_required
+def update_assignment():
+    form = request.get_json()
+    aid = form.pop("aid")
+    num_modified = assignments.update_assignment(aid, form)
+    if num_modified < 1:
+        raise WebException("Assignment does not exist")
+    return { "success": 1, "message": "Assignment updated" }

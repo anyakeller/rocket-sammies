@@ -15,7 +15,7 @@
 		<div class="panel panel-default">
 		  <div class = "panel-heading heading-red"><center>
 		    <h4 class = "panel-title">
-		      <a data-toggle="collapse" data-parent="#assignment" href="#{{ item["class"]["name"] }}">{{ item["class"]["name"] }}</a>
+                <a data-toggle="collapse" data-parent="#assignment" href="#{{ item["class"]["name"] }}">{{ item["class"]["name"] }}</a> ({{ item["assignments"]|length  }})
 		    </h4></center>
 		  </div>
 		  <div id=  "{{ item['class']['name'] }}" class="panel-collapse collapse">

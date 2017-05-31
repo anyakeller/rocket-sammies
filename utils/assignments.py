@@ -63,3 +63,12 @@ def remove_assignment(aid):
     }
     result = db.assignments.delete_one(match)
     return result.deleted_count
+
+def update_assignment(aid, data):
+    """
+    Update an assignment with a specific id
+    """
+
+    db = common.get_connection()
+    result = db.assignments.update_one({"aid": aid}, data)
+    return result.modified_count
