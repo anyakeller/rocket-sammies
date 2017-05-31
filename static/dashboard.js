@@ -1,12 +1,15 @@
 (function () {
   "use strict";
-  var btnAssign = document.getElementById("btn-assign");
+  var btnAssigns = document.getElementsByClassName("btn-assign");
   var modalAssign = document.getElementById("modal-assign");
   var btnCreateAssignment = document.getElementById("btn-create-assignment");
+  var i;
 
-  btnAssign.addEventListener("click", function () {
-      $(modalAssign).modal();
-  });
+  for (i = 0; i < btnAssigns.length; i++) {
+      btnAssigns[i].addEventListener("click", function () {
+          $(modalAssign).modal();
+      });
+  }
 
   var studentSelector = PM.studentSelector(document.getElementById("student-selection"));
   studentSelector.loadFromServer();

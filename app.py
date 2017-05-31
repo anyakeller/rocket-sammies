@@ -1,4 +1,7 @@
 from flask import Flask, abort, render_template, session, redirect
+from pymongo import MongoClient
+import pprint
+import csv
 import os
 
 
@@ -37,11 +40,9 @@ def dashboard():
     for klass in classes:
         students = [utils.students.getStudent(**{"Student ID": str(id)})[0] for id in klass["students"]]
         klass["students"] = students
-        data.append({
-            "class": klass,
-            "assignments": utils.assignments.get_assignments(**{"cid": klass["cid"]})
-        })
-    return render_template("dashboard.html", data=data)
+        klass["assignments"] = utils.assignments.get_assignments(**{"cid": klass["cid"]})
+        data.append(klass)
+    return render_template("dashboard.html", classes=data)
 
 @app.route("/class")
 @app.route("/class/<cid>")
@@ -100,6 +101,24 @@ def rubricCreation():
     return render_template("rubric.html")
     
 
+
+#export to CSV
+@app.route("/export",methods=['GET','POST'])
+def export():
+    client = MongoClient()
+    db = client.project_manager
+    students = db.students
+    results = []
+    for s in students.find():
+        results.append(s)
+    print results
+    #keys = results[0].keys()
+    #with open('people.csv', 'wb') as output_file:
+    #    dict_writer = csv.DictWriter(output_file, keys)
+    #    dict_writer.writeheader()
+    #    dict_writer.writerows(results)
+    return
+export()
 
 if __name__ == "__main__":
 
