@@ -1,9 +1,4 @@
-from bson import json_util
-from flask import Flask, abort, render_template, session, redirect,request,Response
-from pymongo import MongoClient
-import json
-import pprint
-import csv
+from flask import Flask, abort, render_template, session, redirect, request, Response
 import os
 
 
@@ -47,7 +42,7 @@ def dashboard():
     return render_template("dashboard.html", classes=data)
 
 @app.route("/class")
-@app.route("/class/<cid>")
+@app.route("/class/<cid>/")
 @redirect_if_not_logged_in
 def classview(cid=None):
     if cid is None:
@@ -71,6 +66,30 @@ def classview(cid=None):
         klass=klass,
         students=students,
         assignments=assigs)
+
+@app.route("/class/<cid>/export/")
+def export_class(cid=None):
+    klass = utils.classes.get_class(cid=cid)[0]
+    students = klass.get("students", [])
+    results = []
+    for student in students:
+        results.append(utils.students.getStudent(**{"Student ID":str(student)})[0])
+    keys = results[0].keys()
+    csv = ",".join(keys)
+    csv += "\n"
+    for row in results:
+        values = []
+        for key in keys:
+            if key in row:
+                values.append(str(row[key]))
+            else:
+                values.append("")
+        csv = csv + ",".join(values)+"\n"
+
+    return Response(
+            csv,
+            mimetype="text/csv",
+            headers={"Content-disposition":"attachment; filename=students.csv"})
 
 @app.route("/logout")
 def logout():
@@ -101,58 +120,6 @@ def backtodash():
 @app.route("/rubric",methods=['GET'])
 def rubricCreation():
     return render_template("rubric.html")
-
-@app.route("/exportStudents")
-def exportStudents():
-    return render_template("downloadStudentData.html",cid="2e49cecbe85552ed768e80b2223b7b21")
-#export to CSV
-@app.route("/export",methods=['GET','POST'])
-def export():
-    cid = request.args.get("cid")
-    client = MongoClient()
-    db = client.project_manager
-    classes = db.classes
-    kids = classes.find_one({"cid":cid})["students"]
-    students = db.students
-    results = []
-    for kid in kids:
-        results.append(students.find_one({"Student ID":kid}))
-    results = json.dumps(results, default=json_util.default)
-    return str(results)
-
-@app.route("/downloadStudents")
-@app.route("/downloadStudents/<cid>")
-def downloadStudents(cid=None):
-    if cid is None:
-        # View all classes if no class id was passed into the url
-        classes = utils.classes.get_class(teacher=session.get("uid"))
-        return render_template("class.html", classes=classes)
-
-    client = MongoClient()
-    db = client.project_manager
-    classes = db.classes
-    kids = classes.find_one({"cid":cid})["students"]
-    students = db.students
-    results = []
-    for kid in kids:
-        results.append(students.find_one({"Student ID":kid}))
-    print results
-    keys = results[0].keys()
-    csv = ",".join(keys)
-    csv = csv + "\n"
-    for row in results:
-        values = []
-        for key in keys:
-            if key in row:
-                values.append(str(row[key]))
-            else:
-                values.append("")
-        csv = csv + ",".join(values)+"\n"
-
-    return Response(
-            csv,
-            mimetype="text/csv",
-            headers={"Content-disposition":"attachment; filename=studentData.csv"})
 
 
 if __name__ == "__main__":
