@@ -5,38 +5,38 @@
 {% endblock %}
 {% block content %}
 
-
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
             <center><h1 class="head">Course Overview </h1></center><br>
             <div class="panel-group" id="assignments">
-                {% for item in data %}
-		<div class="panel panel-default">
-		  <div class = "panel-heading heading-red"><center>
-		    <h4 class = "panel-title">
-                <a data-toggle="collapse" data-parent="#assignment" href="#{{ item["class"]["name"] }}">{{ item["class"]["name"] }}</a> ({{ item["assignments"]|length  }})
-		    </h4></center>
-		  </div>
-		  <div id=  "{{ item['class']['name'] }}" class="panel-collapse collapse">
-		  <div class = "panel-body">
-                     <h4><u>Assignments</u></h4>
-                       {% for assignment in item["assignments"] %}
-                       <br>
+                {% for class in classes %}
+                <div class="panel panel-default">
+                    <div class = "panel-heading heading-red"><center>
+                            <h4 class = "panel-title">
+                                <a data-toggle="collapse" data-parent="#assignment" href="#{{ class["name"] }}">{{ class["name"] }}</a> ({{ class["assignments"]|length  }})    <button type="button" class="btn btn-link delete-class"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+                        </h4></center>
+                    </div>
+                    <div id=  "{{ class['name'] }}" class="panel-collapse collapse">
+                        <div class = "panel-body">
+                            <h4><u>Assignments</u></h4>
+                            {% for assignment in class["assignments"] %}
+                            <br>
 
-                      <p>
+                            <p>
 
-                            <h5>{{ assignment["title"] }}</h5>
+                            <h5>{{ assignment["title"] }}<button type="button" class="btn btn-link delete-class"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+                            </h5>
                             Type: {{ assignment["type"] }}<br>
                             Description: {{ assignment["description"] }}<br>
                             Max score: {{ assignment["max_score"] }}<br>
-                                <div>
-                                    <button class="btn btn-primary btn-assign" data-cid="{{ item['class']['cid'] }}">Assign</button>
-                                    <br><br>
-                                </div>
-                              {% endfor %}
+                            <div>
+                                <button class="btn btn-primary btn-assign" data-cid="{{ item['class']['cid'] }}">Assign</button>
+                                <br><br>
+                            </div>
+                            {% endfor %}
 
-                              </div>
+                        </div>
                     </div>
                 </div>
                 <br>
@@ -55,17 +55,17 @@
                     <h3>Students</h3>
 
                     <ol>
-                            <p style="margin-bottom: 0;">Select which students you would like to assign this project to.</p>
+                        <p style="margin-bottom: 0;">Select which students you would like to assign this project to.</p>
 
 
-                            <div id="student-selection"></div>
+                        <div id="student-selection"></div>
                     </ol>
 
                 </div>
                 <div class="modal-footer">
-                  <form action="/dashboard" method = "GET">
-                    <button id="btn-create-assignment" class="btn btn-default btn-primary">Assign</button>
-                  </form>
+                    <form action="/dashboard" method = "GET">
+                        <button id="btn-create-assignment" class="btn btn-default btn-primary">Assign</button>
+                    </form>
 
                 </div>
             </div>

@@ -4,10 +4,13 @@
 <center>
     <h1>Class: {{ klass["name"] }}</h1>
 
+<br>
+
   <button class = "btn btn-info" id="singlebutton">New Single Assignment</button>
   <button class = "btn btn-info" id="groupbutton"> New Group Project </button>
 
   <br><br>
+  <a class="btn btn-info" href="/class/{{ klass["cid"] }}/export">Export to CSV</a>
     <div id="singleForm" class="modal fade" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -42,7 +45,8 @@
         </div>
     </div>
 
-    <br><br>
+    
+    <h3><u>Student Information</u></h3>
     <table style="width:92%;" class="table table-inverse">
         <thead>
             <tr>
@@ -59,7 +63,9 @@
             {% endfor %}
         </tbody>
     </table>
-
+    
+    <br>
+    <h3><u>Assignments</u></h3>
     <table style="width:92%;" class="table table-inverse">
         <thead>
             <tr>
@@ -74,7 +80,9 @@
                 <th width = "500" scope="row">{{ assignment["title"] }}</th>
                 <td width = "200">{{ assignment["description"] }}</td>
                 <td>
-                  <button class = "btn btn-info" id="create-rubric-btn">Create Rubric</button>
+                  <form action="/rubric" method ="GET">
+                    <button class = "btn btn-info" id="create-rubric-btn">Create Rubric</button>
+                  </form>
                 </td>
             </tr>
             {% endfor %}

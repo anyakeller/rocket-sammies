@@ -5,7 +5,7 @@ from utils import assignments
 
 blueprint = Blueprint("assignment", __name__)
 
-@blueprint.route("/create", methods=["POST"])
+@blueprint.route("/create/", methods=["POST"])
 @api_wrapper
 @teachers_only
 @login_required
@@ -41,7 +41,7 @@ def create_assignment():
 
     return { "success": 1, "message": "Assignment created" }
 
-@blueprint.route("/submit", methods=["POST"])
+@blueprint.route("/submit/", methods=["POST"])
 @api_wrapper
 @login_required
 def submit_assignment():
@@ -49,7 +49,7 @@ def submit_assignment():
     # TODO: Implement
     return { "success": 1, "message": "Assignment submitted" }
 
-@blueprint.route("/update", methods=["POST"])
+@blueprint.route("/update/", methods=["POST"])
 @api_wrapper
 @teachers_only
 @login_required

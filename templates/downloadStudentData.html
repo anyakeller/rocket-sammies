@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Downlaod Students{% endblock %}
+{% block head %} <link rel="stylesheet" href="/static/class.css">{% endblock %}
+{% block content %}
+<div class="container">
+    <h2>Download Studentss</h2>
+
+    <a href="/downloadStudents/{{cid}}">Download</a>
+    {% endblock %}
+
+    {% block scripts %}
+    {{ super() }}
+    <script src="/static/downloadStudentData.js"> </script>
+    <script>
+var download = function(){
+    var cid = "{{ cid }}";
+    var input = { 'cid': cid};
+
+    $.ajax({
+        url: '/export',
+        type: 'GET',
+        data: input,
+        success: function( d ) {
+            d = JSON.parse(d);
+            console.log(d);
+        }
+    });
+};
+$("#download").click(download);
+    </script>
+    {% endblock %}

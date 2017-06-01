@@ -1,3 +1,40 @@
 {% extends "base.html" %}
+{% block title %}Rubric Creation{% endblock %}
 {% block content %}
+<center>
+<br>
+<h1>Custom Rubric Creation</h1>
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4">
+          <textarea class="form-control" type="text" value="butsbuts buts" placeholder="Enter a description of an assesment category" id="user-rubric-category"></textarea>
+        </div>
+        <div class="col-md-4">
+          <input class="form-control" type="text" value="Grade out of #" id="user-rubric-grade">
+        </div>
+        <div class="col-md-4">
+          <input class="btn btn-primary" type="submit" value = "Add Row" id="create-rubric-row">
+        </div>
+    </div>
+  </div>
+<br>
+<table style="width:50%;" id = "initial-table" class="table table-inverse">
+    <thead>
+        <tr>
+            <th style="width:85%;">Category</th>
+            <th style="width:15%;"> / 10</th>
+        </tr>
+    </thead>
+    <tbody id="init-table-body">
+    </tbody>
+</table>
+
+
+</center>
+{% endblock %}
+{% block scripts %}
+{{ super() }}
+<script src="/static/rubric.js"></script>
 {% endblock %}

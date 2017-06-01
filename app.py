@@ -1,4 +1,4 @@
-from flask import Flask, abort, render_template, session, redirect
+from flask import Flask, abort, render_template, session, redirect, request, Response
 import os
 
 
@@ -19,17 +19,17 @@ app.register_blueprint(api.students.blueprint, url_prefix="/api/students")
 def index():
     return redirect("/dashboard")
 
-@app.route("/login")
+@app.route("/login/")
 def login():
     return render_template("login.html")
 
 # For testing frontend:
-@app.route("/gradebook")
+@app.route("/gradebook/")
 @redirect_if_not_logged_in
 def gradebook():
     return render_template("gradebook.html")
 
-@app.route("/dashboard")
+@app.route("/dashboard/")
 @redirect_if_not_logged_in
 def dashboard():
     data = []
@@ -37,14 +37,12 @@ def dashboard():
     for klass in classes:
         students = [utils.students.getStudent(**{"Student ID": str(id)})[0] for id in klass["students"]]
         klass["students"] = students
-        data.append({
-            "class": klass,
-            "assignments": utils.assignments.get_assignments(**{"cid": klass["cid"]})
-        })
-    return render_template("dashboard.html", data=data)
+        klass["assignments"] = utils.assignments.get_assignments(**{"cid": klass["cid"]})
+        data.append(klass)
+    return render_template("dashboard.html", classes=data)
 
-@app.route("/class")
-@app.route("/class/<cid>")
+@app.route("/class/")
+@app.route("/class/<cid>/")
 @redirect_if_not_logged_in
 def classview(cid=None):
     if cid is None:
@@ -69,7 +67,31 @@ def classview(cid=None):
         students=students,
         assignments=assigs)
 
-@app.route("/logout")
+@app.route("/class/<cid>/export/")
+def export_class(cid=None):
+    klass = utils.classes.get_class(cid=cid)[0]
+    students = klass.get("students", [])
+    results = []
+    for student in students:
+        results.append(utils.students.getStudent(**{"Student ID":str(student)})[0])
+    keys = results[0].keys()
+    csv = ",".join(keys)
+    csv += "\n"
+    for row in results:
+        values = []
+        for key in keys:
+            if key in row:
+                values.append(str(row[key]))
+            else:
+                values.append("")
+        csv = csv + ",".join(values)+"\n"
+
+    return Response(
+            csv,
+            mimetype="text/csv",
+            headers={"Content-disposition":"attachment; filename=students.csv"})
+
+@app.route("/logout/")
 def logout():
     session.clear()
     return redirect("/")
@@ -81,20 +103,26 @@ def inject_session():
         return dict(session)
     return {}
 
-@app.route("/oneclass")
+@app.route("/oneclass/")
 def oneclass():
     return render_template("oneclass.html")
 
-@app.route("/assignment")
+@app.route("/assignment/")
 def assignment():
     return render_template("assignment.html")
 
-@app.route("/createAssignment", methods = ['POST'])
+@app.route("/createAssignment/", methods = ['POST'])
 def newAssignment():
     return redirect('assignment')
-@app.route("/assigntodash",methods=['GET','POST'])
+
+@app.route("/assigntodash/",methods=['GET','POST'])
 def backtodash():
     return redirect('dashboard')
+
+@app.route("/rubric/",methods=['GET'])
+def rubricCreation():
+    return render_template("rubric.html")
+
 
 if __name__ == "__main__":
 
