@@ -103,26 +103,9 @@ def inject_session():
         return dict(session)
     return {}
 
-@app.route("/oneclass/")
-def oneclass():
-    return render_template("oneclass.html")
-
-@app.route("/assignment/")
-def assignment():
-    return render_template("assignment.html")
-
-@app.route("/createAssignment/", methods = ['POST'])
-def newAssignment():
-    return redirect('assignment')
-
-@app.route("/assigntodash/",methods=['GET','POST'])
-def backtodash():
-    return redirect('dashboard')
-
 @app.route("/rubric/",methods=['GET'])
 def rubricCreation():
     return render_template("rubric.html")
-
 
 if __name__ == "__main__":
 
