@@ -161,6 +161,17 @@ var PM = (function () {
                             self.addStudent(studentData);
                         });
                     });
+                },
+                clearStudents: function () {
+                    studentList.innerHTML = "";
+                },
+                loadClassFromServer: function (cid) {
+                    var self = this;
+                    PM.apiCall("GET", "/api/class/" + cid + "/students", null, function (response) {
+                        response.data.forEach(function (studentData) {
+                            self.addStudent(studentData);
+                        });
+                    });
                 }
             };
         };

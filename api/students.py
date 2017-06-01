@@ -11,7 +11,6 @@ blueprint = Blueprint("students", __name__)
 @login_required
 def get_students():
     """Get all students in the database"""
-
     data = students.getStudent()
     return { "success": 1, "data": data }
 

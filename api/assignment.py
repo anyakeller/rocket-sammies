@@ -60,3 +60,13 @@ def update_assignment():
     if num_modified < 1:
         raise WebException("Assignment does not exist")
     return { "success": 1, "message": "Assignment updated" }
+
+@blueprint.route("/<aid>/delete")
+@api_wrapper
+@teachers_only
+@login_required
+def delete_assignment(aid):
+    deleted_count = assignments.remove_assignment(aid)
+    if deleted_count < 1:
+        raise WebException("Assignment does not exist")
+    return { "success": 1, "message": "Assignment deleted" }
