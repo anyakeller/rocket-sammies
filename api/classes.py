@@ -16,8 +16,8 @@ def create_class():
     name = form.get("name")
     teacher = session.get("uid")
     student_ids = form["students"]
-    classes.create_class(name, teacher, student_ids)
-    return { "success": 1, "message": "Class created" }
+    cid = classes.create_class(name, teacher, student_ids)
+    return { "success": 1, "data": { "cid": cid }, "message": "Class created" }
 
 @blueprint.route("/<cid>/students", methods=["GET"])
 @api_wrapper

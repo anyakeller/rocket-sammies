@@ -23,7 +23,9 @@
             PM.apiCall("POST", "/api/class/create", {
                 "name": name,
                 "students": studentSelector.getSelectedStudentIDs()
-            }, "/class");
+            }, function (response) {
+                window.location = "/class/" + response.data.cid;
+            });
         }
     });
 
@@ -34,7 +36,6 @@
             PM.apiCall("POST", "/api/students/add-csv", {
                 "csv": reader.result
             }, function (response) {
-                console.log(response);
                 response.added_students.forEach(function (studentData) {
                     studentSelector.addStudent(studentData);
                 });
