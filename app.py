@@ -19,17 +19,17 @@ app.register_blueprint(api.students.blueprint, url_prefix="/api/students")
 def index():
     return redirect("/dashboard")
 
-@app.route("/login")
+@app.route("/login/")
 def login():
     return render_template("login.html")
 
 # For testing frontend:
-@app.route("/gradebook")
+@app.route("/gradebook/")
 @redirect_if_not_logged_in
 def gradebook():
     return render_template("gradebook.html")
 
-@app.route("/dashboard")
+@app.route("/dashboard/")
 @redirect_if_not_logged_in
 def dashboard():
     data = []
@@ -41,7 +41,7 @@ def dashboard():
         data.append(klass)
     return render_template("dashboard.html", classes=data)
 
-@app.route("/class")
+@app.route("/class/")
 @app.route("/class/<cid>/")
 @redirect_if_not_logged_in
 def classview(cid=None):
@@ -91,7 +91,7 @@ def export_class(cid=None):
             mimetype="text/csv",
             headers={"Content-disposition":"attachment; filename=students.csv"})
 
-@app.route("/logout")
+@app.route("/logout/")
 def logout():
     session.clear()
     return redirect("/")
@@ -103,21 +103,23 @@ def inject_session():
         return dict(session)
     return {}
 
-@app.route("/oneclass")
+@app.route("/oneclass/")
 def oneclass():
     return render_template("oneclass.html")
 
-@app.route("/assignment")
+@app.route("/assignment/")
 def assignment():
     return render_template("assignment.html")
 
-@app.route("/createAssignment", methods = ['POST'])
+@app.route("/createAssignment/", methods = ['POST'])
 def newAssignment():
     return redirect('assignment')
-@app.route("/assigntodash",methods=['GET','POST'])
+
+@app.route("/assigntodash/",methods=['GET','POST'])
 def backtodash():
     return redirect('dashboard')
-@app.route("/rubric",methods=['GET'])
+
+@app.route("/rubric/",methods=['GET'])
 def rubricCreation():
     return render_template("rubric.html")
 
