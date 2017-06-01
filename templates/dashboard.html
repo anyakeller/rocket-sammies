@@ -14,8 +14,8 @@
                 <div class="panel panel-default">
                     <div class = "panel-heading heading-red"><center>
                             <h4 class = "panel-title">
-                                <a data-toggle="collapse" data-parent="#assignment" href="#{{ class["name"] }}">{{ class["name"] }}</a> ({{ class["assignments"]|length  }})
-                            </h4></center>
+                                <a data-toggle="collapse" data-parent="#assignment" href="#{{ class["name"] }}">{{ class["name"] }}</a> ({{ class["assignments"]|length  }})    <button type="button" class="btn btn-link delete-class"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+                        </h4></center>
                     </div>
                     <div id=  "{{ class['name'] }}" class="panel-collapse collapse">
                         <div class = "panel-body">
@@ -25,7 +25,8 @@
 
                             <p>
 
-                            <h5>{{ assignment["title"] }}</h5>
+                            <h5>{{ assignment["title"] }}<button type="button" class="btn btn-link delete-class"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+                            </h5>
                             Type: {{ assignment["type"] }}<br>
                             Description: {{ assignment["description"] }}<br>
                             Max score: {{ assignment["max_score"] }}<br>
