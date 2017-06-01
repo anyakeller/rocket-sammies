@@ -14,10 +14,10 @@
                 <div class="panel panel-default">
                     <div class = "panel-heading heading-red"><center>
                             <h4 class = "panel-title">
-                                <a data-toggle="collapse" data-parent="#assignment" href="#{{ class["name"] }}">{{ class["name"] }}</a> ({{ class["assignments"]|length  }})    <button type="button" class="btn btn-link delete-class"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+                                <a data-toggle="collapse" data-parent="#assignment" href="#{{ class["cid"] }}">{{ class["name"] }}</a> ({{ class["assignments"]|length  }})    <button type="button" class="btn btn-link delete-class"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
                         </h4></center>
                     </div>
-                    <div id=  "{{ class['name'] }}" class="panel-collapse collapse">
+                    <div id=  "{{ class['cid'] }}" class="panel-collapse collapse">
                         <div class = "panel-body">
                             <h4><u>Assignments</u></h4>
                             {% for assignment in class["assignments"] %}
