@@ -69,6 +69,6 @@
 	};
     };
     for (i = 0; i < deleteClassBtns.length; i++) {
-	deleteClassBtns[i].addEventListener(deleteClassHandler(deleteClassBtns[i]));
+	deleteClassBtns[i].addEventListener("click", deleteClassHandler(deleteClassBtns[i]));
     }
 }());

@@ -7,12 +7,13 @@
 
   for (i = 0; i < btnAssigns.length; i++) {
       btnAssigns[i].addEventListener("click", function () {
+          studentSelector.clearStudents();
+          studentSelector.loadClassFromServer(this.getAttribute("data-cid"));
           $(modalAssign).modal();
       });
   }
 
   var studentSelector = PM.studentSelector(document.getElementById("student-selection"));
-  studentSelector.loadFromServer();
 
   btnCreateAssignment.addEventListener("click", function () {
     var studentIDs = studentSelector.getSelectedStudentIDs();
