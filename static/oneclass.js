@@ -30,6 +30,7 @@ groupCreateButton.addEventListener("click", function(e){
         "description": document.getElementById("groupprojectDescription").value,
         "cid":document.getElementById("groupprojectCid").value,
         "max_score":+document.getElementById("groupprojectMaxScore").value,
-        "type": "Group Project"
+        "type": "Group Project",
+        "max_group_size": document.getElementById("groupprojectMaxSize").value
     }, window.location);
 });
