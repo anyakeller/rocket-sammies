@@ -15,7 +15,7 @@ def get_students():
     data = students.getStudent()
     return { "success": 1, "data": data }
 
-@blueprint.route("/add-csv/", methods=["POST"])
+@blueprint.route("/add-csv", methods=["POST"])
 @api_wrapper
 @teachers_only
 @login_required

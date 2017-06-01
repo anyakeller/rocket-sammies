@@ -5,7 +5,7 @@ from decorators import WebException, api_wrapper, login_required, teachers_only
 
 blueprint = Blueprint("class", __name__)
 
-@blueprint.route("/create/", methods=["POST"])
+@blueprint.route("/create", methods=["POST"])
 @api_wrapper
 @teachers_only
 @login_required
@@ -18,7 +18,7 @@ def create_class():
     classes.create_class(name, teacher, student_ids)
     return { "success": 1, "message": "Class created" }
 
-@blueprint.route("/students/<cid>/", methods=["GET"])
+@blueprint.route("/students/<cid>", methods=["GET"])
 @api_wrapper
 @teachers_only
 @login_required
@@ -31,7 +31,7 @@ def get_students(cid):
         students = _classes["students"]
     return { "success": 1, "data": students }
 
-@blueprint.route("/delete/", methods=["POST"])
+@blueprint.route("/delete", methods=["POST"])
 @api_wrapper
 @teachers_only
 @login_required
