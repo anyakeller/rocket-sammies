@@ -107,6 +107,8 @@ def inject_session():
 def rubricCreation():
     return render_template("rubric.html")
 
+    
+
 if __name__ == "__main__":
 
     # Create and store secret key if it doesn't already exist
