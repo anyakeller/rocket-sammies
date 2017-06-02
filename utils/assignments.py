@@ -15,7 +15,8 @@ def create_assignment(cid, title, description, max_score, _type, rubric):
         "description": description,
         "max_score": max_score,
         "rubric": rubric,
-        "type": _type
+        "type": _type,
+        "active": False,
     }
 
     db.assignments.insert(assignment)
@@ -39,6 +40,7 @@ def create_project(cid, title, description, max_score, rubric, max_group_size):
         "type": "Group Project",
         "max_group_size": max_group_size,
         "groups": [],
+        "active": False,
     }
 
     db.assignments.insert(assignment)
