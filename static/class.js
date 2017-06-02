@@ -32,7 +32,6 @@
     btnImportStudents.addEventListener("change", function () {
         var reader = new FileReader();
         reader.onload = function () {
-            console.log(reader.result);
             PM.apiCall("POST", "/api/students/add-csv", {
                 "csv": reader.result
             }, function (response) {
@@ -46,30 +45,25 @@
     });
 
     var deleteClassBtns = document.getElementsByClassName("delete-class"), i;
-    var getCID = function (elem) {
-	while (!elem.hasAttribute("data-cid")) {
-	    elem = elem.parentNode;
-	}
-	return elem.getAttribute("data-cid");
+    var rmClass = function (cid) {
+        PM.apiCall("POST", "/api/class/delete", {
+            cid: cid
+        }, function () {
+            var panel = document.getElementById("panel-" + cid);
+            panel.remove();
+        });
     };
-    var rmClass = function (elem) {
-	var cid = getCID(e.target);
-	PM.apiCall("POST", "/api/class/delete", {
-	    cid: cid
-	}, function () {
-	    while (!elem.hasAttribute("data-cid")) {
-		elem = elem.parentNode;
-	    }
-	    elem.remove();
-	});
+    var deleteClassHandler = function (cid) {
+        return function (event) {
+            // TODO: use a modal rather than a confirm
+            if (confirm("Are you sure you want to delete this class?")) {
+                rmClass(cid);
+            }
+        };
     };
-    var deleteClassHandler = function (deleteBtn) {
-	return function (e) {
-	    // TODO: make modal appear, with a confirmation button
-	    // which calls rmClass
-	};
-    };
+    var cid;
     for (i = 0; i < deleteClassBtns.length; i++) {
-	deleteClassBtns[i].addEventListener("click", deleteClassHandler(deleteClassBtns[i]));
+        cid = deleteClassBtns[i].getAttribute("data-cid");
+        deleteClassBtns[i].addEventListener("click", deleteClassHandler(cid));
     }
 }());

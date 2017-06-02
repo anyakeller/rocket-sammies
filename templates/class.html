@@ -46,11 +46,11 @@
 
     <div class="panel-group" id="classes">
         {% for class in classes %}
-        <div class="panel panel-default" data-cid="{{ class['cid'] }}">
+        <div class="panel panel-default" data-cid="{{ class['cid'] }}" id="panel-{{ class['cid'] }}">
             <div class="panel-heading heading-red">
                 <h4 class="panel-title">
                     <a data-toggle="collapse" data-parent="#classes" href="#{{ class["cid"] }}">{{ class["name"] }}</a>
-                    <button type="button" class="btn btn-link delete-class">
+                    <button type="button" data-cid="{{ class['cid'] }}" class="btn btn-link delete-class">
                               <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                     </button>
                 </h4>
