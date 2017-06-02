@@ -10,7 +10,7 @@
   <button class = "btn btn-info" id="groupbutton"> New Group Project</button>
 
   <br><br>
-  <a class="btn btn-info" href="/class/{{ klass["cid"] }}/export">Export to CSV</a>
+
     <div id="singleForm" class="modal fade" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -39,14 +39,18 @@
                     <input type = 'text' id = 'groupprojectMaxScore'  class = 'field' placeholder = 'Max Score' required><br><br>
                     <input type = 'text' id = 'groupprojectMaxSize'  class = 'field' placeholder = 'Max Group Size' required><br><br>
                     <input type="hidden" id="groupprojectCid" value="{{ klass["cid"] }}">
-                    <button id="groupCreateButton" class = 'field'>Create</button>
+                    <button id="groupCreateButton" class = 'btn btn-primary '>Create</button>
                 </div>
             </div>
         </div>
     </div>
 
+    <a class="btn btn-info" href="/class/{{ klass["cid"] }}/edit">Edit Class</a>
 
-    <h3><u>Student Information</u></h3>
+<br><br>
+    <h3><u>Student Information</u></h3><br>
+    <a class="btn btn-info" href="/class/{{ klass["cid"] }}/export">Export to CSV</a>
+    <br><br>
     <table style="width:92%;" class="table table-inverse">
         <thead>
             <tr>
@@ -63,23 +67,21 @@
             {% endfor %}
         </tbody>
     </table>
-
-    <br>
     <h3><u>Assignments</u></h3>
     <table style="width:92%;" class="table table-inverse">
         <thead>
             <tr>
                 <th>Assignment Name</th>
-                <th>Description</th>
-                <td></td>
+                <th style="text-align: center;">Description</th>
+                <th style="text-align: right;">Edit Assignment</th>
             </tr>
         </thead>
         <tbody>
             {% for assignment in assignments %}
             <tr>
                 <th width = "500" scope="row">{{ assignment["title"] }}</th>
-                <td width = "200">{{ assignment["description"] }}</td>
-                <td>
+                <td align="center" width = "200">{{ assignment["description"] }}</td>
+                <td align="right">
                   <form action="/rubric" method ="GET">
                     <button class = "btn btn-info" id="create-rubric-btn">View Assignment</button>
                   </form>
