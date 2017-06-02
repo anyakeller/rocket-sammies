@@ -10,7 +10,6 @@
     openRubricModal.addEventListener("click", function () {
         $(modalForRubrics).modal();
     });
-
     var createRubricTable = function(e){
       var categoryGrade = document.getElementById('user-rubric-grade').value;
       var categoryDescription = document.getElementById('user-rubric-category').value;
@@ -23,10 +22,27 @@
       var newText2 = document.createTextNode(categoryGrade);
       newCell.appendChild(newText);
       newCell2.appendChild(newText2);
+
+
+      // send the data to backend using hidden html forms
+      
+
       $(modalForRubrics).modal('hide');
 
 
 
     }
     rubricRowCreate.addEventListener("click",createRubricTable);
+
+    var createRubricForm = function(e){
+      var form = document.createElement('form');
+      form.setAttribute('action',"/sendRubricData")
+      form.setAttribute('method','GET');
+      var hiddenInput = document.createElement('input');
+      hiddenInput.setAttribute('type','hidden');
+      form.appendChild(hiddenInput);
+
+    }
+
+
 }());
