@@ -10,6 +10,7 @@
           var aid = this.getAttribute("data-aid");
           var assign = !(this.getAttribute("data-assigned").toLowerCase() === "true");
           var data = {"assign": assign};
+          this.disabled = true;
           PM.apiCall("POST", "/api/assignment/" + aid + "/assign", data, function(response) {
               this.setAttribute("data-assigned", response.assigned);
               if (response.assigned) {
@@ -19,6 +20,7 @@
                   this.innerHTML = "Assign";
                   $.notify("Assignment unassigned", "success");
               }
+              this.disabled = false;
           }.bind(this));
       });
   }
