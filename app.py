@@ -69,7 +69,8 @@ def classview(cid=None):
 
 @app.route("/class/<cid>/edit")
 def editSingleClass():
-    #WHAT DO YOU WANT THE EDIT CLASS BUTTON TO DO ? 
+    #WHAT DO YOU WANT THE EDIT CLASS BUTTON TO DO ?
+    return ""
 
 @app.route("/class/<cid>/export/")
 def export_class(cid=None):
