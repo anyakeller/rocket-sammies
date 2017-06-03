@@ -151,3 +151,4 @@ jamesW -- 2017-06-01 13:45
 
 jamesW -- 2017-06-03 13:43
 - Implment assignment activation
+- Added basic page for editing assignments
