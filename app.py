@@ -41,6 +41,15 @@ def dashboard():
         data.append(klass)
     return render_template("dashboard.html", classes=data)
 
+@app.route("/assignment/<aid>/")
+@redirect_if_not_logged_in
+def view_assignment(aid):
+    assignment = utils.assignments.get_assignments(aid=aid)
+    if len(assignment) == 0:
+        # Assignment does not exist
+        abort(404)
+    return ""
+
 @app.route("/class/")
 @app.route("/class/<cid>/")
 @redirect_if_not_logged_in
@@ -52,7 +61,7 @@ def classview(cid=None):
 
     # Get the class associated with the class id in the url
     classes = utils.classes.get_class(cid=cid)
-    if len(classes) != 1:
+    if len(classes) == 0:
         # Class does not exist, so return a 404 error
         abort(404)
     klass = classes[0]

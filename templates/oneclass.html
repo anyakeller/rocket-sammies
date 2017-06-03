@@ -82,9 +82,7 @@
                 <th width = "500" scope="row">{{ assignment["title"] }}</th>
                 <td align="center" width = "200">{{ assignment["description"] }}</td>
                 <td align="right">
-                  <form action="/rubric" method ="GET">
-                    <button class = "btn btn-info" id="create-rubric-btn">View Assignment</button>
-                  </form>
+                    <a class = "btn btn-info" href="/assignment/{{ assignment['aid'] }}">View Assignment</button>
                 </td>
             </tr>
             {% endfor %}
