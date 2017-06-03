@@ -148,3 +148,6 @@ anyaK -- 2017-06-1 11:40
 
 jamesW -- 2017-06-01 13:45
 - Added a button for downloading csv of class
+
+jamesW -- 2017-06-03 13:43
+- Implment assignment activation
