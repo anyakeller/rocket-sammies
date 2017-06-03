@@ -28,8 +28,11 @@ def addStudentsStr(studentsCSV):
     students = []
     reader = csv.DictReader(studentsCSV.split('\n'), delimiter=',')
     for student in reader:
-        students.append(student)
-    db.students.insert_many(students)
+        # Insert students into the database if they don't already exist
+        result = db.students.update_one({"Student ID": student["Student ID"]}, {"$set": student}, upsert=True)
+        if result.upserted_id != None:
+            # New document was upserted (read: inserted) into the database
+            students.append(student)
     return students
 
 # Returns students based on keyword

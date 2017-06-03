@@ -20,8 +20,6 @@ def get_students():
 @login_required
 def add_students():
     """Add students to the database"""
-    # FIXME: check for duplicates (e.g. for when the user accidentally
-    # re-uploads same file)
     # FIXME: handle invalid CSV
     form = request.get_json()
     s = students.addStudentsStr(form["csv"])
