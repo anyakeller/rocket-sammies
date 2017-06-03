@@ -4,12 +4,12 @@
 <center>
     <h1>Class: {{ klass["name"] }}</h1>
 
-<br>
+    <br>
 
-  <button class = "btn btn-info" id="singlebutton">New Single Assignment</button>
-  <button class = "btn btn-info" id="groupbutton"> New Group Project</button>
+    <button class = "btn btn-info" id="singlebutton">New Single Assignment</button>
+    <button class = "btn btn-info" id="groupbutton"> New Group Project</button>
 
-  <br><br>
+    <br><br>
 
     <div id="singleForm" class="modal fade" role="dialog">
         <div class="modal-dialog" role="document">
@@ -47,7 +47,7 @@
 
     <a class="btn btn-info" href="/class/{{ klass["cid"] }}/edit">Edit Class</a>
 
-<br><br>
+    <br><br>
     <h3><u>Student Information</u></h3><br>
     <a class="btn btn-info" href="/class/{{ klass["cid"] }}/export">Export to CSV</a>
     <br><br>
@@ -88,9 +88,10 @@
             {% endfor %}
         </tbody>
     </table>
-{% endblock %}
+    {% endblock %}
 
-{% block scripts %}
-{{ super() }}
-<script src="/static/oneclass.js"></script>
-{% endblock %}
+    {% block scripts %}
+    {{ super() }}
+    <script src="/static/oneclass.js"></script>
+    {% endblock %}
+</center>

@@ -2,53 +2,49 @@
 {% block title %}Rubric Creation{% endblock %}
 {% block content %}
 <center>
-<br>
-<h1>Assignment: INSERT_SOMETHING_HERE</h1>
-`
+    <br>
+    <h1>Assignment: INSERT_SOMETHING_HERE</h1>
 
-
-<div>
-    <button class="btn btn-primary" type="submit" id="create-rubric-row">Add To Rubric</button>
-    <br><br>
-    <div id="modal-edit-rubric" class="modal fade" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1>Add To The Rubric</h1>
-                </div>
-                <div class="modal-body">
-                    <h3>Add Category</h3>
-
-                    <div class="input-group">
-                        <span class="input-group-addon">Description</span>
-                        <textarea class="form-control" type="text" placeholder="Enter a description" id="user-rubric-category"></textarea>
+    <div>
+        <button class="btn btn-primary" type="submit" id="create-rubric-row">Add To Rubric</button>
+        <br><br>
+        <div id="modal-edit-rubric" class="modal fade" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1>Add To The Rubric</h1>
                     </div>
-                    <h3>Enter Grade</h3>
-                    <div class="input-group">
-                        <span class="input-group-addon">Grade</span>
-                        <textarea class="form-control" type="text" placeholder="Grade" id="user-rubric-grade"></textarea>
+                    <div class="modal-body">
+                        <h3>Add Category</h3>
+
+                        <div class="input-group">
+                            <span class="input-group-addon">Description</span>
+                            <textarea class="form-control" type="text" placeholder="Enter a description" id="user-rubric-category"></textarea>
+                        </div>
+                        <h3>Enter Grade</h3>
+                        <div class="input-group">
+                            <span class="input-group-addon">Grade</span>
+                            <textarea class="form-control" type="text" placeholder="Grade" id="user-rubric-grade"></textarea>
+                        </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-primary" type="submit" id="submit-to-rubric-table">Do It!</button>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" type="submit" id="submit-to-rubric-table">Do It!</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<table style="width:50%;" id = "initial-table" class="table table-inverse">
-    <thead>
-        <tr>
-            <th style="width:85%;">Category</th>
-            <th style="width:15%;"> / 10</th>
-        </tr>
-    </thead>
-    <tbody id="init-table-body">
-    </tbody>
-</table>
-
-
+    <table style="width:50%;" id = "initial-table" class="table table-inverse">
+        <thead>
+            <tr>
+                <th style="width:85%;">Category</th>
+                <th style="width:15%;"> / 10</th>
+            </tr>
+        </thead>
+        <tbody id="init-table-body">
+        </tbody>
+    </table>
 </center>
 {% endblock %}
 {% block scripts %}
