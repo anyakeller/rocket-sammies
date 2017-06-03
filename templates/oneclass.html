@@ -20,7 +20,7 @@
                 <div class="modal-body">
                     <input type = 'text' id = 'singleprojectTitle'  class = 'form-control' placeholder = 'Title' required><br><br>
                     <input type = 'text' id = 'singleprojectDescription'  class = 'form-control' placeholder = 'Description' required><br><br>
-                    <input type = 'text' id = 'singleprojectMaxScore'  class = 'form-control' placeholder = 'Max Score' required><br><br>
+                    <input type = 'number' id = 'singleprojectMaxScore'  class = 'form-control' placeholder = 'Max Score' required><br><br>
                     <input type="hidden" id="singleprojectCid" value="{{ klass["cid"] }}">
                     <button id="singleCreateButton" class='btn btn-primary'>Create</button>
                 </div>
@@ -34,10 +34,10 @@
                     <h2>Create Group Assignment</h2>
                 </div>
                 <div class="modal-body">
-                    <input type = 'text' id = 'groupprojectTitle'  class = 'field' placeholder = 'Title' required><br><br>
-                    <input type = 'text' id = 'groupprojectDescription'  class = 'field' placeholder = 'Description' required><br><br>
-                    <input type = 'text' id = 'groupprojectMaxScore'  class = 'field' placeholder = 'Max Score' required><br><br>
-                    <input type = 'text' id = 'groupprojectMaxSize'  class = 'field' placeholder = 'Max Group Size' required><br><br>
+                    <input type = 'text' id = 'groupprojectTitle'  class = 'form-control' placeholder = 'Title' required><br><br>
+                    <input type = 'text' id = 'groupprojectDescription'  class = 'form-control' placeholder = 'Description' required><br><br>
+                    <input type = 'number' id = 'groupprojectMaxScore'  class = 'form-control' placeholder = 'Max Score' required><br><br>
+                    <input type = 'number' id = 'groupprojectMaxSize'  class = 'form-control' placeholder = 'Max Group Size' required><br><br>
                     <input type="hidden" id="groupprojectCid" value="{{ klass["cid"] }}">
                     <button id="groupCreateButton" class = 'btn btn-primary '>Create</button>
                 </div>
