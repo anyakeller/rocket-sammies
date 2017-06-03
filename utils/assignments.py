@@ -16,7 +16,7 @@ def create_assignment(cid, title, description, max_score, _type, rubric):
         "max_score": max_score,
         "rubric": rubric,
         "type": _type,
-        "active": False,
+        "assigned": False,
     }
 
     db.assignments.insert(assignment)
