@@ -13,11 +13,11 @@
           PM.apiCall("POST", "/api/assignment/" + aid + "/assign", data, function(response) {
               this.setAttribute("data-assigned", response.assigned);
               if (response.assigned) {
-                  this.innerHTML = "Deactivate";
-                  $.notify("Assignment activated", "success");
+                  this.innerHTML = "Unassign";
+                  $.notify("Assignment assigned", "success");
               } else {
-                  this.innerHTML = "Activate";
-                  $.notify("Assignment deactivated", "success");
+                  this.innerHTML = "Assign";
+                  $.notify("Assignment unassigned", "success");
               }
           }.bind(this));
       });

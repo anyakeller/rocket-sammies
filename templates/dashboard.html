@@ -31,7 +31,7 @@
                             Description: {{ assignment["description"] }}<br>
                             Max score: {{ assignment["max_score"] }}<br>
                             <div>
-                                <button class="btn btn-primary btn-assign" data-assigned="{{ assignment['assigned'] }}" data-aid="{{ assignment['aid'] }}">{% if assignment["assigned"] %}Deactivate{% else %}Activate{% endif %}</button>
+                                <button class="btn btn-primary btn-assign" data-assigned="{{ assignment['assigned'] }}" data-aid="{{ assignment['aid'] }}">{% if assignment["assigned"] %}Unassign{% else %}Assign{% endif %}</button>
                                 <br><br>
                             </div>
                             {% endfor %}
