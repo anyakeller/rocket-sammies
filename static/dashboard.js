@@ -7,16 +7,19 @@
 
   for (i = 0; i < btnAssigns.length; i++) {
       btnAssigns[i].addEventListener("click", function () {
-          studentSelector.clearStudents();
-          studentSelector.loadClassFromServer(this.getAttribute("data-cid"));
-          $(modalAssign).modal();
+          var aid = this.getAttribute("data-aid");
+          var assign = !(this.getAttribute("data-assigned").toLowerCase() === "true");
+          var data = {"assign": assign};
+          PM.apiCall("POST", "/api/assignment/" + aid + "/assign", data, function(response) {
+              this.setAttribute("data-assigned", response.assigned);
+              if (response.assigned) {
+                  this.innerHTML = "Deactivate";
+                  $.notify("Assignment activated", "success");
+              } else {
+                  this.innerHTML = "Activate";
+                  $.notify("Assignment deactivated", "success");
+              }
+          }.bind(this));
       });
   }
-
-  var studentSelector = PM.studentSelector(document.getElementById("student-selection"));
-
-  btnCreateAssignment.addEventListener("click", function () {
-    var studentIDs = studentSelector.getSelectedStudentIDs();
-    // TODO: make assignment for those students
-  });
 }());

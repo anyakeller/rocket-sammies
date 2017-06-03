@@ -70,3 +70,15 @@ def delete_assignment(aid):
     if deleted_count < 1:
         raise WebException("Assignment does not exist")
     return { "success": 1, "message": "Assignment deleted" }
+
+@blueprint.route("/<aid>/assign", methods=["POST"])
+@api_wrapper
+@teachers_only
+@login_required
+def assign_assignment(aid):
+    form = request.get_json()
+    assign = form.get("assign", False)
+    num_modified = assignments.update_assignment(aid, {"assigned": assign})
+    if num_modified < 1:
+        raise WebException("Assignment does not exist")
+    return { "success": 1, "assigned": assign }

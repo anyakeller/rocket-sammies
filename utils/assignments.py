@@ -40,7 +40,7 @@ def create_project(cid, title, description, max_score, rubric, max_group_size):
         "type": "Group Project",
         "max_group_size": max_group_size,
         "groups": [],
-        "active": False,
+        "assigned": False,
     }
 
     db.assignments.insert(assignment)
@@ -72,5 +72,5 @@ def update_assignment(aid, data):
     """
 
     db = common.get_connection()
-    result = db.assignments.update_one({"aid": aid}, data)
+    result = db.assignments.update_one({"aid": aid}, {"$set": data})
     return result.modified_count
