@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Edit Assignment{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="col-md-12">
+        <h2>Edit assignment</h2>
+        <form id="edit-assignment-form">
+        <div class="col-md-6">
+            <input type="hidden" id="aid" value="{{ assignment["aid"] }}">
+            <input type="hidden" id="type" value="{{ assignment["type"] }}">
+            <label>Title</label>
+            <input id="title" class="form-control" type="text" value="{{ assignment["title"] }}" placeholder="Title" required>
+            <br>
+            <label>Description</label>
+            <textarea id="description" class="form-control" type="text" placeholder="Description" required>{{ assignment["description"] }}</textarea>
+
+            <br>
+            <label>Max score</label>
+            <input id="max-score" class="form-control" type="number" value="{{ assignment["max_score"] }}" placeholder="Max score" required>
+
+            {% if assignment["type"] == "Group Project" %}
+            <br>
+            <label>Max Group Size</label>
+            <input id="max-group-size" class="form-control" type="number" value="{{ assignment["max_group_size"] }}" placeholder="Max Group Size" required>
+            {% endif %}
+
+            <br>
+            <button type="submit" class="btn btn-primary">Update</button>
+        </div>
+        <div class="col-md-6">
+            rubric
+        </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+{% block scripts %}
+{{ super() }}
+<script src="/static/edit_assignment.js"></script>
+{% endblock %}

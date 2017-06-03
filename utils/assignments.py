@@ -73,4 +73,4 @@ def update_assignment(aid, data):
 
     db = common.get_connection()
     result = db.assignments.update_one({"aid": aid}, {"$set": data})
-    return result.modified_count
+    return result.matched_count

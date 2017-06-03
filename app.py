@@ -48,7 +48,7 @@ def view_assignment(aid):
     if len(assignment) == 0:
         # Assignment does not exist
         abort(404)
-    return ""
+    return render_template("edit_assignment.html", assignment=assignment[0])
 
 @app.route("/class/")
 @app.route("/class/<cid>/")
