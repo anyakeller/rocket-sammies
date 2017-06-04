@@ -36,6 +36,38 @@ var PM = (function () {
         });
     };
 
+    // Check if the given student name matches a search
+    var matches = function (input, name) {
+        var i, j;
+        // Replace common punctuation with whitespace
+        input = input.replace(/[,.;'"/]/g, " ");
+        name = name.replace(/[,.;'"/]/g, " ");
+        // Normalize all sequences of whitespace to one space, and trim
+        input = input.replace(/[\s]+/g, " ").trim();
+        name = name.replace(/[\s]+/g, " ").trim();
+        // Normalize to lower case
+        input = input.toLowerCase();
+        name = name.toLowerCase();
+
+        var input_parts = input.split(" ");
+        var name_parts = name.split(" ");
+        // If any word in input is the beginning of any word in name, it's a match
+        var input_part_matched;
+        for (j = 0; j < input_parts.length; j += 1) {
+            input_part_matched = false;
+            for (i = 0; i < name_parts.length; i += 1) {
+                if (name_parts[i].startsWith(input_parts[j])) {
+                    input_part_matched = true;
+                }
+            }
+            // If the input part didn't match any of the name_parts, it doesn't match
+            if (!input_part_matched) {
+                return false;
+            }
+        }
+        return true;
+    };
+
     var studentSelector = (function () {
         // Util functions:
         var addStudent = function (studentList, student) {
@@ -43,6 +75,7 @@ var PM = (function () {
             checkbox.setAttribute("type", "checkbox");
             checkbox.setAttribute("data-id", student["Student ID"]);
             checkbox.setAttribute("data-name", student["Student Name"]);
+            checkbox.setAttribute("data-visible", "true");
             var label = document.createElement("LABEL");
             label.setAttribute("style", "display: block;");
             label.appendChild(checkbox);
@@ -64,38 +97,6 @@ var PM = (function () {
             return student_ids;
         };
 
-        // Check if the given student name matches the search the user has typed
-        var matches = function (input, name) {
-            var i, j;
-            // Replace common punctuation with whitespace
-            input = input.replace(/[,.;'"/]/g, " ");
-            name = name.replace(/[,.;'"/]/g, " ");
-            // Normalize all sequences of whitespace to one space, and trim
-            input = input.replace(/[\s]+/g, " ").trim();
-            name = name.replace(/[\s]+/g, " ").trim();
-            // Normalize to lower case
-            input = input.toLowerCase();
-            name = name.toLowerCase();
-
-            var input_parts = input.split(" ");
-            var name_parts = name.split(" ");
-            // If any word in input is the beginning of any word in name, it's a match
-            var input_part_matched;
-            for (j = 0; j < input_parts.length; j += 1) {
-                input_part_matched = false;
-                for (i = 0; i < name_parts.length; i += 1) {
-                    if (name_parts[i].startsWith(input_parts[j])) {
-                        input_part_matched = true;
-                    }
-                }
-                // If the input part didn't match any of the name_parts, it doesn't match
-                if (!input_part_matched) {
-                    return false;
-                }
-            }
-            return true;
-        };
-
         // The studentSelector function:
         // `container` is a <div> which studentSelector will populate with a list of
         // checkboxes and students, and a select-all/deselect-all button.
@@ -105,7 +106,6 @@ var PM = (function () {
             var studentNameInput = document.createElement("INPUT");
             studentNameInput.setAttribute("class", "form-control");
             studentNameInput.setAttribute("placeholder", "John Smith, Jane Doe, ...");
-            studentNameInput.setAttribute("data-visible", "true");
 
             var studentList = document.createElement("UL");
             studentList.setAttribute("class", "student-selection-list");
@@ -166,8 +166,11 @@ var PM = (function () {
                 }
             });
 
+            // When the enter key is pressed, if the search has yielded only one student
+            // toggle that student's checkbox
             studentNameInput.addEventListener("keydown", function (e) {
                 var checkboxes, i;
+                // keyCode 13 is the enter key
                 if (e.keyCode === 13) {
                     checkboxes = studentList.querySelectorAll("input[data-visible=true]");
                     if (checkboxes.length === 1) {
@@ -214,6 +217,7 @@ var PM = (function () {
     // the object.
     return Object.freeze({
         apiCall: apiCall,
+        queryMatches: matches,
         studentSelector: studentSelector
     });
 }());
