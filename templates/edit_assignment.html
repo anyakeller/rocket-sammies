@@ -1,5 +1,8 @@
 {% extends "base.html" %}
 {% block title %}Edit: {{ assignment["title"]}} {% endblock %}
+{% block head %}
+<link rel="stylesheet" href="/static/edit_assignment.css" />
+{% endblock %}
 {% block content %}
 <div class="container">
 
@@ -16,26 +19,32 @@
   <div class="row">
         <form id="edit-assignment-form">
         <div class="col-md-6">
-            <input type="hidden" id="aid" value="{{ assignment["aid"] }}">
-            <input type="hidden" id="type" value="{{ assignment["type"] }}">
-            <label>Title</label>
-            <input id="title" class="form-control" type="text" value="{{ assignment["title"] }}" placeholder="Title" required>
-            <br>
-            <label>Description</label>
-            <textarea id="description" class="form-control" type="text" placeholder="Description" required>{{ assignment["description"] }}</textarea>
+            <h2>Edit Assignment</h2>
+            <form id="edit-assignment-form">
+                <div class="col-md-6">
+                    <input type="hidden" id="aid" value="{{ assignment["aid"] }}">
+                    <input type="hidden" id="type" value="{{ assignment["type"] }}">
+                    <input type="hidden" id="cid" value="{{ assignment["cid"] }}">
+                    <label>Title</label>
+                    <input id="title" class="form-control" type="text" value="{{ assignment["title"] }}" placeholder="Title" required>
+                    <br>
+                    <label>Description</label>
+                    <textarea id="description" class="form-control" type="text" placeholder="Description" required>{{ assignment["description"] }}</textarea>
 
-            <br>
-            <label>Max score</label>
-            <input id="max-score" class="form-control" type="number" value="{{ assignment["max_score"] }}" placeholder="Max score" required>
+                    <br>
+                    <label>Max score</label>
+                    <input id="max-score" class="form-control" type="number" value="{{ assignment["max_score"] }}" placeholder="Max score" required>
 
-            {% if assignment["type"] == "Group Project" %}
-            <br>
-            <label>Max Group Size</label>
-            <input id="max-group-size" class="form-control" type="number" value="{{ assignment["max_group_size"] }}" placeholder="Max Group Size" required>
-            {% endif %}
+                    {% if assignment["type"] == "Group Project" %}
+                    <br>
+                    <label>Max Group Size</label>
+                    <input id="max-group-size" class="form-control" type="number" value="{{ assignment["max_group_size"] }}" placeholder="Max Group Size" required>
+                    {% endif %}
 
-            <br>
-            <button type="submit" class="btn btn-primary">Update</button>
+                    <br>
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+            </form>
         </div>
         </form>
 
@@ -51,18 +60,19 @@
                         <div class="modal-body">
                             <h3>Add Category</h3>
 
-                            <div class="input-group">
-                                <span class="input-group-addon">Description</span>
-                                <textarea class="form-control" type="text" placeholder="Enter a description" id="user-rubric-category"></textarea>
+                                <div class="input-group">
+                                    <span class="input-group-addon">Description</span>
+                                    <textarea class="form-control" type="text" placeholder="Enter a description" id="user-rubric-category"></textarea>
+                                </div>
+                                <h3>Enter Grade</h3>
+                                <div class="input-group">
+                                    <span class="input-group-addon">Grade</span>
+                                    <textarea class="form-control" type="text" placeholder="Grade" id="user-rubric-grade"></textarea>
+                                </div>
                             </div>
-                            <h3>Enter Grade</h3>
-                            <div class="input-group">
-                                <span class="input-group-addon">Grade</span>
-                                <textarea class="form-control" type="text" placeholder="Grade" id="user-rubric-grade"></textarea>
+                            <div class="modal-footer">
+                                <button class="btn btn-primary" type="submit" id="submit-to-rubric-table">Do It!</button>
                             </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button class="btn btn-primary" type="submit" id="submit-to-rubric-table">Do It!</button>
                         </div>
                     </div>
                 </div>
@@ -78,8 +88,32 @@
             </tbody>
         </table>
       </div>
-    </div>
-  </div>
+      {% if assignment.get('groups') != None %}
+      <div class="row">
+          <h2>Assign Groups</h2>
+          <div class="col-md-4">
+              <div id="group-maker-student-selector" style="max-width: 600px;"></div>
+              <button class="btn btn-primary" id="btn-new-group">New group with these students</button>
+              <!--<button class="btn btn-primary" id="btn-add-to-group">Add these students to a group</button>-->
+          </div>
+          <div class="col-md-8">
+              <div id="student-groups">
+                  {% for group in assignment.groups %}
+                  <div class="group-student-list">
+                      <h4>Group</h4>
+                      <ul>
+                          {% for student_id in group: %}
+                          <li data-id="{{ student_id }}">{{ students_by_id[student_id]['Student Name'] }}</li>
+                          {% endfor %}
+                      </ul>
+                  </div>
+                  {% endfor %}
+              </div>
+          </div>
+      </div>
+      {% endif %}
+</div>
+</div>
 
 {% endblock %}
 {% block scripts %}

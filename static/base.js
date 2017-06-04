@@ -87,18 +87,6 @@ var PM = (function () {
             studentList.appendChild(li);
         };
 
-        var getSelectedStudentIDs = function (studentList) {
-            var students = studentList.querySelectorAll("input");
-            var i;
-            var student_ids = [];
-            for (i = 0; i < students.length; i += 1) {
-                if (students[i].checked) {
-                    student_ids.push(+students[i].getAttribute("data-id"));
-                }
-            }
-            return student_ids;
-        };
-
         // The studentSelector function:
         // `container` is a <div> which studentSelector will populate with a list of
         // checkboxes and students, and a select-all/deselect-all button.
@@ -187,11 +175,34 @@ var PM = (function () {
 
             return {
                 getSelectedStudentIDs: function () {
-                    return getSelectedStudentIDs(studentList);
+                    var students = studentList.querySelectorAll("input");
+                    var i, student_ids = [];
+                    for (i = 0; i < students.length; i += 1) {
+                        if (students[i].checked) {
+                            student_ids.push(+students[i].getAttribute("data-id"));
+                        }
+                    }
+                    return student_ids;
                 },
+
+                getSelectedStudentIDsAndNames: function () {
+                    var students = studentList.querySelectorAll("input");
+                    var i, student_info = [];
+                    for (i = 0; i < students.length; i += 1) {
+                        if (students[i].checked) {
+                            student_info.push({
+                                "Student ID": +students[i].getAttribute("data-id"),
+                                "Student Name": students[i].getAttribute("data-name")
+                            });
+                        }
+                    }
+                    return student_info;
+                },
+
                 addStudent: function (studentData) {
                     addStudent(studentList, studentData);
                 },
+
                 loadFromServer: function () {
                     var self = this;
                     PM.apiCall("GET", "/api/students", null, function (response) {
@@ -200,15 +211,22 @@ var PM = (function () {
                         });
                     });
                 },
+
                 clearStudents: function () {
                     studentList.innerHTML = "";
                 },
-                loadClassFromServer: function (cid) {
+
+                loadClassFromServer: function (cid, success) {
                     var self = this;
                     PM.apiCall("GET", "/api/class/" + cid + "/students", null, function (response) {
+                        var students = [];
                         response.data.forEach(function (studentData) {
                             self.addStudent(studentData);
+                            students.push(studentData);
                         });
+                        if (typeof success === "function") {
+                            success(students);
+                        }
                     });
                 }
             };

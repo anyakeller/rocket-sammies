@@ -1,5 +1,7 @@
 import common
 
+import utils
+
 def create_class(name, tid, students=[]):
     """
     Creates a class and inserts it into the database
@@ -41,3 +43,15 @@ def remove_class(cid):
     }
     result = db.classes.delete_one(match)
     return result.deleted_count
+
+def get_students(cid):
+    _classes = get_class(cid=cid)
+    if len(_classes) != 1:
+        student_ids = []
+    else:
+        student_ids = _classes[0]["students"]
+    students = []
+    for sid in student_ids:
+        matches = utils.students.getStudent(**{"Student ID": str(sid)})
+        students += matches
+    return students
