@@ -37,31 +37,32 @@ var PM = (function () {
     };
 
     // Check if the given student name matches a search
-    var matches = function (input, name) {
+    var testQuery = function (query, name) {
         var i, j;
         // Replace common punctuation with whitespace
-        input = input.replace(/[,.;'"/]/g, " ");
+        query = query.replace(/[,.;'"/]/g, " ");
         name = name.replace(/[,.;'"/]/g, " ");
         // Normalize all sequences of whitespace to one space, and trim
-        input = input.replace(/[\s]+/g, " ").trim();
+        query = query.replace(/[\s]+/g, " ").trim();
         name = name.replace(/[\s]+/g, " ").trim();
         // Normalize to lower case
-        input = input.toLowerCase();
+        query = query.toLowerCase();
         name = name.toLowerCase();
 
-        var input_parts = input.split(" ");
+        var query_parts = query.split(" ");
         var name_parts = name.split(" ");
-        // If any word in input is the beginning of any word in name, it's a match
-        var input_part_matched;
-        for (j = 0; j < input_parts.length; j += 1) {
-            input_part_matched = false;
+        // If every word in query is the beginning of some word in name, it's a match
+        var query_part_matched;
+        for (j = 0; j < query_parts.length; j += 1) {
+            query_part_matched = false;
             for (i = 0; i < name_parts.length; i += 1) {
-                if (name_parts[i].startsWith(input_parts[j])) {
-                    input_part_matched = true;
+                if (name_parts[i].startsWith(query_parts[j])) {
+                    query_part_matched = true;
+                    break;
                 }
             }
-            // If the input part didn't match any of the name_parts, it doesn't match
-            if (!input_part_matched) {
+            // If the query part didn't match any of the name_parts, the query doesn't match
+            if (!query_part_matched) {
                 return false;
             }
         }
@@ -81,6 +82,7 @@ var PM = (function () {
             label.appendChild(checkbox);
             label.innerHTML += " " + student["Student Name"];
             var li = document.createElement("LI");
+            li.setAttribute("data-name", student["Student Name"]);
             li.appendChild(label);
             studentList.appendChild(li);
         };
@@ -152,16 +154,16 @@ var PM = (function () {
             studentNameInput.addEventListener("keyup", function () {
                 var val = studentNameInput.value.trim();
                 // Filter visibility of items in studentList by the entered text
-                var list = studentList.querySelectorAll("input");
+                var list = studentList.querySelectorAll("li");
                 var i, elem;
                 for (i = 0; i < list.length; i += 1) {
                     elem = list[i];
-                    if (matches(val, elem.getAttribute("data-name"))) {
-                        elem.parentNode.parentNode.setAttribute("style", "display: block;");
-                        elem.setAttribute("data-visible", "true");
+                    if (testQuery(val, elem.getAttribute("data-name"))) {
+                        elem.setAttribute("style", "display: block;");
+                        elem.querySelector("input").setAttribute("data-visible", "true");
                     } else {
-                        elem.parentNode.parentNode.setAttribute("style", "display: none;");
-                        elem.setAttribute("data-visible", "false");
+                        elem.setAttribute("style", "display: none;");
+                        elem.querySelector("input").setAttribute("data-visible", "false");
                     }
                 }
             });
@@ -217,7 +219,7 @@ var PM = (function () {
     // the object.
     return Object.freeze({
         apiCall: apiCall,
-        queryMatches: matches,
+        testQuery: testQuery,
         studentSelector: studentSelector
     });
 }());
