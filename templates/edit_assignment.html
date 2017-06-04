@@ -47,36 +47,12 @@
             </div>
         </form>
 
-        <!--<div class="col-md-6">
-            <center><button class="btn btn-primary" type="submit" id="create-rubric-row">Add To Rubric</button></center>
-            <br><br>
-            <div id="modal-edit-rubric" class="modal fade" role="dialog">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1>Add To The Rubric</h1>
-                        </div>
-                        <div class="modal-body">
-                            <h3>Add Category</h3>
-
-                            <div class="input-group">
-                                <span class="input-group-addon">Description</span>
-                                <textarea class="form-control" type="text" placeholder="Enter a description" id="user-rubric-category"></textarea>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button class="btn btn-primary" type="submit" id="submit-to-rubric-table">Do It!</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>-->
         <div class="col-md-6">
         <table id="initial-table" class="table table-inverse" data-rubric='{{ assignment["rubric"]|tojson|safe }}'>
             <thead>
                 <tr>
                     <th style="width:85%;">Category</th>
-                    <th style="width:15%;"> / 10</th>
+                    <th style="width:15%;">Max Score</th>
                 </tr>
             </thead>
             <tbody id="init-table-body">

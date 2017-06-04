@@ -89,12 +89,26 @@
         });
     });
 
+<<<<<<< HEAD
     rubric.forEach(function (item) {
         addRowToTable(item.category, item.max_score);
     });
 
     // /////////////////////////////////////////////////////////////////////////
     // Assigning groups:
+=======
+    }
+    rubricRowCreate.addEventListener("click",createRubricTable);
+
+    var createRubricForm = function(e){
+        var form = document.createElement('form');
+        form.setAttribute('action',"/sendRubricData")
+        form.setAttribute('method','GET');
+        var hiddenInput = document.createElement('input');
+        hiddenInput.setAttribute('type','hidden');
+        form.appendChild(hiddenInput);
+    }
+>>>>>>> d314641bc6c8692431408902ff3280f5d9e98b1a
 
     var divStudentSelector = document.getElementById("group-maker-student-selector");
     // If this is not on the page, the assignment is not a group assignment,

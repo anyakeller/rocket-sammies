@@ -91,13 +91,18 @@ def export_class(cid):
     for student in students:
         results.append(utils.students.getStudent(**{"Student ID":str(student)})[0])
     keys = results[0].keys()
+    keys.remove("_id") # Remove Mongo object id
     csv = ",".join(keys)
     csv += "\n"
     for row in results:
         values = []
         for key in keys:
             if key in row:
-                values.append(str(row[key]))
+                column = str(row[key])
+                if "," in column:
+                    # Quote column is a comma is present
+                    column = "\"%s\"" % column
+                values.append(column)
             else:
                 values.append("")
         csv = csv + ",".join(values)+"\n"
@@ -118,7 +123,7 @@ def inject_session():
     if session:
         return dict(session)
     return {}
-    
+
 
 if __name__ == "__main__":
 
