@@ -76,10 +76,11 @@ def classview(cid=None):
         students=students,
         assignments=assigs)
 
-@app.route("/class/<cid>/edit")
-def editSingleClass(cid):
+@app.route("/class/<cid>/gradebook")
+def singleClassGradeBook(cid):
     #WHAT DO YOU WANT THE EDIT CLASS BUTTON TO DO ?
-    return ""
+    return redirect("/gradebook")
+
 
 @app.route("/class/<cid>/export/")
 def export_class(cid):
