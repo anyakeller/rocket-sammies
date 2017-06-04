@@ -149,5 +149,7 @@ def group_remove_member(aid):
             except:
                 raise WebException("No such student in that group")
         i += 1
+    # Remove empty groups
+    groups = filter(lambda g: len(g) > 0, groups)
     assignments.update_assignment(aid,  {"groups": groups})
     return { "success": 1, "message": "Group added", "groups": groups }
