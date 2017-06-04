@@ -15,16 +15,25 @@
     var studentSelector = PM.studentSelector(document.getElementById("student-selection"));
     studentSelector.loadFromServer();
 
+    var creatingClass = false;
     btnCreateClass.addEventListener("click", function () {
+        // If an apiCall is in progress, cancel
+        if (creatingClass) {
+            $.notify("Action is in progress");
+            return;
+        }
         var name = inputNewClassName.value.trim();
         if (name === "") {
             $.notify("Please enter a class name");
         } else {
+            creatingClass = true;
             PM.apiCall("POST", "/api/class/create", {
                 "name": name,
                 "students": studentSelector.getSelectedStudentIDs()
             }, function (response) {
                 window.location = "/class/" + response.data.cid;
+            }, function () {
+                creatingClass = false;
             });
         }
     });
