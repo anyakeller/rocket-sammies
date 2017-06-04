@@ -98,7 +98,7 @@
                       <h4>Group</h4>
                       <ul>
                           {% for student_id in group: %}
-                          <li class="group-student-item" data-id="{{ student_id }}" data-group='{{ group|tojson }}'>
+                          <li class="group-student-item" data-id="{{ student_id }}">
                               <button class="group-remove-student"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
                               {{ students_by_id[student_id]['Student Name'] }}</li>
                           {% endfor %}

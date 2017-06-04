@@ -95,12 +95,18 @@
 
     var studentSelector = PM.studentSelector(divStudentSelector, {"noSelectAll": true});
 
+    // This is unfortunate code. removeBtnHandler is bound to "click" on the trash button
+    // in the list of students in a group. It makes an API call to remove the student
+    // from the group (identifying the group by its members), then removes the <li>
+    // for that student.
+    // Some of the jankiness here is due to the choice that we manually update the page
+    // HTML rather than triggering a full page reload.
     var removeBtnHandler = function (event) {
-        console.log("remove", this);
         var student_li = this.parentNode;
-        var student_ids = [], i, student_lis = student_li.parentNode.querySelectorAll("li");
-        for (i = 0; i < student_lis.length; i++) {
-            student_ids.push(student_lis[i].getAttribute("data-id"));
+        // Get the students in this group by iterating over the LIs in the HTML.
+        var student_ids = [], i, student_LIs = student_li.parentNode.querySelectorAll("li");
+        for (i = 0; i < student_LIs.length; i++) {
+            student_ids.push(student_LIs[i].getAttribute("data-id"));
         }
         PM.apiCall("POST", "/api/assignment/" + aid + "/group-rm-member", {
             group: student_ids,
@@ -110,7 +116,8 @@
         });
     };
 
-    // Add an element to divGroups describing the group. Students in the group are `students`
+    // Add an element to divGroups describing the group. The `students` parameters
+    // is a list of objects containing "Student ID" and "Student Name" properties.
     // `student_ids` is a list of student ids
     var addGroupElement = function (students, student_ids) {
         var group = document.createElement("DIV");
@@ -171,6 +178,8 @@
         }
     });
 
+    // Bind removeBtnHandler to the remove buttons on the page at initial
+    // page load
     var removeFromGroupBtns = document.querySelectorAll(".group-remove-student");
     var i;
     for (i = 0; i < removeFromGroupBtns.length; i++) {
