@@ -112,12 +112,7 @@ def inject_session():
     if session:
         return dict(session)
     return {}
-
-@app.route("/rubric/",methods=['GET'])
-def rubricCreation():
-    return render_template("rubric.html")
-    #send all assignments to rubric.html so that I can use the assignment name as the title.
-
+    
 
 if __name__ == "__main__":
 
