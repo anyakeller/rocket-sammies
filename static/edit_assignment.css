@@ -1,8 +1,36 @@
 .group-student-list {
     background-color: rgba(100, 100, 100, 0.25);
     border: 1px solid white;
-    border-radius: 10px;
     display: inline-block;
-    padding: 6px;
-    width: 40%;
+    width: 45%;
+    margin: 0;
+    padding: 0;
+    padding-top: 6px;
+}
+
+.group-student-list h4 {
+    padding-left: 6px;
+    padding-right: 6px;
+}
+
+.group-student-list ul {
+    margin: 0;
+    padding: 0;
+}
+
+.group-student-list .group-student-item {
+    list-style-type: none;
+    border: 1px solid dimgray;
+    background-color: rgba(100, 00, 100, 0.25);
+    padding-right: 6px;
+}
+
+.group-student-list button.group-remove-student {
+    /* Padding left/right used to center the glyphicon */
+    padding-left: 1px;
+    padding-right: 3px;
+    background-color: white;
+    width: 2em;
+    height: 2em;
+    border-radius: 0;
 }

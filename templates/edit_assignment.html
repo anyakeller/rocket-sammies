@@ -86,19 +86,21 @@
       {% if assignment.get('groups') != None %}
       <div class="row">
           <h2>Assign Groups</h2>
-          <div class="col-md-4">
+          <div class="col-md-3">
               <div id="group-maker-student-selector" style="max-width: 600px;"></div>
               <button class="btn btn-primary" id="btn-new-group">New group with these students</button>
               <!--<button class="btn btn-primary" id="btn-add-to-group">Add these students to a group</button>-->
           </div>
-          <div class="col-md-8">
+          <div class="col-md-9">
               <div id="student-groups">
                   {% for group in assignment.groups %}
                   <div class="group-student-list">
                       <h4>Group</h4>
                       <ul>
                           {% for student_id in group: %}
-                          <li data-id="{{ student_id }}">{{ students_by_id[student_id]['Student Name'] }}</li>
+                          <li class="group-student-item" data-id="{{ student_id }}">
+                              <button class="group-remove-student"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+                              {{ students_by_id[student_id]['Student Name'] }}</li>
                           {% endfor %}
                       </ul>
                   </div>
