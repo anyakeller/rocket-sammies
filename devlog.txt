@@ -164,3 +164,4 @@ wilsonB -- 2017-06-04 10:00
 - Fixed styling issues on /class/ page
 - Prevented repeated clicks on "Create Class" while the API call is loading
   from sending more API calls
+- Add a dozen students to sample.csv
