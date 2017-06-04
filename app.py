@@ -48,7 +48,6 @@ def view_assignment(aid):
     students_by_id = {}
     for s in students:
         students_by_id[s["Student ID"]] = s
-    print students_by_id.keys()
     return render_template("edit_assignment.html", assignment=assignment, students_by_id=students_by_id)
 
 @app.route("/class/")
