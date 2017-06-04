@@ -164,6 +164,9 @@ wilsonB -- 2017-06-04 10:00
 - Fixed styling issues on /class/ page
 - Prevented repeated clicks on "Create Class" while the API call is loading
   from sending more API calls
-- Add a dozen students to sample.csv
+- Added a dozen students to sample.csv
 - Improved ergonomics of student selection (use enter key; improve search match function
   to treat punctuation as whitespace and be more strict)
+
+wilsonB -- 2017-06-04 17:00
+- Created UI for making groups for group projects
