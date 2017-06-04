@@ -20,3 +20,7 @@
     cursor: inherit;
     display: block;
 }
+
+#classes .panel {
+    margin-bottom: 1em;
+}
