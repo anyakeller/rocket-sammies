@@ -23,7 +23,6 @@ def index():
 def login():
     return render_template("login.html")
 
-# For testing frontend:
 @app.route("/gradebook/")
 @redirect_if_not_logged_in
 def gradebook():
@@ -79,7 +78,8 @@ def classview(cid=None):
 @app.route("/class/<cid>/gradebook")
 def singleClassGradeBook(cid):
     #WHAT DO YOU WANT THE EDIT CLASS BUTTON TO DO ?
-    return redirect("/gradebook")
+    classes = utils.classes.get_class(cid=cid)
+    return redirect("/gradebook",cid=cid,class=classes)
 
 
 @app.route("/class/<cid>/export/")
