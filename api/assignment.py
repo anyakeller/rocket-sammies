@@ -81,3 +81,18 @@ def assign_assignment(aid):
     if num_modified < 1:
         raise WebException("Assignment does not exist")
     return { "success": 1, "assigned": assign }
+
+@blueprint.route("/<aid>/add-group", methods=["POST"])
+@api_wrapper
+@teachers_only
+@login_required
+def add_group(aid):
+    form = request.get_json()
+    assignment = assignments.get_assignments(aid=aid)
+    if len(assignment) != 1:
+        raise WebException("Assignment does not exist")
+    groups = assignment["groups"]
+    group = form.get("group")
+    groups.append(group)
+    assignments.update_assignment(aid,  {"groups": groups})
+    return { "success": 1, "message": "Group added", "groups": groups }
