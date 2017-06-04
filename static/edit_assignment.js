@@ -20,63 +20,67 @@
         if (isGroupProject) {
             data["max_group_size"] = document.getElementById("max-group-size").value
         }
+        data["rubric"] = serializeRubric();
         updateAssignment(aid, data);
     });
 
+    var serializeRubric = function() {
+        var table =document.getElementById("init-table-body");
+        var rubric = [];
+        var i, row;
+        for (i = 0; i < table.rows.length; i++) {
+            row = table.rows[i];
+            rubric.push({
+                "category": row.cells[0].innerHTML,
+                "max_score": row.cells[1].innerHTML,
+            });
+        }
+        return rubric;
+    };
 
-      // THIS IS THE JAVASCRIPT FOR THE RUBRIC FORMS ADDED BY DHIRAJATORY STATEMENTS
-      var rubricRowCreate = document.getElementById('submit-to-rubric-table');
-      var openRubricModal = document.getElementById('create-rubric-row');
-      var modalForRubrics = document.getElementById("modal-edit-rubric");
+    // THIS IS THE JAVASCRIPT FOR THE RUBRIC FORMS ADDED BY DHIRAJATORY STATEMENTS
+    var rubricRowCreate = document.getElementById('submit-to-rubric-table');
+    var openRubricModal = document.getElementById('create-rubric-row');
+    var modalForRubrics = document.getElementById("modal-edit-rubric");
 
-      var initTable = document.getElementById('initial-table');
-      var tableRef = initTable.getElementsByTagName('tbody')[0];
+    var initTable = document.getElementById('initial-table');
+    var tableRef = initTable.getElementsByTagName('tbody')[0];
 
-      openRubricModal.addEventListener("click", function () {
-          $(modalForRubrics).modal();
-      });
+    openRubricModal.addEventListener("click", function () {
+        $(modalForRubrics).modal();
+    });
 
+    var createRubricTable = function(e){
 
-      var createRubricTable = function(e){
+        var categoryDescription = document.getElementById('user-rubric-category').value;
 
-          var categoryDescription = document.getElementById('user-rubric-category').value;
-
-          // Create Table with the things
-          var newRow = tableRef.insertRow(tableRef.rows.length);
-          var newCell = newRow.insertCell(0);
-          var newCell2 = newRow.insertCell(-1);
-          var newText = document.createTextNode(categoryDescription);
-          newCell.appendChild(newText);
-          
-
-          // clear the modal input fields
-
-          document.getElementById("user-rubric-category").value = "";
-
-
-          // send the data to backend using hidden html forms
-          $(modalForRubrics).modal('hide');
-
-      }
-      rubricRowCreate.addEventListener("click",createRubricTable);
-
-      var createRubricForm = function(e){
-          var form = document.createElement('form');
-          form.setAttribute('action',"/sendRubricData")
-          form.setAttribute('method','GET');
-          var hiddenInput = document.createElement('input');
-          hiddenInput.setAttribute('type','hidden');
-          form.appendChild(hiddenInput);
-
-      }
+        // Create Table with the things
+        var newRow = tableRef.insertRow(tableRef.rows.length);
+        var newCell = newRow.insertCell(0);
+        var newCell2 = newRow.insertCell(-1);
+        var newText = document.createTextNode(categoryDescription);
+        newCell.appendChild(newText);
 
 
+        // clear the modal input fields
+
+        document.getElementById("user-rubric-category").value = "";
 
 
+        // send the data to backend using hidden html forms
+        $(modalForRubrics).modal('hide');
 
+    }
+    rubricRowCreate.addEventListener("click",createRubricTable);
 
-
-
+    var createRubricForm = function(e){
+        var form = document.createElement('form');
+        form.setAttribute('action',"/sendRubricData")
+        form.setAttribute('method','GET');
+        var hiddenInput = document.createElement('input');
+        hiddenInput.setAttribute('type','hidden');
+        form.appendChild(hiddenInput);
+    }
 
     var divStudentSelector = document.getElementById("group-maker-student-selector");
     // If this is not on the page, the assignment is not a group assignment,

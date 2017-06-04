@@ -80,6 +80,13 @@
                 </tr>
             </thead>
             <tbody id="init-table-body">
+                {% for row in assignment["rubric"] %}
+                <tr>
+                {% for col in row %}
+                <td>{{ row[col] }}</td>
+                {% endfor %}
+                </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>
