@@ -43,11 +43,17 @@ def dashboard():
 @app.route("/assignment/<aid>/")
 @redirect_if_not_logged_in
 def view_assignment(aid):
-    assignment = utils.assignments.get_assignments(aid=aid)
-    if len(assignment) == 0:
+    matches = utils.assignments.get_assignments(aid=aid)
+    if len(matches) == 0:
         # Assignment does not exist
         abort(404)
-    return render_template("edit_assignment.html", assignment=assignment[0])
+    assignment = matches[0]
+    # Make a map from student ID to student data
+    students = utils.classes.get_students(assignment["cid"])
+    students_by_id = {}
+    for s in students:
+        students_by_id[s["Student ID"]] = s
+    return render_template("edit_assignment.html", assignment=assignment, students_by_id=students_by_id)
 
 @app.route("/class/")
 @app.route("/class/<cid>/")

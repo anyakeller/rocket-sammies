@@ -49,11 +49,32 @@ def submit_assignment():
     # TODO: Implement
     return { "success": 1, "message": "Assignment submitted" }
 
+@blueprint.route("/<aid>", methods=["GET"])
+@api_wrapper
+@login_required
+def get_assignment_data(aid):
+    """Route for getting the data describing an assignment"""
+    matches = assignments.get_assignments(aid=aid)
+    if len(matches) < 1:
+        raise WebException("Assignment does not exist")
+    return { "success": 1, "data": matches[0] }
+
 @blueprint.route("/<aid>/update", methods=["POST"])
 @api_wrapper
 @teachers_only
 @login_required
 def update_assignment(aid):
+    form = request.get_json()
+    num_modified = assignments.update_assignment(aid, form)
+    if num_modified < 1:
+        raise WebException("Assignment does not exist")
+    return { "success": 1, "message": "Assignment updated" }
+
+@blueprint.route("/<aid>/newgroup", methods=["POST"])
+@api_wrapper
+@teachers_only
+@login_required
+def add_group_to_assignment(aid):
     form = request.get_json()
     num_modified = assignments.update_assignment(aid, form)
     if num_modified < 1:

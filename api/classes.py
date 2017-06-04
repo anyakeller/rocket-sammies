@@ -25,15 +25,9 @@ def create_class():
 @login_required
 def get_students(cid):
     """Route for retrieving a list of all students in a class by its class id (cid)"""
-    _classes = classes.get_class(cid=cid)
-    if len(_classes) != 1:
-        student_ids = []
-    else:
-        student_ids = _classes[0]["students"]
-    students = []
-    for sid in student_ids:
-        matches = utils.students.getStudent(**{"Student ID": str(sid)})
-        students += matches
+    # Each "student" returned is directly from the db collection, i.e. it is
+    # a dictionary with the "Student ID", "Student Name", ... properties.
+    students = utils.classes.get_students(cid)
     return { "success": 1, "data": students }
 
 @blueprint.route("/delete", methods=["POST"])
