@@ -77,12 +77,12 @@ def classview(cid=None):
         assignments=assigs)
 
 @app.route("/class/<cid>/edit")
-def editSingleClass():
+def editSingleClass(cid):
     #WHAT DO YOU WANT THE EDIT CLASS BUTTON TO DO ?
     return ""
 
 @app.route("/class/<cid>/export/")
-def export_class(cid=None):
+def export_class(cid):
     klass = utils.classes.get_class(cid=cid)[0]
     students = klass.get("students", [])
     results = []
