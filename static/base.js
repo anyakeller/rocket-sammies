@@ -64,19 +64,33 @@ var PM = (function () {
         // Check if the given student name matches the search the user has typed
         var matches = function (input, name) {
             var i, j;
+            // Replace common punctuation with whitespace
+            input = input.replace(/[,.;'"/]/g, " ");
+            name = name.replace(/[,.;'"/]/g, " ");
+            // Normalize all sequences of whitespace to one space, and trim
+            input = input.replace(/[\s]+/g, " ").trim();
+            name = name.replace(/[\s]+/g, " ").trim();
+            // Normalize to lower case
+            input = input.toLowerCase();
+            name = name.toLowerCase();
+
             var input_parts = input.split(" ");
-            var name_parts = name.split(",");
+            var name_parts = name.split(" ");
             // If any word in input is the beginning of any word in name, it's a match
-            for (i = 0; i < name_parts.length; i += 1) {
-                for (j = 0; j < input_parts.length; j += 1) {
-                    console.log(name_parts[i], "startsWith", input_parts[j]);
-                    // TODO: clean up
-                    if (name_parts[i].trim().toLowerCase().startsWith(input_parts[j].trim().toLowerCase())) {
-                        return true;
+            var input_part_matched;
+            for (j = 0; j < input_parts.length; j += 1) {
+                input_part_matched = false;
+                for (i = 0; i < name_parts.length; i += 1) {
+                    if (name_parts[i].startsWith(input_parts[j])) {
+                        input_part_matched = true;
                     }
                 }
+                // If the input part didn't match any of the name_parts, it doesn't match
+                if (!input_part_matched) {
+                    return false;
+                }
             }
-            return false;
+            return true;
         };
 
         // The studentSelector function:
@@ -88,11 +102,15 @@ var PM = (function () {
             var studentNameInput = document.createElement("INPUT");
             studentNameInput.setAttribute("class", "form-control");
             studentNameInput.setAttribute("placeholder", "John Smith, Jane Doe, ...");
+            studentNameInput.setAttribute("data-visible", "true");
+
             var studentList = document.createElement("UL");
             studentList.setAttribute("class", "student-selection-list");
+
             var toggleSelectAll = document.createElement("BUTTON");
             toggleSelectAll.innerHTML = "Select all";
             toggleSelectAll.setAttribute("class", "btn btn-default");
+
             toggleSelectAll.addEventListener("click", function () {
                 var i, checkboxes = studentList.querySelectorAll("input");
                 var some_deselected = false;
@@ -127,6 +145,7 @@ var PM = (function () {
                     : "Deselect all");
             });
 
+            // Must be keyup, because at keydown the newly typed character hasn't been added to the <input> yet
             studentNameInput.addEventListener("keyup", function () {
                 var val = studentNameInput.value.trim();
                 // Filter visibility of items in studentList by the entered text
@@ -134,11 +153,22 @@ var PM = (function () {
                 var i, elem;
                 for (i = 0; i < list.length; i += 1) {
                     elem = list[i];
-                    console.log(elem);
                     if (matches(val, elem.getAttribute("data-name"))) {
                         elem.parentNode.parentNode.setAttribute("style", "display: block;");
+                        elem.setAttribute("data-visible", "true");
                     } else {
                         elem.parentNode.parentNode.setAttribute("style", "display: none;");
+                        elem.setAttribute("data-visible", "false");
+                    }
+                }
+            });
+
+            studentNameInput.addEventListener("keydown", function (e) {
+                var checkboxes, i;
+                if (e.keyCode === 13) {
+                    checkboxes = studentList.querySelectorAll("input[data-visible=true]");
+                    if (checkboxes.length === 1) {
+                        checkboxes[0].checked = !checkboxes[0].checked;
                     }
                 }
             });
