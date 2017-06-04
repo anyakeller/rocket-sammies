@@ -77,10 +77,10 @@ def classview(cid=None):
 
 @app.route("/class/<cid>/gradebook")
 def singleClassGradeBook(cid):
-    #WHAT DO YOU WANT THE EDIT CLASS BUTTON TO DO ?
-    classes = utils.classes.get_class(cid=cid)
-    return redirect("/gradebook",cid=cid,class=classes)
-
+    klass = utils.classes.get_class(cid=cid)[0]
+    students = [utils.students.getStudent(**{"Student ID": str(id)})[0] for id in klass["students"]]
+    assignments = utils.assignments.get_assignments(cid=cid)
+    return render_template("gradebook.html", klass=klass, students=students, assignments=assignments)
 
 @app.route("/class/<cid>/export/")
 def export_class(cid):
