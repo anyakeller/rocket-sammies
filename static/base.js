@@ -8,7 +8,7 @@ var PM = (function () {
     // and responding to it (pass a URL for `after` to redirect to that URL
     // on success, or a function to be called on success). On failure, it
     // shows an error notification using the error message from the server.
-    var apiCall = function (method, url, data, after) {
+    var apiCall = function (method, url, data, after, failure) {
         method = method.toUpperCase();
         $.ajax({
             method: method,
@@ -27,6 +27,9 @@ var PM = (function () {
             } else {
                 console.error("Error in response:", data);
                 $.notify(data.message, "error");
+                if (typeof failure === "function") {
+                    failure(data);
+                }
             }
         }, function (response) {
             $.notify(response.message, "error");
