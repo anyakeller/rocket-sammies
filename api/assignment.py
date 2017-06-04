@@ -118,3 +118,26 @@ def add_group(aid):
     groups.append(group)
     assignments.update_assignment(aid,  {"groups": groups})
     return { "success": 1, "message": "Group added", "groups": groups }
+
+@blueprint.route("/<aid>/group-rm-member", methods=["POST"])
+@api_wrapper
+@teachers_only
+@login_required
+def group_remove_member(aid):
+    form = request.get_json()
+    matches = assignments.get_assignments(aid=aid)
+    if len(matches) != 1:
+        raise WebException("Assignment does not exist")
+    assignment = matches[0]
+    groups = assignment["groups"]
+    selected_group = [str(sid) for sid in form.get("group")]
+    i = 0
+    while i < len(groups):
+        if selected_group == groups[i]:
+            try:
+                groups[i].remove(form.get("sid"))
+            except:
+                raise WebException("No such student in that group")
+        i += 1
+    assignments.update_assignment(aid,  {"groups": groups})
+    return { "success": 1, "message": "Group added", "groups": groups }

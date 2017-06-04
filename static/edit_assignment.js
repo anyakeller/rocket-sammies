@@ -95,27 +95,63 @@
 
     var studentSelector = PM.studentSelector(divStudentSelector, {"noSelectAll": true});
 
+    var removeBtnHandler = function (event) {
+        console.log("remove", this);
+        var student_li = this.parentNode;
+        var student_ids = [], i, student_lis = student_li.parentNode.querySelectorAll("li");
+        for (i = 0; i < student_lis.length; i++) {
+            student_ids.push(student_lis[i].getAttribute("data-id"));
+        }
+        PM.apiCall("POST", "/api/assignment/" + aid + "/group-rm-member", {
+            group: student_ids,
+            sid: student_li.getAttribute("data-id")
+        }, function () {
+            student_li.remove();
+        });
+    };
+
     // Add an element to divGroups describing the group. Students in the group are `students`
-    var addGroupElement = function (students) {
+    // `student_ids` is a list of student ids
+    var addGroupElement = function (students, student_ids) {
         var group = document.createElement("DIV");
         group.setAttribute("class", "group-student-list");
-        group.innerHTML += "<h4>Group</h3>";
+        group.innerHTML += "<h4>Group</h4>";
         var memberList = document.createElement("UL");
         students.forEach(function (s) {
-            memberList.innerHTML += "<li data-id='" + s["Student ID"] + "'>" + s["Student Name"] + "</li>";
+            var inside_li = "";
+            // The glyphicon:
+            inside_li += '<button class="group-remove-student"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>';
+            // Student's name:
+            inside_li += s["Student Name"];
+            var student_id = s["Student ID"];
+            var li = document.createElement("LI");
+            li.setAttribute("class", "group-student-item");
+            li.setAttribute("data-id", student_id);
+            li.innerHTML = inside_li;
+            memberList.appendChild(li);
         });
         group.appendChild(memberList);
         divGroups.appendChild(group);
+        var btns = group.querySelectorAll(".group-remove-student");
+        var i;
+        for (i = 0; i < btns.length; i++) {
+            btns[i].addEventListener("click", removeBtnHandler);
+        }
     };
 
     var setupGroupSelection = function () {
         var groups = assignment.groups;
         console.log(groups);
         btnNewGroup.addEventListener("click", function () {
-            var students = studentSelector.getSelectedStudentIDs();
-            addGroupElement(students);
+            var students = studentSelector.getSelectedStudentIDsAndNames();
+            var student_ids = [];
+            students.forEach(function (s) {
+                student_ids.push("" + s["Student ID"]);
+            });
             PM.apiCall("POST", "/api/assignment/" + aid + "/add-group", {
-                "group": students
+                "group": student_ids
+            }, function () {
+                addGroupElement(students, student_ids);
             });
         });
     };
@@ -134,4 +170,10 @@
             setupGroupSelection();
         }
     });
+
+    var removeFromGroupBtns = document.querySelectorAll(".group-remove-student");
+    var i;
+    for (i = 0; i < removeFromGroupBtns.length; i++) {
+        removeFromGroupBtns[i].addEventListener("click", removeBtnHandler);
+    }
 }());

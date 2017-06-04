@@ -29,8 +29,17 @@
     /* Padding left/right used to center the glyphicon */
     padding-left: 1px;
     padding-right: 3px;
-    background-color: white;
+    background-color: #aa6caa;
     width: 2em;
     height: 2em;
     border-radius: 0;
+    border: none;
+}
+
+.group-student-list button.group-remove-student:hover {
+    background-color: #d2a437;
+}
+
+.group-student-list button.group-remove-student:active {
+    border: 1px solid brown;
 }

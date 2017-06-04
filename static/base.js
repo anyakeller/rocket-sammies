@@ -122,9 +122,11 @@ var PM = (function () {
                     for (i = 0; i < checkboxes.length; i += 1) {
                         checkboxes[i].checked = some_deselected;
                     }
-                    toggleSelectAll.innerHTML = (some_deselected
-                        ? "Deselect all"
-                        : "Select all");
+                    if (toggleSelectAll) {
+                        toggleSelectAll.innerHTML = (some_deselected
+                                ? "Deselect all"
+                                : "Select all");
+                    }
                 });
             }
 
@@ -140,9 +142,11 @@ var PM = (function () {
                         break;
                     }
                 }
-                toggleSelectAll.innerHTML = (some_deselected
-                    ? "Select all"
-                    : "Deselect all");
+                if (toggleSelectAll) {
+                    toggleSelectAll.innerHTML = (some_deselected
+                        ? "Select all"
+                        : "Deselect all");
+                }
             });
 
             // Must be keyup, because at keydown the newly typed character hasn't been added to the <input> yet
