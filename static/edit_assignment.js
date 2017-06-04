@@ -52,23 +52,26 @@
 
     var createRubricTable = function(e){
 
-        var categoryDescription = document.getElementById('user-rubric-category').value;
+      var categoryGrade = document.getElementById('user-rubric-grade').value;
+                var categoryDescription = document.getElementById('user-rubric-category').value;
 
-        // Create Table with the things
-        var newRow = tableRef.insertRow(tableRef.rows.length);
-        var newCell = newRow.insertCell(0);
-        var newCell2 = newRow.insertCell(-1);
-        var newText = document.createTextNode(categoryDescription);
-        newCell.appendChild(newText);
+                // Create Table with the things
+                var newRow = tableRef.insertRow(tableRef.rows.length);
+                var newCell = newRow.insertCell(0);
+                var newCell2 = newRow.insertCell(-1);
+                var newText = document.createTextNode(categoryDescription);
+                var newText2 = document.createTextNode(categoryGrade);
+                newCell.appendChild(newText);
+                newCell2.appendChild(newText2);
+
+                // clear the modal input fields
+                document.getElementById("user-rubric-grade").value = "";
+                document.getElementById("user-rubric-category").value = "";
 
 
-        // clear the modal input fields
+                // send the data to backend using hidden html forms
+                $(modalForRubrics).modal('hide');
 
-        document.getElementById("user-rubric-category").value = "";
-
-
-        // send the data to backend using hidden html forms
-        $(modalForRubrics).modal('hide');
 
     }
     rubricRowCreate.addEventListener("click",createRubricTable);
