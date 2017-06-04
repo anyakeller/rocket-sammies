@@ -65,8 +65,8 @@ def get_assignment_data(aid):
 @login_required
 def update_assignment(aid):
     form = request.get_json()
-    num_modified = assignments.update_assignment(aid, form)
-    if num_modified < 1:
+    num_matched = assignments.update_assignment(aid, form)
+    if num_matched == 0:
         raise WebException("Assignment does not exist")
     return { "success": 1, "message": "Assignment updated" }
 
@@ -76,8 +76,8 @@ def update_assignment(aid):
 @login_required
 def add_group_to_assignment(aid):
     form = request.get_json()
-    num_modified = assignments.update_assignment(aid, form)
-    if num_modified < 1:
+    num_matched = assignments.update_assignment(aid, form)
+    if num_matched == 0:
         raise WebException("Assignment does not exist")
     return { "success": 1, "message": "Assignment updated" }
 
@@ -98,8 +98,8 @@ def delete_assignment(aid):
 def assign_assignment(aid):
     form = request.get_json()
     assign = form.get("assign", False)
-    num_modified = assignments.update_assignment(aid, {"assigned": assign})
-    if num_modified < 1:
+    num_matched = assignments.update_assignment(aid, {"assigned": assign})
+    if num_matched == 0:
         raise WebException("Assignment does not exist")
     return { "success": 1, "assigned": assign }
 
