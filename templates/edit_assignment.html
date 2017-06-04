@@ -1,5 +1,8 @@
 {% extends "base.html" %}
 {% block title %}Edit: {{ assignment["title"]}} {% endblock %}
+{% block head %}
+<link rel="stylesheet" href="/static/edit_assignment.css" />
+{% endblock %}
 {% block content %}
 <div class="container">
 
@@ -85,32 +88,32 @@
             </tbody>
         </table>
       </div>
-    <div class="row">
-        <h2>Assign Students</h2>
-        <div class="col-md-5">
-            <div id="group-maker-student-selector" style="max-width: 600px;"></div>
-            <button class="btn btn-primary" id="btn-new-group">New group with these students</button>
-            <button class="btn btn-primary" id="btn-add-to-group">Add these students to a group</button>
-            <button class="btn btn-primary" id="btn-save-groups">Save groups</button>
-        </div>
-        <div class="col-md-7">
-            <div id="student-groups">
-                {% for group in assignment.groups %}
-                <div>
-                    <h3>Group</h3>
-                    <h2>Students:</h2>
-                    <ul>
-                        {% for student_id in group: %}
-                        <li data-id="{{ student_id }}">{{ students_by_id[student_id]['Student Name'] }}</li>
-                        {% endfor %}
-                    </ul>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
-    </div>
-    </div>
-  </div>
+      {% if assignment.get('groups') != None %}
+      <div class="row">
+          <h2>Assign Groups</h2>
+          <div class="col-md-4">
+              <div id="group-maker-student-selector" style="max-width: 600px;"></div>
+              <button class="btn btn-primary" id="btn-new-group">New group with these students</button>
+              <!--<button class="btn btn-primary" id="btn-add-to-group">Add these students to a group</button>-->
+          </div>
+          <div class="col-md-8">
+              <div id="student-groups">
+                  {% for group in assignment.groups %}
+                  <div class="group-student-list">
+                      <h4>Group</h4>
+                      <ul>
+                          {% for student_id in group: %}
+                          <li data-id="{{ student_id }}">{{ students_by_id[student_id]['Student Name'] }}</li>
+                          {% endfor %}
+                      </ul>
+                  </div>
+                  {% endfor %}
+              </div>
+          </div>
+      </div>
+      {% endif %}
+</div>
+</div>
 
 {% endblock %}
 {% block scripts %}

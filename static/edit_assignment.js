@@ -79,12 +79,17 @@
 
 
 
-
     var divStudentSelector = document.getElementById("group-maker-student-selector");
-    var btnNewGroup = document.getElementById("btn-new-group");
-    var btnAddToGroup = document.getElementById("btn-add-to-group");
-    var btnSaveGroups = document.getElementById("btn-save-groups");
+    // If this is not on the page, the assignment is not a group assignment,
+    // and the rest of this function should not run
+    if (divStudentSelector === null) {
+        return;
+    }
+
     var divGroups = document.getElementById("student-groups");
+    var btnNewGroup = document.getElementById("btn-new-group");
+    // Not implemented:
+    // var btnAddToGroup = document.getElementById("btn-add-to-group");
 
     var students;
     var assignment;
@@ -94,8 +99,8 @@
     // Add an element to divGroups describing the group. Students in the group are `students`
     var addGroupElement = function (students) {
         var group = document.createElement("DIV");
-        group.innerHTML += "<h3>Group</h3>";
-        group.innerHTML += "<h4>Students:</h3>";
+        group.setAttribute("class", "group-student-list");
+        group.innerHTML += "<h4>Group</h3>";
         var memberList = document.createElement("UL");
         students.forEach(function (s) {
             memberList.innerHTML += "<li data-id='" + s["Student ID"] + "'>" + s["Student Name"] + "</li>";
@@ -108,9 +113,11 @@
         var groups = assignment.groups;
         console.log(groups);
         btnNewGroup.addEventListener("click", function () {
-            var students = studentSelector.getSelectedStudentIDsAndNames();
-            //addGroupElement(students);
-            //PM.apiCall("POST", 
+            var students = studentSelector.getSelectedStudentIDs();
+            addGroupElement(students);
+            PM.apiCall("POST", "/api/assignment/" + aid + "/add-group", {
+                "group": students
+            });
         });
     };
 

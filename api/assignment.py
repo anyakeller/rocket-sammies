@@ -109,11 +109,12 @@ def assign_assignment(aid):
 @login_required
 def add_group(aid):
     form = request.get_json()
-    assignment = assignments.get_assignments(aid=aid)
-    if len(assignment) != 1:
+    matches = assignments.get_assignments(aid=aid)
+    if len(matches) != 1:
         raise WebException("Assignment does not exist")
+    assignment = matches[0]
     groups = assignment["groups"]
-    group = form.get("group")
+    group = [str(sid) for sid in form.get("group")]
     groups.append(group)
     assignments.update_assignment(aid,  {"groups": groups})
     return { "success": 1, "message": "Group added", "groups": groups }
