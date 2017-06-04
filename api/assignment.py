@@ -115,8 +115,16 @@ def add_group(aid):
     assignment = matches[0]
     groups = assignment["groups"]
     group = [str(sid) for sid in form.get("group")]
+
+    if len(group) == 0:
+        raise WebException("Group must contain at least one member")
+
+    if len(group) > assignment["max_group_size"]:
+        raise WebException("Maximum grop size exceeded")
+
     if group in groups:
         raise WebException("Group already exists")
+
     groups.append(group)
     assignments.update_assignment(aid,  {"groups": groups})
     return { "success": 1, "message": "Group added", "groups": groups }
