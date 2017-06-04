@@ -94,7 +94,7 @@
     var students;
     var assignment;
 
-    var studentSelector = PM.studentSelector(divStudentSelector);
+    var studentSelector = PM.studentSelector(divStudentSelector, {"noSelectAll": true});
 
     // Add an element to divGroups describing the group. Students in the group are `students`
     var addGroupElement = function (students) {

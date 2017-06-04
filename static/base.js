@@ -92,7 +92,7 @@ var PM = (function () {
         // checkboxes and students, and a select-all/deselect-all button.
         // studentSelector returns an object with functions for addings students
         // to the list and getting which students are selected
-        return function (container) {
+        return function (container, options) {
             var studentNameInput = document.createElement("INPUT");
             studentNameInput.setAttribute("class", "form-control");
             studentNameInput.setAttribute("placeholder", "John Smith, Jane Doe, ...");
@@ -100,26 +100,33 @@ var PM = (function () {
             var studentList = document.createElement("UL");
             studentList.setAttribute("class", "student-selection-list");
 
-            var toggleSelectAll = document.createElement("BUTTON");
-            toggleSelectAll.innerHTML = "Select all";
-            toggleSelectAll.setAttribute("class", "btn btn-default");
+            var toggleSelectAll;
+            // the `options` parameter may have a property `noSelectAll`, which says
+            // to exclude the toggleSelectAll button
+            if (typeof options === "object" && options !== null && options.noSelectAll) {
+                toggleSelectAll = false;
+            } else {
+                toggleSelectAll = document.createElement("BUTTON");
+                toggleSelectAll.innerHTML = "Select all";
+                toggleSelectAll.setAttribute("class", "btn btn-default");
 
-            toggleSelectAll.addEventListener("click", function () {
-                var i, checkboxes = studentList.querySelectorAll("input");
-                var some_deselected = false;
-                for (i = 0; i < checkboxes.length; i += 1) {
-                    if (!checkboxes[i].checked) {
-                        some_deselected = true;
-                        break;
+                toggleSelectAll.addEventListener("click", function () {
+                    var i, checkboxes = studentList.querySelectorAll("input");
+                    var some_deselected = false;
+                    for (i = 0; i < checkboxes.length; i += 1) {
+                        if (!checkboxes[i].checked) {
+                            some_deselected = true;
+                            break;
+                        }
                     }
-                }
-                for (i = 0; i < checkboxes.length; i += 1) {
-                    checkboxes[i].checked = some_deselected;
-                }
-                toggleSelectAll.innerHTML = (some_deselected
-                    ? "Deselect all"
-                    : "Select all");
-            });
+                    for (i = 0; i < checkboxes.length; i += 1) {
+                        checkboxes[i].checked = some_deselected;
+                    }
+                    toggleSelectAll.innerHTML = (some_deselected
+                        ? "Deselect all"
+                        : "Select all");
+                });
+            }
 
             // If the user clicks anywhere in the list (on a student), refresh the
             // "Select all" / "Deselent all" button label
@@ -171,7 +178,9 @@ var PM = (function () {
 
             container.appendChild(studentNameInput);
             container.appendChild(studentList);
-            container.appendChild(toggleSelectAll);
+            if (toggleSelectAll) {
+                container.appendChild(toggleSelectAll);
+            }
 
             return {
                 getSelectedStudentIDs: function () {
