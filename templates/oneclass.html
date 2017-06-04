@@ -68,6 +68,7 @@
         </tbody>
     </table>
     <h3><u>Assignments</u></h3>
+    {% if assignments | length > 0 %}
     <table style="width:92%;" class="table table-inverse">
         <thead>
             <tr>
@@ -88,6 +89,9 @@
             {% endfor %}
         </tbody>
     </table>
+    {% else %}
+    <h1>There are no assignments yet</h1>
+    {% endif %}
     {% endblock %}
 
     {% block scripts %}
