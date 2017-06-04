@@ -20,7 +20,7 @@
         <form id="edit-assignment-form">
             <div class="col-md-6">
                 <form id="edit-assignment-form">
-                    <div class="col-md-6">
+                    <div class="col-md-11">
                         <input type="hidden" id="aid" value="{{ assignment["aid"] }}">
                         <input type="hidden" id="type" value="{{ assignment["type"] }}">
                         <input type="hidden" id="cid" value="{{ assignment["cid"] }}">
@@ -47,7 +47,7 @@
             </div>
         </form>
 
-        <div class="col-md-6">
+        <!--<div class="col-md-6">
             <center><button class="btn btn-primary" type="submit" id="create-rubric-row">Add To Rubric</button></center>
             <br><br>
             <div id="modal-edit-rubric" class="modal fade" role="dialog">
@@ -70,8 +70,9 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <table style="width:50%;" id = "initial-table" class="table table-inverse">
+        </div>-->
+        <div class="col-md-6">
+        <table id="initial-table" class="table table-inverse" data-rubric='{{ assignment["rubric"]|tojson|safe }}'>
             <thead>
                 <tr>
                     <th style="width:85%;">Category</th>
@@ -79,15 +80,16 @@
                 </tr>
             </thead>
             <tbody id="init-table-body">
-                {% for row in assignment["rubric"] %}
-                <tr>
-                {% for col in row %}
-                <td>{{ row[col] }}</td>
-                {% endfor %}
-                </tr>
-                {% endfor %}
             </tbody>
+            <tfoot>
+                <tr>
+                    <td><input type="text" id="new-criterion-description" /></td>
+                    <td><input type="text" size="3" id="new-criterion-maxpoints" /></td>
+                    <td><button class="btn btn-primary" id="btn-new-criterion">Add to rubric</button></td>
+                </tr>
+            </tfoot>
         </table>
+        </div>
     </div>
     {% if assignment.get('groups') != None %}
     <div class="row">

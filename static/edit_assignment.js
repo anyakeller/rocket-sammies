@@ -1,11 +1,13 @@
 (function () {
     "use strict";
 
+    // /////////////////////////////////////////////////////////////////////////
+    // Editing properties of the the assignment
     var editAssignmentForm = document.getElementById("edit-assignment-form");
     var aid = document.getElementById("aid").value;
     var cid = document.getElementById("cid").value;
 
-    var updateAssignment = function(aid, data) {
+    var updateAssignment = function(data) {
         PM.apiCall("POST", "/api/assignment/" + aid + "/update", data, window.location);
     };
 
@@ -20,67 +22,79 @@
         if (isGroupProject) {
             data["max_group_size"] = document.getElementById("max-group-size").value
         }
-        data["rubric"] = serializeRubric();
-        updateAssignment(aid, data);
+        updateAssignment(data);
     });
 
-    var serializeRubric = function() {
-        var table =document.getElementById("init-table-body");
-        var rubric = [];
-        var i, row;
-        for (i = 0; i < table.rows.length; i++) {
-            row = table.rows[i];
-            rubric.push({
-                "category": row.cells[0].innerHTML,
-                "max_score": row.cells[1].innerHTML,
-            });
-        }
-        return rubric;
-    };
-
-    // THIS IS THE JAVASCRIPT FOR THE RUBRIC FORMS ADDED BY DHIRAJATORY STATEMENTS
-    var rubricRowCreate = document.getElementById('submit-to-rubric-table');
-    var openRubricModal = document.getElementById('create-rubric-row');
-    var modalForRubrics = document.getElementById("modal-edit-rubric");
+    // /////////////////////////////////////////////////////////////////////////
+    // Editing the rubric
 
     var initTable = document.getElementById('initial-table');
-    var tableRef = initTable.getElementsByTagName('tbody')[0];
 
-    openRubricModal.addEventListener("click", function () {
-        $(modalForRubrics).modal();
+    // The `rubric` variable will be the authoritative copy of the rubric. When saving, we use this
+    var rubric = JSON.parse(initTable.getAttribute('data-rubric'));
+
+    var rubricTBody = initTable.querySelector('tbody');
+    var inputNewDescription = document.getElementById('new-criterion-description');
+    var inputNewMaxPoints = document.getElementById('new-criterion-maxpoints');
+    var btnAddCriterion = document.getElementById('btn-new-criterion');
+
+    var updateAssignmentRubric = function (onSuccess) {
+        PM.apiCall("POST", "/api/assignment/" + aid + "/update", {
+            "rubric": rubric
+        }, onSuccess);
+    };
+
+    var addRowToTable = (function () {
+        var counter = 0;
+        return function (category, max_score) {
+            counter += 1;
+            var id = "rubric-row-" + counter;
+            var tr = document.createElement("TR");
+            tr.setAttribute("id", id);
+            tr.innerHTML += "<td>" + category + "</td>";
+            tr.innerHTML += "<td>" + max_score + "</td>";
+            var lastTd = document.createElement("TD");
+            var editBtn = document.createElement("BUTTON");
+            editBtn.setAttribute("class", "btn btn-primary");
+            editBtn.setAttribute("for", id);
+            editBtn.innerHTML = "Edit";
+            lastTd.appendChild(editBtn);
+            tr.appendChild(lastTd);
+            rubricTBody.appendChild(tr);
+
+            editBtn.addEventListener("click", function () {
+                var target_tr = document.getElementById(this.getAttribute("for"));
+                var tds = target_tr.querySelectorAll("td");
+                var categoryTd = tds[0], maxScoreTd = tds[1];
+                // TODO: implement editing of row
+            });
+        };
+    }());
+
+    btnAddCriterion.addEventListener('click', function () {
+        var desc = inputNewDescription.value;
+        var maxPoints = +inputNewMaxPoints.value;
+        if (!Number.isFinite(maxPoints) || maxPoints < 0 || maxPoints % 1 != 0) {
+            $.notify("Max points must be a whole number");
+            return;
+        }
+        rubric.push({
+            "category": desc,
+            "max_score": maxPoints
+        });
+        addRowToTable(desc, maxPoints);
+        updateAssignmentRubric(function () {
+            inputNewDescription.value = "";
+            inputNewMaxPoints.value = "";
+        });
     });
 
-    var createRubricTable = function(e){
+    rubric.forEach(function (item) {
+        addRowToTable(item.category, item.max_score);
+    });
 
-        var categoryDescription = document.getElementById('user-rubric-category').value;
-
-        // Create Table with the things
-        var newRow = tableRef.insertRow(tableRef.rows.length);
-        var newCell = newRow.insertCell(0);
-        var newCell2 = newRow.insertCell(-1);
-        var newText = document.createTextNode(categoryDescription);
-        newCell.appendChild(newText);
-
-
-        // clear the modal input fields
-
-        document.getElementById("user-rubric-category").value = "";
-
-
-        // send the data to backend using hidden html forms
-        $(modalForRubrics).modal('hide');
-
-    }
-    rubricRowCreate.addEventListener("click",createRubricTable);
-
-    var createRubricForm = function(e){
-        var form = document.createElement('form');
-        form.setAttribute('action',"/sendRubricData")
-        form.setAttribute('method','GET');
-        var hiddenInput = document.createElement('input');
-        hiddenInput.setAttribute('type','hidden');
-        form.appendChild(hiddenInput);
-    }
+    // /////////////////////////////////////////////////////////////////////////
+    // Assigning groups:
 
     var divStudentSelector = document.getElementById("group-maker-student-selector");
     // If this is not on the page, the assignment is not a group assignment,

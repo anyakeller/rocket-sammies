@@ -1,3 +1,11 @@
+#initial-table {
+    border: 1px solid black;
+}
+
+#initial-table td, #initial-table th {
+    border: 1px solid black;
+}
+
 .group-student-list {
     background-color: rgba(100, 100, 100, 0.25);
     border: 1px solid white;
