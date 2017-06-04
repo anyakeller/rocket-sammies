@@ -1,77 +1,27 @@
 {% extends "base.html" %}
-{% block title %}{{ class["cid"]["name"] }}{% endblock %}
+{% block title %} {{ klass["name"] }}: Gradebook{% endblock %}
 {% block content %}
-
-
 
 <div class="outer">
     <div class="inner">
         <table class="table">
             <tr>
                 <th class=fix>Student</th>
-                <th>Project_1</th>
-                <th>Project_1</th>
-                <th>Project_1</th>
-                <th>Project_1</th>
-                <th>Project_1</th>
-                <th>Project_1</th>
-                <th>Project_1</th>
-                <th>Project_1</th>
-                <th>Project_1</th>
-                <th>Project_1</th>
-                <th>Project_1</th>
-                <th>Project_1</th>
-                <th>Project_1</th>
-
+                {% for assignment in assignments %}
+                <th>{{ assignment["title"] }}</th>
+                {% endfor %}
             </tr>
             <tr>
                 <th class=fix scope="row">John Doe</th>
-                <td>23</td>
-                <td>23</td>
-                <td>23</td>
-                <td>23</td>
-                <td>23</td>
-                <td>23</td>
-                <td>23</td>
-                <td>23</td>
-                <td>23</td>
-                <td>23</td>
-                <td>23</td>
-                <td>23</td>
-                <td>23</td>
-
+                <td>22</td>
             </tr>
             <tr>
                 <th class=fix scope="row">Jake Grane</th>
-                <td>70</td>
-                <td>23</td>
-                <td>23</td>
-                <td>23</td>
-                <td>23</td>
-                <td>23</td>
-                <td>23</td>
-                <td>23</td>
-                <td>23</td>
-                <td>23</td>
-                <td>23</td>
-                <td>23</td>
-                <td>23</td>
+                <td>22</td>
             </tr>
             <tr>
                 <th class=fix scope="row">Asher Lasday</th>
-                <td>02</td>
-                <td>23</td>
-                <td>23</td>
-                <td>23</td>
-                <td>23</td>
-                <td>23</td>
-                <td>23</td>
-                <td>23</td>
-                <td>23</td>
-                <td>23</td>
-                <td>23</td>
-                <td>23</td>
-                <td>23</td>
+                <td>22</td>
             </tr>
         </table>
     </div>

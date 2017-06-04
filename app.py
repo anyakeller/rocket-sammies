@@ -23,11 +23,6 @@ def index():
 def login():
     return render_template("login.html")
 
-@app.route("/gradebook/")
-@redirect_if_not_logged_in
-def gradebook():
-    return render_template("gradebook.html")
-
 @app.route("/dashboard/")
 @redirect_if_not_logged_in
 def dashboard():
