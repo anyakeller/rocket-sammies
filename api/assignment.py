@@ -65,7 +65,7 @@ def update_assignment(aid):
 @teachers_only
 @login_required
 def delete_assignment(aid):
-    deleted_count = assignments.remove_assignment(aid)
+    deleted_count = assignments.remove_assignment(aid=aid)
     if deleted_count < 1:
         raise WebException("Assignment does not exist")
     return { "success": 1, "message": "Assignment deleted" }

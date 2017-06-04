@@ -53,17 +53,14 @@ def get_assignments(**match):
     assignments = db.assignments.find(match)
     return list(assignments)
 
-def remove_assignment(aid):
+def remove_assignment(**match):
     """
     Remove an assignment with a specific id
     Returns the number of deleted documents
     """
 
     db = common.get_connection()
-    match = {
-        "aid": aid
-    }
-    result = db.assignments.delete_one(match)
+    result = db.assignments.delete_many(match)
     return result.deleted_count
 
 def update_assignment(aid, data):

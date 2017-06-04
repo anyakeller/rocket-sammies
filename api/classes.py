@@ -1,7 +1,7 @@
 from flask import Blueprint, request, session
 
 import utils
-from utils import classes
+from utils import assignments, classes
 from decorators import WebException, api_wrapper, login_required, teachers_only
 
 blueprint = Blueprint("class", __name__)
@@ -47,4 +47,5 @@ def delete_class():
     count = classes.remove_class(cid)
     if count == 0:
         raise WebException("Class does not exist")
+    assignments.remove_assignment(cid=cid)
     return { "success": 1, "message": "Class deleted" }
