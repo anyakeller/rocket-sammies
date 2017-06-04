@@ -95,7 +95,7 @@
 
     var studentSelector = PM.studentSelector(divStudentSelector, {"noSelectAll": true});
 
-    // This is unfortunate code. removeBtnHandler is bound to "click" on the trash button
+    // This function is ugly. removeBtnHandler is bound to "click" on the trash button
     // in the list of students in a group. It makes an API call to remove the student
     // from the group (identifying the group by its members), then removes the <li>
     // for that student.
