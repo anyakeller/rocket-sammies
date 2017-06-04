@@ -115,6 +115,8 @@ def add_group(aid):
     assignment = matches[0]
     groups = assignment["groups"]
     group = [str(sid) for sid in form.get("group")]
+    if group in groups:
+        raise WebException("Group already exists")
     groups.append(group)
     assignments.update_assignment(aid,  {"groups": groups})
     return { "success": 1, "message": "Group added", "groups": groups }
