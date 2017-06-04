@@ -146,9 +146,21 @@ jamesW -- 2017-05-30 17:48
 anyaK -- 2017-06-1 11:40
 - Added download student CSV functionality
 
+wilsonB -- 2017-06-01 14:00
+- Identified panels in /class/ page by cid, not name (so that panels work regardless of the name)
+- Made "Create Class" redirect to the newly created class
+
 jamesW -- 2017-06-01 13:45
 - Added a button for downloading csv of class
+
+wilsonB -- 2017-06-02 13:55
+- Implemented delete-class button on /class/ page
 
 jamesW -- 2017-06-03 13:43
 - Implment assignment activation
 - Added basic page for editing assignments
+
+wilsonB -- 2017-06-04 10:00
+- Fixed styling issues on /class/ page
+- Prevented repeated clicks on "Create Class" while the API call is loading
+  from sending more API calls
