@@ -114,7 +114,7 @@ def add_group(aid):
         raise WebException("Assignment does not exist")
     assignment = matches[0]
     groups = assignment["groups"]
-    group = set([str(sid) for sid in form.get("group")])
+    group = [str(sid) for sid in form.get("group")]
 
     if len(group) == 0:
         raise WebException("Group must contain at least one member")
@@ -126,17 +126,20 @@ def add_group(aid):
         raise WebException("Group already exists")
 
     # Prevent members who are already in groups from being added to new ones
-    names = []
+    overlap_ids = []
     for group2 in groups:
-        intersection = group.intersection(group2)
-        if len(intersection) > 0:
-            names += [students.getStudent(**{"Student ID": student})[0]["Student Name"].split(", ")[1] for student in intersection]
+        for sid in group:
+            if sid in group2:
+                overlap_ids.append(sid)
+    overlap_names = [students.getStudent(**{"Student ID": student})[0]["Student Name"].split(", ")[1] for student in overlap_ids]
 
-    if len(names) == 1:
-        raise WebException("%s is already in a group!" % names[0])
-    elif len(names) > 1:
-        names = ", ".join(names[:-1]) + ", and " + names[-1]
-        raise WebException("%s are already in groups!" % names)
+    if len(overlap_names) == 1:
+        raise WebException("%s is already in a group!" % overlap_names[0])
+    elif len(overlap_names) == 2:
+        raise WebException("%s and %s are already in groups!" % (overlap_names[0], overlap_names[1]))
+    elif len(overlap_names) > 1:
+        strnames = ", ".join(overlap_names[:-1]) + ", and " + overlap_names[-1]
+        raise WebException("%s are already in groups!" % strnames)
 
     groups.append(group)
     assignments.update_assignment(aid,  {"groups": groups})
