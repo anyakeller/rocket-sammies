@@ -14,8 +14,8 @@ app.register_blueprint(api.grades.blueprint, url_prefix="/api/grade")
 app.register_blueprint(api.user.blueprint, url_prefix="/api/user")
 app.register_blueprint(api.students.blueprint, url_prefix="/api/students")
 
-DIR = os.path.dirname(__file__) or ‘.’
-DIR+= ‘/’
+DIR = os.path.dirname(__file__) or '.'
+DIR+= '/'
 
 @app.route("/")
 @redirect_if_not_logged_in
