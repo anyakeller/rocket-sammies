@@ -147,6 +147,7 @@ var PM = (function () {
                         ? "Select all"
                         : "Deselect all");
                 }
+                studentNameInput.focus();
             });
 
             // Must be keyup, because at keydown the newly typed character hasn't been added to the <input> yet
