@@ -176,3 +176,7 @@ wilsonB -- 2017-06-04 17:00
 
 jonathanB -- 2017-06--04 20:10
 - Added basic functionality for grade storage and retrieval
+
+wilsonB -- 2017-06-04 20:11
+- Simplified frontend for adding rubric entries (edit inline instead of with modal)
+- Implemented frontend for editing rubric entries, and validate numeric inputs
