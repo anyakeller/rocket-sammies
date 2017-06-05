@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Assignment Grading{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="/static/dashboard.css">
+{% endblock %}
+
+{% block content %}
+<input id="aid" type="hidden" value="{{ assignment['aid'] }}" />
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+{% endblock %}
+

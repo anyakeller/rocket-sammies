@@ -54,9 +54,13 @@ def view_assignment(aid):
     return render_template(DIR+"edit_assignment.html", assignment=assignment, students_by_id=students_by_id)
 
 @app.route("/assignment/<aid>/gradepage")
-def gradepage():
-    print "CAVSCAVSCAVSCAVS"
-    return render_template(DIR+"gradepage.html")
+def gradepage(aid):
+    matches = utils.assignments.get_assignments(aid=aid)
+    if len(matches) == 0:
+        # Assignment does not exist
+        abort(404)
+    assignment = matches[0]
+    return render_template(DIR+"gradepage.html", assignment=assignment)
 
 
 @app.route("/class/")

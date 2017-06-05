@@ -128,6 +128,21 @@
         };
     }());
 
+    var addGradeBtn = function () {
+        var addGradeButton = document.createElement("a");
+        var textForGrade = document.createTextNode("Give Grades");
+        addGradeButton.appendChild(textForGrade);
+        addGradeButton.setAttribute("value","Give Grades");
+        addGradeButton.setAttribute("class","btn btn-primary");
+        addGradeButton.setAttribute("href","/assignment/" + aid + "/gradepage");
+        addGradeButton.setAttribute("style","margin:auto; display:block;");
+        initTable.parentNode.appendChild(addGradeButton);
+    };
+
+    if (rubric.length > 0) {
+        addGradeBtn();
+    }
+
     btnAddCriterion.addEventListener('click', function () {
         var desc = inputNewDescription.value;
         var maxPoints = +inputNewMaxPoints.value;
@@ -146,17 +161,9 @@
         });
 
         // add giving grades html page button when one rubric category has
-        if(rubric.length>0){
+        if(rubric.length === 1){
           //add the button
-          console.log("TESTINGIF THIS IS BEING RENDERED");
-          var addGradeButton = document.createElement("a");
-          var textForGrade = document.createTextNode("Give Grades");
-          addGradeButton.appendChild(textForGrade);
-          addGradeButton.setAttribute("value","Give Grades");
-          addGradeButton.setAttribute("class","btn btn-primary");
-          addGradeButton.setAttribute("href","/assignment/<aid>/gradepage");
-          addGradeButton.setAttribute("style","margin:auto; display:block;");
-          document.body.appendChild(addGradeButton);
+          addGradeBtn();
         }
 
 
