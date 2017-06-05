@@ -47,6 +47,3 @@ def removeStudent(studentEmail):
     }
 
     db.students.delete_one(doomedStudent)
-
-if __name__ == '__main__':
-    addStudents('data/sample.csv')
