@@ -250,6 +250,7 @@
             PM.apiCall("POST", "/api/assignment/" + aid + "/add-group", {
                 "group": student_ids
             }, function () {
+                studentSelector.deselectAll();
                 addGroupElement(students, student_ids);
             });
         });

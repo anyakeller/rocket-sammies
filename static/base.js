@@ -212,6 +212,20 @@ var PM = (function () {
                     return student_info;
                 },
 
+                deselectAll: function () {
+                    var checkboxes = studentList.querySelectorAll("input"), i;
+                    for (i = 0; i < checkboxes.length; i += 1) {
+                        checkboxes[i].checked = false;
+                    }
+                },
+
+                selectAll: function () {
+                    var checkboxes = studentList.querySelectorAll("input"), i;
+                    for (i = 0; i < checkboxes.length; i += 1) {
+                        checkboxes[i].checked = true;
+                    }
+                },
+
                 addStudent: function (studentData) {
                     addStudent(studentList, studentData);
                 },
