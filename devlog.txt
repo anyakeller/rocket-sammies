@@ -184,3 +184,6 @@ jonathanB -- 2017-06--04 20:10
 wilsonB -- 2017-06-04 20:11
 - Simplified frontend for adding rubric entries (edit inline instead of with modal)
 - Implemented frontend for editing rubric entries, and validate numeric inputs
+
+jamesW -- 2017-06-05 14:01
+- Add setup script
