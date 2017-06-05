@@ -1,7 +1,7 @@
 from flask import Blueprint, request
 
 from decorators import WebException, api_wrapper, login_required, teachers_only
-from utils import assignments
+from utils import assignments, students
 
 blueprint = Blueprint("assignment", __name__)
 
@@ -114,7 +114,7 @@ def add_group(aid):
         raise WebException("Assignment does not exist")
     assignment = matches[0]
     groups = assignment["groups"]
-    group = [str(sid) for sid in form.get("group")]
+    group = set([str(sid) for sid in form.get("group")])
 
     if len(group) == 0:
         raise WebException("Group must contain at least one member")
@@ -124,6 +124,19 @@ def add_group(aid):
 
     if group in groups:
         raise WebException("Group already exists")
+
+    # Prevent members who are already in groups from being added to new ones
+    names = []
+    for group2 in groups:
+        intersection = group.intersection(group2)
+        if len(intersection) > 0:
+            names += [students.getStudent(**{"Student ID": student})[0]["Student Name"].split(", ")[1] for student in intersection]
+
+    if len(names) == 1:
+        raise WebException("%s is already in a group!" % names[0])
+    elif len(names) > 1:
+        names = ", ".join(names[:-1]) + ", and " + names[-1]
+        raise WebException("%s are already in groups!" % names)
 
     groups.append(group)
     assignments.update_assignment(aid,  {"groups": groups})
