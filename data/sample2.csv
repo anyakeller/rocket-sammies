@@ -1,0 +1,4 @@
+Student ID,Student Name,Grade,Student Email,Student Phone,Surname,Contact Type,Contact Name,Relationship,Resides In HH,Correspondence,Custodial Parent,Has Alert,Contact Priority,Contact Address,Contact Email,Home Phone,Cell Phone,Work Phone,Portal ID
+111111120,"C.K., Louis",11,lck@stuy.edu,,"C.K.",Guardian,"Doe, Jane",Mother,Yes,Yes,Yes,No,1,1600 Penn Ave,,999-888-7777,,777-888-9999,
+111111121,"Hart, Kevin",11,khart@stuy.edu,,Hart,Guardian,"Doe, Jane",Mother,Yes,Yes,Yes,No,1,1600 Penn Ave,,999-888-7777,,777-888-9999,
+111111122,"Rock, Chris",11,crock@stuy.edu,,Rock,Guardian,"Doe, Jane",Mother,Yes,Yes,Yes,No,1,1600 Penn Ave,,999-888-7777,,777-888-9999,
