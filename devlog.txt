@@ -168,5 +168,11 @@ wilsonB -- 2017-06-04 10:00
 - Improved ergonomics of student selection (use enter key; improve search match function
   to treat punctuation as whitespace and be more strict)
 
+jonathanB -- 2017-06-04 12:00
+- Worked with Dhiraj on frontend to backend connectivity for grades and rubrics
+
 wilsonB -- 2017-06-04 17:00
 - Created UI for making groups for group projects
+
+jonathanB -- 2017-06--04 20:10
+- Added basic functionality for grade storage and retrieval
