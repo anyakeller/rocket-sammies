@@ -44,6 +44,68 @@
         }, onSuccess);
     };
 
+    // Return how many <tr>s are before `tr` in `rubricTBody`
+    // If the `tr` is not in `rubricTBody`, returns null
+    var getRowIndex = function (tr) {
+        var trs = rubricTBody.querySelectorAll("tr"), i;
+        for (i = 0; i < trs.length; i++) {
+            if (trs[i] === tr) {
+                return i;
+            }
+        }
+        return null;
+    };
+
+    var editBtnHandler = function () {
+        // This handles two events: editing and updating
+        // After hitting "Edit", this button changes to "Update"
+        // After hitting "Update", it changes back to "Edit"
+        var self = this;
+        var target_tr = document.getElementById(this.getAttribute("for"));
+        var tds = target_tr.querySelectorAll("td");
+        var categoryTd = tds[0], maxScoreTd = tds[1];
+        if (this.innerHTML === "Edit") {
+            let category = categoryTd.innerHTML.trim();
+            let maxScore = maxScoreTd.innerHTML.trim();
+
+            let categoryInput = document.createElement("INPUT");
+            categoryInput.setAttribute("type", "text");
+            categoryInput.value = category;
+            categoryTd.innerHTML = "";
+            categoryTd.appendChild(categoryInput);
+
+            let maxScoreInput = document.createElement("INPUT");
+            // Use type=text so we can set size=3
+            maxScoreInput.setAttribute("type", "text");
+            maxScoreInput.setAttribute("size", "3");
+            maxScoreInput.value = maxScore;
+            maxScoreTd.innerHTML = "";
+            maxScoreTd.appendChild(maxScoreInput);
+
+            this.innerHTML = "Update";
+        } else {
+            let index = getRowIndex(target_tr);
+            let categoryInput = categoryTd.querySelector("input");
+            let maxScoreInput = maxScoreTd.querySelector("input");
+            let category = categoryInput.value.trim();
+            let maxScore = maxScoreInput.value.trim();
+            if (!Number.isFinite(+maxScore) || +maxScore < 0 || +maxScore % 1 !== 0) {
+                $.notify("Max points must be a whole number");
+                return;
+            }
+            let newRow = {
+                "category": category,
+                "max_score": +maxScore
+            };
+            rubric[index] = newRow;
+            updateAssignmentRubric(function () {
+                categoryTd.innerHTML = category;
+                maxScoreTd.innerHTML = maxScore;
+                self.innerHTML = "Edit";
+            });
+        }
+    };
+
     var addRowToTable = (function () {
         var counter = 0;
         return function (category, max_score) {
@@ -62,12 +124,7 @@
             tr.appendChild(lastTd);
             rubricTBody.appendChild(tr);
 
-            editBtn.addEventListener("click", function () {
-                var target_tr = document.getElementById(this.getAttribute("for"));
-                var tds = target_tr.querySelectorAll("td");
-                var categoryTd = tds[0], maxScoreTd = tds[1];
-                // TODO: implement editing of row
-            });
+            editBtn.addEventListener("click", editBtnHandler);
         };
     }());
 
