@@ -210,10 +210,6 @@ jamesW -- 2017-06-04 18:39
 jonathanB -- 2017-06--04 20:10
 - Added basic functionality for grade storage and retrieval
 
-wilsonB -- 2017-06-04 20:11
-- Simplified frontend for adding rubric entries (edit inline instead of with modal)
-- Implemented frontend for editing rubric entries, and validate numeric inputs
-
 dhirajP -- 2017-06-04 15:00
 - added rubric javascript and rubric html to the new edit_assignment.html page
 - changed template and template css for edit_assignment.html
@@ -222,5 +218,16 @@ dhirajP -- 2017-06-04 15:00
 - cleaned up app.py
 - created route and button for giving grades to each student for an assignment.
 
+wilsonB -- 2017-06-04 20:11
+- Simplified frontend for adding rubric entries (edit inline instead of with modal)
+- Implemented frontend for editing rubric entries, and validate numeric inputs
+
 jamesW -- 2017-06-05 14:01
 - Add setup script
+
+wilsonB -- 2017-06-05 20:00
+- Fixed "Give Grades" button on assignment page and being the gradepage.html template
+- Implement radio button-based student selection on gradepage
+- Make UI for editing grades of each student (in tab-like viewing); without
+  making API calls yet
+
