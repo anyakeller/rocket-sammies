@@ -62,7 +62,7 @@ def gradepage(aid):
     assignment = matches[0]
     students = utils.classes.get_students(assignment["cid"])
     for student in students:
-        gr = utils.grades.get_grade(sid=student["Student ID"])
+        gr = utils.grades.get_grade(sid=student["Student ID"], aid=aid)
         if len(gr) > 0:
             student["grades"] = gr[0]["grades"]
         else:
