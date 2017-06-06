@@ -60,7 +60,8 @@ def gradepage(aid):
         # Assignment does not exist
         abort(404)
     assignment = matches[0]
-    return render_template(DIR+"gradepage.html", assignment=assignment)
+    students = utils.classes.get_students(assignment["cid"])
+    return render_template(DIR+"gradepage.html", assignment=assignment, students=students)
 
 
 @app.route("/class/")
