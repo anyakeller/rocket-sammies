@@ -107,8 +107,8 @@ def singleClassGradeBook(cid):
         grades[a["aid"]] = {}
         for grade in assig_grades:
             grades[a["aid"]][grade["sid"]] = grade
-
-    return render_template(DIR+"gradebook.html", klass=klass, students=students, assignments=assignments, grades=str(grades))
+    print grades
+    return render_template(DIR+"gradebook.html", klass=klass, students=students, assignments=assignments, grades=grades)
 
 @app.route("/class/<cid>/export/")
 def export_class(cid):
