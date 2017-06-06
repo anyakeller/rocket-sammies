@@ -14,7 +14,9 @@
             {% for student in students %}
             <tr>
                 <th>{{ student["Student Name"] }}</th>
-                <td>{{ grades[student['Student Name']]}}
+                {% for grade in grades[student["Student Name"]] %}
+                <td>{{ grade }}</td>
+                {% endfor %}
             </tr>
             {% endfor %}
         </table>

@@ -108,12 +108,15 @@ def singleClassGradeBook(cid):
         for grade in assig_grades:
             grades[a["aid"]][grade["sid"]] = grade
     newGrades = {}
-    for assignment in assignments:
-        for student in students:
-            try:
-                newGrades[student['Student Name']] = grades[assignment['aid']][student['Student ID']]['grades']
-            except:
-                pass
+    for student in students:
+        newGrades[student["Student Name"]] = []
+        for assignment in assignments:
+            assignment_grades = grades[assignment["aid"]]
+            if student["Student ID"] in assignment_grades:
+                g = assignment_grades[student["Student ID"]]["grades"]
+            else:
+                g = []
+            newGrades[student["Student Name"]].append(g)
     return render_template(DIR+"gradebook.html", klass=klass, students=students, assignments=assignments, grades=newGrades)
 
 @app.route("/class/<cid>/export/")
