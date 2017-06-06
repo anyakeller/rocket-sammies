@@ -31,10 +31,10 @@
                     <th>Max Score</th>
                 </thead>
                 <tbody>
-                    {% for row in assignment["rubric"] %}
+                    {% for (index, row) in enumerated_rubric %}
                     <tr>
                         <td>{{ row["category"] }}</td>
-                        <td><input type="text" size="3" /></td>
+                        <td><input type="text" size="3" value="{{ student['grades'][index] }}" /></td>
                         <td>{{ row["max_score"] }}</td>
                     </tr>
                     {% endfor %}

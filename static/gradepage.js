@@ -38,10 +38,7 @@
                 $.notify("Grades must be whole numbers");
                 return;
             }
-            grade.push({
-                "category": rubric[i].category,
-                "score": inputs[i].value
-            });
+            grade.push(+inputs[i].value);
         }
         PM.apiCall("POST", "/api/grade/update", {
             "sid": sid,

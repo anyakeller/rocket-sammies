@@ -61,7 +61,13 @@ def gradepage(aid):
         abort(404)
     assignment = matches[0]
     students = utils.classes.get_students(assignment["cid"])
-    return render_template(DIR+"gradepage.html", assignment=assignment, students=students)
+    for student in students:
+        gr = utils.grades.get_grade(sid=student["Student ID"])
+        if len(gr) > 0:
+            student["grades"] = gr[0]["grades"]
+        else:
+            student["grades"] = [""] * len(assignment["rubric"])
+    return render_template(DIR+"gradepage.html", assignment=assignment, enumerated_rubric=list(enumerate(assignment["rubric"])), students=students)
 
 
 @app.route("/class/")
