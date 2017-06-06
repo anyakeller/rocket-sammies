@@ -30,7 +30,9 @@
     var handleUpdateGrade = function (e) {
         // Copy the rubric into the grade:
         var grade = [], i;
-        var inputs = this.querySelectorAll("input");
+        var sid = this.getAttribute("data-sid");
+        var gradeEditSection = document.getElementById("grade-edit-" + sid);
+        var inputs = gradeEditSection.querySelectorAll("input");
         for (i = 0; i < rubric.length; i++) {
             if (!Number.isFinite(+inputs[i].value) || +inputs[i].value < 0) {
                 $.notify("Grades must be whole numbers");
@@ -41,12 +43,11 @@
                 "score": inputs[i].value
             });
         }
-        // TODO: update to new API call
-        // PM.apiCall("POST", "/api/grades/create/", {
-        //     "sid": sid,
-        //     "aid": aid,
-        //     "grades": grade
-        // });
+        PM.apiCall("POST", "/api/grade/update", {
+            "sid": sid,
+            "aid": aid,
+            "grades": grade
+        });
     };
     for (i = 0; i < updateGradeBtns.length; i++) {
         updateGradeBtns[i].addEventListener("click", handleUpdateGrade);
