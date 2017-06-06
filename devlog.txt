@@ -130,6 +130,10 @@ jonathanB -- 2017-05-24 14:06
 - Started work on further group functionality
 - Rewriting assignment storage in dictionary form
 
+dhirajP -- 2017-05-24 14:00
+- cleaned up some files
+- added new favicon
+
 wilsonB -- 2017-05-28 07:37
 - Moved code for the student-selection dialog from class.js to library function in base.js,
   for reusability.
@@ -143,6 +147,19 @@ jamesW -- 2017-05-30 17:48
 - Changed ajax requests to properly send json to the api
 - Changed assignment types to strings instead of numbers
 
+dhirajP -- 2017-05-30 18:00
+- vamped up the dashboard collapsable panels
+- added css to class.html page and dashboard.html
+- fixed dashboard panels, so that multiple assignment are now able to display in each collapsable panel
+
+dhirajP -- 2017-05-31 15:00
+- added more css features to base.css
+- fixed templates so that the new font family showed up
+- added route for the buttons in the dashboard modals
+- quick template edits for oneclass.html
+- added rubric creation page, and the corresponding rubric javascript page
+- completed rubric.js, added event listener to rubric submit button
+
 anyaK -- 2017-06-1 11:40
 - Added download student CSV functionality
 
@@ -153,12 +170,24 @@ wilsonB -- 2017-06-01 14:00
 jamesW -- 2017-06-01 13:45
 - Added a button for downloading csv of class
 
+dhirajP -- 2017-06-01 14:00
+- changed table css in oneclass.html
+- added more to rubric.js, and finished rubric creation
+
 wilsonB -- 2017-06-02 13:55
 - Implemented delete-class button on /class/ page
+
+dhirajP -- 2017-06-02 14:00
+- cleaned up some template files
+- added css and edit class button to oneclass.html
+- started a route for editing a single class.
 
 jamesW -- 2017-06-03 13:43
 - Implment assignment activation
 - Added basic page for editing assignments
+
+dhirajP -- 2017-06-03 13:50
+- added bootstrap grid and css to edit_assignment.html
 
 wilsonB -- 2017-06-04 10:00
 - Fixed styling issues on /class/ page
@@ -184,6 +213,14 @@ jonathanB -- 2017-06--04 20:10
 wilsonB -- 2017-06-04 20:11
 - Simplified frontend for adding rubric entries (edit inline instead of with modal)
 - Implemented frontend for editing rubric entries, and validate numeric inputs
+
+dhirajP -- 2017-06-04 15:00
+- added rubric javascript and rubric html to the new edit_assignment.html page
+- changed template and template css for edit_assignment.html
+- added a route for the gradebook, and a new button that routes to the gradebook, in each class panel in the dashboard.
+- added jinja for the gradebook table row headers, and column header (student names and assignment names now show up, need to get their grades)
+- cleaned up app.py
+- created route and button for giving grades to each student for an assignment.
 
 jamesW -- 2017-06-05 14:01
 - Add setup script
