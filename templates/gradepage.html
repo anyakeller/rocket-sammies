@@ -16,12 +16,33 @@
 </div>
 </center>
 
-<div class="row">
+<div class="row" style="margin-top: 10px; padding-left: 10%; padding-right: 10%;">
     <div class="col-md-4">
         <div id="student-selector"></div>
     </div>
     <div class="col-md-8">
-        <!-- ... tabs of student grading ... -->
+        {% for student in students %}
+        <div style="display: none;" id="grade-edit-{{ student['Student ID'] }}" data-id="{{ student['Student ID'] }}" data-name="{{ student['Student Name'] }}">
+            <h3>Grading {{ student['Student Name'] }}</h3>
+            <table style="margin-left: 0; width: 100%;">
+                <thead>
+                    <th>Category</th>
+                    <th>Score</th>
+                    <th>Max Score</th>
+                </thead>
+                <tbody>
+                    {% for row in assignment["rubric"] %}
+                    <tr>
+                        <td>{{ row["category"] }}</td>
+                        <td><input type="text" size="3" /></td>
+                        <td>{{ row["max_score"] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <div><button class="btn btn-primary update-grade-btn" data-sid="{{ student['Student ID'] }}">Set grades</button></div>
+        </div>
+        {% endfor %}
     </div>
 </div>
 
