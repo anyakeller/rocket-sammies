@@ -2,20 +2,8 @@
 {% block title %} {{ klass["name"] }}: Gradebook{% endblock %}
 {% block content %}
 <!--
-    The `grades` variable is a list of dicts, where each dict is:
-    {
-        "aid": assignment ID,
-        "sid": student ID,
-        "grades": a list of numbers; each number is the grade in the
-            corresponding category of the rubric (the 1st number in this
-            list is the score for the 1st category of the rubric, the 2nd
-            number is the score for the 2nd category in the rubric, etc.)
-        "assignment": the assignment that this is a grade of. Note that
-            the assignment has a property "rubric" which is the rubric for
-            the assignment.
-    }
-    There is also the `klass`, `students`, and `assignments` variables (the latter
-    two containing students/assignments only in this class)
+    The `grades` variable is a dict of dicts, where grades[aid][sid] is
+    the grade dict for assignment aid and student sid (given some aid and sid).
 -->
 {{ grades }}
 <div class="outer">

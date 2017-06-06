@@ -101,15 +101,15 @@ def singleClassGradeBook(cid):
     klass = utils.classes.get_class(cid=cid)[0]
     students = [utils.students.getStudent(**{"Student ID": str(id)})[0] for id in klass["students"]]
     assignments = utils.assignments.get_assignments(cid=cid)
-    grades = []
+    grades = {}
     for a in assignments:
-        new_grades = utils.grades.get_grade(aid=a["aid"])
-        # add a property to each grade with the corresponding rubric, for convenience
-        for ng in new_grades:
-            ng["assignment"] = a
-        grades += new_grades
+        assig_grades = utils.grades.get_grade(aid=a["aid"])
+        grades[a["aid"]] = {}
+        for student in students:
+            for grade in assig_grades:
+                grades[a["aid"]][grade["sid"]] = grade
 
-    return render_template(DIR+"gradebook.html", klass=klass, students=students, assignments=assignments, grades=grades)
+    return render_template(DIR+"gradebook.html", klass=klass, students=students, assignments=assignments, grades=str(grades))
 
 @app.route("/class/<cid>/export/")
 def export_class(cid):
