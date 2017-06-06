@@ -1,22 +1,6 @@
 {% extends "base.html" %}
 {% block title %} {{ klass["name"] }}: Gradebook{% endblock %}
 {% block content %}
-<!--
-    The `grades` variable is a dict of dicts, where grades[aid][sid] is
-    the grade dict for assignment aid and student sid (given some aid and sid).
--->
-
-{{ grades }}
-<br><br><br>
-
-{%for assignment in assignments%}
-{%for student in students%}
-  {{ grades[assignment['aid']][student['Student ID']] }}
-{% endfor %}
-{% endfor %}
-
-
-
 
 <div class="outer">
     <div class="inner">
@@ -30,12 +14,7 @@
             {% for student in students %}
             <tr>
                 <th>{{ student["Student Name"] }}</th>
-                <td>22</td>
-                <td>100</td>
-                <td>100</td>
-                <td>100</td>
-                <td>100</td>
-                <td>100</td>
+                <td>{{ grades[student['Student Name']]}}
             </tr>
             {% endfor %}
         </table>

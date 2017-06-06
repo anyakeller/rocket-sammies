@@ -231,3 +231,6 @@ wilsonB -- 2017-06-05 20:00
 - Make UI for editing grades of each student (in tab-like viewing); without
   making API calls yet
 
+jonathanB -- 2017-06-06 4:29
+- Got grades to show up in gradebook
+- Rewrote part of gradebook code in __init__.py
