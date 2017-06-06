@@ -41,14 +41,6 @@ def create_assignment():
 
     return { "success": 1, "message": "Assignment created" }
 
-@blueprint.route("/submit", methods=["POST"])
-@api_wrapper
-@login_required
-def submit_assignment():
-    """Route for submitting an assignment"""
-    # TODO: Implement
-    return { "success": 1, "message": "Assignment submitted" }
-
 @blueprint.route("/<aid>", methods=["GET"])
 @api_wrapper
 @login_required
