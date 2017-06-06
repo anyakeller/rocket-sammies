@@ -71,12 +71,16 @@ var PM = (function () {
 
     var studentSelector = (function () {
         // Util functions:
-        var addStudent = function (studentList, student) {
+        var addStudent = function (studentList, student, formName, useRadio) {
             var checkbox = document.createElement("INPUT");
-            checkbox.setAttribute("type", "checkbox");
+            var type = useRadio ? "radio" : "checkbox";
+            checkbox.setAttribute("type", type);
             checkbox.setAttribute("data-id", student["Student ID"]);
             checkbox.setAttribute("data-name", student["Student Name"]);
             checkbox.setAttribute("data-visible", "true");
+            if (formName) {
+                checkbox.setAttribute("name", formName);
+            }
             var label = document.createElement("LABEL");
             label.setAttribute("style", "display: block;");
             label.appendChild(checkbox);
@@ -87,23 +91,33 @@ var PM = (function () {
             studentList.appendChild(li);
         };
 
+        // Used to uniquely identify each of possibly-multiple studentSelectors
+        // on the same page
+        var counter = 0;
+
         // The studentSelector function:
         // `container` is a <div> which studentSelector will populate with a list of
         // checkboxes and students, and a select-all/deselect-all button.
         // studentSelector returns an object with functions for addings students
         // to the list and getting which students are selected
         return function (container, options) {
+            counter += 1;
+            var formName = "student-selector-" + counter;
+            options = options || {}; // default `options` to {}
             var studentNameInput = document.createElement("INPUT");
             studentNameInput.setAttribute("class", "form-control");
             studentNameInput.setAttribute("placeholder", "John Smith, Jane Doe, ...");
+            studentNameInput.setAttribute("name", formName);
 
             var studentList = document.createElement("UL");
             studentList.setAttribute("class", "student-selection-list");
 
+            var useRadio = !!options.useRadio;
+
             var toggleSelectAll;
             // the `options` parameter may have a property `noSelectAll`, which says
             // to exclude the toggleSelectAll button
-            if (typeof options === "object" && options !== null && options.noSelectAll) {
+            if (options.noSelectAll || useRadio) {
                 toggleSelectAll = false;
             } else {
                 toggleSelectAll = document.createElement("BUTTON");
@@ -131,7 +145,7 @@ var PM = (function () {
             }
 
             // If the user clicks anywhere in the list (on a student), refresh the
-            // "Select all" / "Deselent all" button label
+            // "Select all" / "Deselect all" button label
             studentList.addEventListener("click", function () {
                 var checkboxes = studentList.querySelectorAll("input");
                 var some_deselected = false;
@@ -148,6 +162,18 @@ var PM = (function () {
                         : "Deselect all");
                 }
                 studentNameInput.focus();
+                if (useRadio && typeof options.onRadioClicked === "function") {
+                    let selected;
+                    for (i = 0; i < checkboxes.length; i += 1) {
+                        if (checkboxes[i].checked) {
+                            selected = checkboxes[i];
+                            break;
+                        }
+                    }
+                    if (selected) {
+                        options.onRadioClicked(selected.getAttribute("data-id"), selected.getAttribute("data-name"));
+                    }
+                }
             });
 
             // Must be keyup, because at keydown the newly typed character hasn't been added to the <input> yet
@@ -228,7 +254,7 @@ var PM = (function () {
                 },
 
                 addStudent: function (studentData) {
-                    addStudent(studentList, studentData);
+                    addStudent(studentList, studentData, formName, useRadio);
                 },
 
                 loadFromServer: function () {

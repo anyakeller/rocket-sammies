@@ -8,16 +8,26 @@
 
 {% block content %}
 <input id="aid" type="hidden" value="{{ assignment['aid'] }}" />
+<input id="cid" type="hidden" value="{{ assignment['cid'] }}" />
 <center>
 <h1>Grade: {{ assignment['title'] }}</h1>
-
-
-
-
+<div>
+    Select a student on the grade on the left, and submit his/her grades on the right.
+</div>
 </center>
+
+<div class="row">
+    <div class="col-md-4">
+        <div id="student-selector"></div>
+    </div>
+    <div class="col-md-8">
+        <!-- ... tabs of student grading ... -->
+    </div>
+</div>
 
 {% endblock %}
 
 {% block scripts %}
 {{ super() }}
+<script src="/static/gradepage.js"></script>
 {% endblock %}
