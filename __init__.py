@@ -105,9 +105,8 @@ def singleClassGradeBook(cid):
     for a in assignments:
         assig_grades = utils.grades.get_grade(aid=a["aid"])
         grades[a["aid"]] = {}
-        for student in students:
-            for grade in assig_grades:
-                grades[a["aid"]][grade["sid"]] = grade
+        for grade in assig_grades:
+            grades[a["aid"]][grade["sid"]] = grade
 
     return render_template(DIR+"gradebook.html", klass=klass, students=students, assignments=assignments, grades=str(grades))
 
