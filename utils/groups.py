@@ -1,46 +1,53 @@
 import common
 
-db = common.get_connection()
 
-# Takes in assignment ID and list of student's emails and adds them to the assignment
-def addGroup(aid, studentList):
-    assignment = db.assignments.find({'aid': aid})
-    groups = assignment['groups']
+def create_group(aid, students):
+    """
+    Creates a group and inserts it into the database
+    Returns the id of the new group
+    """
+    db = common.get_connection()
     gid = common.random_string()
-    groups[gid] = studentList
-    db.assignments.update_one({'aid': aid}, {'groups': groups})
+    group = {
+        "gid": gid,
+        "aid": aid,
+        "students": students,
+    }
+    db.groups.insert(group)
+
     return gid
 
-# Takes in assignment ID and list of groups and adds them to the assignment
-def addGroups(aid, groupList):
-    assignment = db.assignments.find({'aid': aid})
-    groups = assignment['groups']
-    for group in groupList:
-        gid = common.random_string()
-        groups[gid] = group
-    return db.assignments.update_many({'aid': aid}, {'groups': groups})
+def remove_group(gid):
+    """
+    Delete a group from its group id
+    Returns the number of deleted documents
+    """
+    db = common.get_connection()
+    match = {
+        "gid": gid
+    }
+    result = db.groups.delete_one(match)
+    return result.deleted_count
 
-# Takes in assignment ID and group ID and remvoes group from the assignment
-def removeGroup(aid, gid):
-    assignment = db.assignments.find({'aid': aid})
-    groups = assignment['groups']
-    groups.pop(gid)
-    return db.assignments.update_one({'aid': aid}, {'groups': groups})
+def get_group(**match):
+    """Retrieve all groups that match the keyword arguments"""
+    db = common.get_connection()
+    groups = db.groups.find(match)
+    return list(groups)
 
-# Takes in assignment ID, group ID, and a new student email and adds it to group
-def addMember(aid, gid, studentEmail):
-    assignment = db.assignments.find({'aid': aid})
-    groups = assignment['groups']
-    group = groups[gid]
-    group.append(studentEmail)
-    groups[gid] = group
-    return db.assignments.update_one({'aid': aid}, {'groups': groups})
+def in_group(student):
+    """Check if a student is already in a group"""
+    db = common.get_connection()
+    result = db.groups.find({"students": {"$in": [student]}})
+    return result.count() > 0
 
-# Takes in assignment ID, group ID, and a student email and removes it from group
-def removeMember(aid, gid, studentEmail):
-    assignment = db.assignments.find({'aid': aid})
-    groups = assignment['groups']
-    group = groups[gid]
-    group.remove(studentEmail)
-    groups[gid] = group
-    return db.assignments.update_one({'aid': aid}, {'groups': groups})
+def add_member(gid, student):
+    """Add a member from a group"""
+    db = common.get_connection()
+    result = db.groups.update({"gid": gid}, {"$push": {"students": student}})
+    return result.u
+
+def remove_member(gid, student):
+    """Remove a member from a group"""
+    db = common.get_connection()
+    db.groups.update({"gid": gid}, {"$pull": {"students": student}})

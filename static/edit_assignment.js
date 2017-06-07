@@ -209,7 +209,8 @@
         }
         PM.apiCall("POST", "/api/assignment/" + aid + "/group-rm-member", {
             group: student_ids,
-            sid: student_li.getAttribute("data-id")
+            sid: student_li.getAttribute("data-id"),
+            gid: student_li.getAttribute("data-gid")
         }, function () {
             student_li.remove();
         });

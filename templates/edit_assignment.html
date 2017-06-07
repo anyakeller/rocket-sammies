@@ -78,12 +78,12 @@
         <div class="col-md-9">
             <div id="student-groups">
                 {% for group in assignment.groups %}
-                {% if group | length > 0 %}
+                {% if group["students"] | length > 0 %}
                 <div class="group-student-list">
                     <h4>Group</h4>
                     <ul>
-                        {% for student_id in group: %}
-                        <li class="group-student-item" data-id="{{ student_id }}">
+                        {% for student_id in group["students"]: %}
+                        <li class="group-student-item" data-id="{{ student_id }}" data-gid="{{ group["gid"] }}">
                             <button class="group-remove-student"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
                             {{ students_by_id[student_id]['Student Name'] }}</li>
                         {% endfor %}

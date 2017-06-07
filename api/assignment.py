@@ -1,7 +1,7 @@
 from flask import Blueprint, request
 
 from decorators import WebException, api_wrapper, login_required, teachers_only
-from utils import assignments, students
+from utils import assignments, groups, students
 
 blueprint = Blueprint("assignment", __name__)
 
@@ -49,24 +49,15 @@ def get_assignment_data(aid):
     matches = assignments.get_assignments(aid=aid)
     if len(matches) < 1:
         raise WebException("Assignment does not exist")
-    return { "success": 1, "data": matches[0] }
+    assignment = matches[0]
+    assignment["groups"] = [groups.get_group(gid=gid)[0] for gid in assignment["groups"]]
+    return { "success": 1, "data": assignment }
 
 @blueprint.route("/<aid>/update", methods=["POST"])
 @api_wrapper
 @teachers_only
 @login_required
 def update_assignment(aid):
-    form = request.get_json()
-    num_matched = assignments.update_assignment(aid, form)
-    if num_matched == 0:
-        raise WebException("Assignment does not exist")
-    return { "success": 1, "message": "Assignment updated" }
-
-@blueprint.route("/<aid>/newgroup", methods=["POST"])
-@api_wrapper
-@teachers_only
-@login_required
-def add_group_to_assignment(aid):
     form = request.get_json()
     num_matched = assignments.update_assignment(aid, form)
     if num_matched == 0:
@@ -105,37 +96,28 @@ def add_group(aid):
     if len(matches) != 1:
         raise WebException("Assignment does not exist")
     assignment = matches[0]
-    groups = assignment["groups"]
-    group = [str(sid) for sid in form.get("group")]
-
-    if len(group) == 0:
-        raise WebException("Group must contain at least one member")
-
-    if len(group) > assignment["max_group_size"]:
-        raise WebException("Maximum grop size exceeded")
-
-    if group in groups:
-        raise WebException("Group already exists")
-
-    # Prevent members who are already in groups from being added to new ones
+    assign_groups = assignment["groups"]
+    new_group = [str(sid) for sid in form.get("group")]
     overlap_ids = []
-    for group2 in groups:
-        for sid in group:
-            if sid in group2:
-                overlap_ids.append(sid)
-    overlap_names = [students.getStudent(**{"Student ID": student})[0]["Student Name"].split(", ")[1] for student in overlap_ids]
+    for student in new_group:
+        if groups.in_group(student):
+            overlap_ids.append(student)
 
-    if len(overlap_names) == 1:
-        raise WebException("%s is already in a group!" % overlap_names[0])
-    elif len(overlap_names) == 2:
-        raise WebException("%s and %s are already in groups!" % (overlap_names[0], overlap_names[1]))
-    elif len(overlap_names) > 1:
-        strnames = ", ".join(overlap_names[:-1]) + ", and " + overlap_names[-1]
-        raise WebException("%s are already in groups!" % strnames)
+    if len(overlap_ids) > 0:
+        overlap_names = [students.getStudent(**{"Student ID": student})[0]["Student Name"].split(", ")[1] for student in overlap_ids]
+        if len(overlap_names) == 1:
+                raise WebException("%s is already in a group!" % overlap_names[0])
+        elif len(overlap_names) == 2:
+            raise WebException("%s and %s are already in groups!" % (overlap_names[0], overlap_names[1]))
+        elif len(overlap_names) > 1:
+            strnames = ", ".join(overlap_names[:-1]) + ", and " + overlap_names[-1]
+            raise WebException("%s are already in groups!" % strnames)
 
-    groups.append(group)
-    assignments.update_assignment(aid,  {"groups": groups})
-    return { "success": 1, "message": "Group added", "groups": groups }
+    gid = groups.create_group(aid, new_group)
+    assign_groups.append(gid)
+
+    assignments.update_assignment(aid,  {"groups": assign_groups})
+    return { "success": 1, "message": "Group added", "groups": assign_groups }
 
 @blueprint.route("/<aid>/group-rm-member", methods=["POST"])
 @api_wrapper
@@ -143,21 +125,9 @@ def add_group(aid):
 @login_required
 def group_remove_member(aid):
     form = request.get_json()
-    matches = assignments.get_assignments(aid=aid)
-    if len(matches) != 1:
-        raise WebException("Assignment does not exist")
-    assignment = matches[0]
-    groups = assignment["groups"]
-    selected_group = [str(sid) for sid in form.get("group")]
-    i = 0
-    while i < len(groups):
-        if selected_group == groups[i]:
-            try:
-                groups[i].remove(form.get("sid"))
-            except:
-                raise WebException("No such student in that group")
-        i += 1
-    # Remove empty groups
-    groups = filter(lambda g: len(g) > 0, groups)
-    assignments.update_assignment(aid,  {"groups": groups})
-    return { "success": 1, "message": "Group added", "groups": groups }
+    # matches = assignments.get_assignments(aid=aid)
+    # if len(matches) != 1:
+    #     raise WebException("Assignment does not exist")
+    # assignment = matches[0]
+    groups.remove_member(form["gid"], form["sid"])
+    return { "success": 1, "message": "Group member removed" }
