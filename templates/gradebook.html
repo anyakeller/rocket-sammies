@@ -5,6 +5,8 @@
 <div class="outer">
     <div class="inner">
         <table width="90%">
+
+
             <tr>
                 <th style="border: 2px solid #5A0001;" class=fix>Student</th>
                 {% for assignment in assignments %}
@@ -15,7 +17,11 @@
             <tr>
                 <th>{{ student["Student Name"] }}</th>
                 {% for grade in grades[student["Student Name"]] %}
-                <td>{{ grade }}</td>
+                <td>
+                  {% for val in grade %}
+                  {% endfor %}
+                  {{grade|sum}}
+                </td>
                 {% endfor %}
             </tr>
             {% endfor %}
