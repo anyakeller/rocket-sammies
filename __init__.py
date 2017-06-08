@@ -51,7 +51,7 @@ def view_assignment(aid):
     students_by_id = {}
     for s in students:
         students_by_id[s["Student ID"]] = s
-    assignment["groups"] = [utils.groups.get_group(gid=gid)[0] for gid in assignment["groups"]]
+    assignment["groups"] = [utils.groups.get_group(gid=gid)[0] for gid in assignment.get("groups", [])]
     return render_template(DIR+"edit_assignment.html", assignment=assignment, students_by_id=students_by_id)
 
 @app.route("/assignment/<aid>/gradepage")

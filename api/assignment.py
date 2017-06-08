@@ -50,7 +50,7 @@ def get_assignment_data(aid):
     if len(matches) < 1:
         raise WebException("Assignment does not exist")
     assignment = matches[0]
-    assignment["groups"] = [groups.get_group(gid=gid)[0] for gid in assignment["groups"]]
+    assignment["groups"] = [groups.get_group(gid=gid)[0] for gid in assignment.get("groups", [])]
     return { "success": 1, "data": assignment }
 
 @blueprint.route("/<aid>/update", methods=["POST"])
