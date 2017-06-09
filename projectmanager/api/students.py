@@ -1,7 +1,7 @@
 from flask import Blueprint, request
 
-from utils import students
-from decorators import api_wrapper, login_required, teachers_only
+from projectmanager.utils import students
+from projectmanager.decorators import api_wrapper, login_required, teachers_only
 
 blueprint = Blueprint("students", __name__)
 

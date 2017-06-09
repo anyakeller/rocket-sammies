@@ -35,10 +35,10 @@ def get_group(**match):
     groups = db.groups.find(match)
     return list(groups)
 
-def in_group(student):
+def in_group(aid, student):
     """Check if a student is already in a group"""
     db = common.get_connection()
-    result = db.groups.find({"students": {"$in": [student]}})
+    result = db.groups.find({"students": {"$in": [student]}, "aid": aid})
     return result.count() > 0
 
 def add_member(gid, student):

@@ -1,7 +1,7 @@
 from flask import Blueprint, request
 
-from decorators import WebException, api_wrapper, login_required, teachers_only
-from utils import assignments, groups, students
+from projectmanager.decorators import WebException, api_wrapper, login_required, teachers_only
+from projectmanager.utils import assignments, groups, students
 
 blueprint = Blueprint("assignment", __name__)
 
@@ -100,7 +100,7 @@ def add_group(aid):
     new_group = [str(sid) for sid in form.get("group")]
     overlap_ids = []
     for student in new_group:
-        if groups.in_group(student):
+        if groups.in_group(aid, student):
             overlap_ids.append(student)
 
     if len(overlap_ids) > 0:

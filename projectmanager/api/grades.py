@@ -1,7 +1,7 @@
 from flask import Blueprint, request
 
-from decorators import WebException, api_wrapper, login_required, teachers_only
-from utils import grades
+from projectmanager.decorators import WebException, api_wrapper, login_required, teachers_only
+from projectmanager.utils import grades
 
 blueprint = Blueprint("grades", __name__)
 

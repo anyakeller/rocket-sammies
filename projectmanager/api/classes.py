@@ -1,8 +1,7 @@
 from flask import Blueprint, request, session
 
-import utils
-from utils import assignments, classes
-from decorators import WebException, api_wrapper, login_required, teachers_only
+from projectmanager.utils import assignments, classes
+from projectmanager.decorators import WebException, api_wrapper, login_required, teachers_only
 
 blueprint = Blueprint("class", __name__)
 
@@ -27,7 +26,7 @@ def get_students(cid):
     """Route for retrieving a list of all students in a class by its class id (cid)"""
     # Each "student" returned is directly from the db collection, i.e. it is
     # a dictionary with the "Student ID", "Student Name", ... properties.
-    students = utils.classes.get_students(cid)
+    students = classes.get_students(cid)
     return { "success": 1, "data": students }
 
 @blueprint.route("/delete", methods=["POST"])

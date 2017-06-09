@@ -1,6 +1,6 @@
 import common
 
-import utils
+from projectmanager.utils import students
 
 def create_class(name, tid, students=[]):
     """
@@ -50,8 +50,8 @@ def get_students(cid):
         student_ids = []
     else:
         student_ids = _classes[0]["students"]
-    students = []
+    all_students = []
     for sid in student_ids:
-        matches = utils.students.getStudent(**{"Student ID": str(sid)})
-        students += matches
-    return students
+        matches = students.getStudent(**{"Student ID": str(sid)})
+        all_students += matches
+    return all_students

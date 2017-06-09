@@ -1,7 +1,7 @@
 from flask import Blueprint, request, session
 
-from decorators import api_wrapper, teachers_only, login_required, WebException
-from utils import classes, users
+from projectmanager.decorators import api_wrapper, teachers_only, login_required, WebException
+from projectmanager.utils import classes, users
 
 import hashlib
 

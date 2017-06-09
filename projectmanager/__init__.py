@@ -46,7 +46,7 @@ def dashboard():
         klass["students"] = students
         klass["assignments"] = utils.assignments.get_assignments(**{"cid": klass["cid"]})
         data.append(klass)
-    return render_template(DIR+"dashboard.html", classes=data)
+    return render_template("dashboard.html", classes=data)
 
 @app.route("/assignment/<aid>/")
 @redirect_if_not_logged_in
@@ -62,7 +62,7 @@ def view_assignment(aid):
     for s in students:
         students_by_id[s["Student ID"]] = s
     assignment["groups"] = [utils.groups.get_group(gid=gid)[0] for gid in assignment.get("groups", [])]
-    return render_template(DIR+"edit_assignment.html", assignment=assignment, students_by_id=students_by_id)
+    return render_template("edit_assignment.html", assignment=assignment, students_by_id=students_by_id)
 
 @app.route("/assignment/<aid>/gradepage")
 def gradepage(aid):
@@ -78,7 +78,7 @@ def gradepage(aid):
             student["grades"] = gr[0]["grades"]
         else:
             student["grades"] = [""] * len(assignment["rubric"])
-    return render_template(DIR+"gradepage.html", assignment=assignment, enumerated_rubric=list(enumerate(assignment["rubric"])), students=students)
+    return render_template("gradepage.html", assignment=assignment, enumerated_rubric=list(enumerate(assignment["rubric"])), students=students)
 
 
 @app.route("/class/")
@@ -88,7 +88,7 @@ def classview(cid=None):
     if cid is None:
         # View all classes if no class id was passed into the url
         classes = utils.classes.get_class(teacher=session.get("uid"))
-        return render_template(DIR+"class.html", classes=classes)
+        return render_template("class.html", classes=classes)
 
     # Get the class associated with the class id in the url
     classes = utils.classes.get_class(cid=cid)
@@ -102,7 +102,7 @@ def classview(cid=None):
 
     # Get all assignments for the class
     assigs = utils.assignments.get_assignments(cid=cid)
-    return render_template(DIR+"oneclass.html",
+    return render_template("oneclass.html",
         klass=klass,
         students=students,
         assignments=assigs)
@@ -128,7 +128,7 @@ def singleClassGradeBook(cid):
             else:
                 g = []
             newGrades[student["Student Name"]].append(g)
-    return render_template(DIR+"gradebook.html", klass=klass, students=students, assignments=assignments, grades=newGrades)
+    return render_template("gradebook.html", klass=klass, students=students, assignments=assignments, grades=newGrades)
 
 @app.route("/class/<cid>/export/")
 def export_class(cid):
