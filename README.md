@@ -15,4 +15,13 @@ Project Manager is a gradebook with an emphasis on easy assignment, oversight, a
 
 ### Libraries in this repo
 
-`notify.js` is used, in `static/lib/notify.js`.
+Bootstrap 3 (minified), jQuery (minified), and `notify.js` are used and stored
+in the repository, in `projectmanager/static/vendor/`.
+
+### Run
+
+To test Project Manager on localhost:5000, run:
+
+```
+$ python run.py
+```
