@@ -17,15 +17,7 @@ app.register_blueprint(api.students.blueprint, url_prefix="/api/students")
 DIR = os.path.dirname(__file__) or '.'
 DIR+= '/'
 
-# Create and store secret key if it doesn't already exist
-with open(".secret_key", "a+b") as f:
-    secret_key = f.read()
-    if not secret_key:
-        # Secret key doesn't exist, so generate it
-        secret_key = os.urandom(64)
-        f.write(secret_key)
-        f.flush()
-    app.secret_key = secret_key
+app.secret_key = os.urandom(64)
 
 @app.route("/")
 @redirect_if_not_logged_in
