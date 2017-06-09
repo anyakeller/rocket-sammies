@@ -234,3 +234,7 @@ wilsonB -- 2017-06-05 20:00
 jonathanB -- 2017-06-06 4:29
 - Got grades to show up in gradebook
 - Rewrote part of gradebook code in __init__.py
+
+wilsonB -- 2017-06-09 15:00
+- HTML-escape JSON inserted into template
+- Update README (list of vendored libraries and script to run on localhost)
