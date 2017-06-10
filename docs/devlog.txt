@@ -56,6 +56,8 @@ jonathanB -- 2017-05-20 12:39
 
 wilsonB -- 2017-05-20 01:30
 - Created nicer error message boxes (replacing alert boxes)
+  This includes a merge commit with author Justin Kim. I made this merge on
+  Justin Kim's laptop before changing my git config user.name and user.email.
 
 wilsonB -- 2017-05-20 20:40
 - Created base.js with common utility functions
@@ -238,3 +240,7 @@ jonathanB -- 2017-06-06 4:29
 wilsonB -- 2017-06-09 15:00
 - HTML-escape JSON inserted into template
 - Update README (list of vendored libraries and script to run on localhost)
+
+wilsonB -- 2017-06-10 12:30
+- Store secret key in Mongo, as in deployment the secret key being randomly
+  generated in __init__.py caused issues due to multithreading.
