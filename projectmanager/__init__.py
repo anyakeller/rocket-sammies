@@ -17,7 +17,7 @@ app.register_blueprint(api.students.blueprint, url_prefix="/api/students")
 DIR = os.path.dirname(__file__) or '.'
 DIR+= '/'
 
-app.secret_key = os.urandom(64)
+app.secret_key = utils.key.secret_key()
 
 @app.route("/")
 @redirect_if_not_logged_in
@@ -164,6 +164,5 @@ def inject_session():
     return {}
 
 if __name__ == "__main__":
-
     app.debug = True
     app.run()

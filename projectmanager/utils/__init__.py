@@ -4,3 +4,4 @@ import classes
 import groups
 import students
 import users
+import key
